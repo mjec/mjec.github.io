@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Systems on mjec&#39;s electric blogaloo</title>
+    <link>https://mjec.blog/tags/systems/</link>
+    <description>Recent content in Systems on mjec&#39;s electric blogaloo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 15 Apr 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://mjec.blog/tags/systems/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>An idea for trusted brute-force-resistant two-factor-authenticated full disk encryption</title>
+      <link>https://mjec.blog/2016/04/15/an-idea-for-trusted-brute-force-resistant-two-factor-authenticated-full-disk-encryption/</link>
+      <pubDate>Fri, 15 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/04/15/an-idea-for-trusted-brute-force-resistant-two-factor-authenticated-full-disk-encryption/</guid>
+      <description>I was privileged to see Matthew Garrett&amp;rsquo;s talk at LCA this year on tpmtotp. This is software which enables you to verify that your computer hardware has not been tampered with before you are required to enter your full disk encryption password. It does this by sealing the TOTP secret in the TPM against a particular set of platform control register values. This means that if any aspect of the boot configuration changes the secret cannot be unsealed, so an attacker cannot pretend to be you.</description>
+    </item>
+    
+  </channel>
+</rss>

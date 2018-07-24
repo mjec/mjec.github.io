@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400|Old+Standard+TT:400' rel='stylesheet' type='text/css'>
+
+    <link rel="icon" type="image/png" href="/favicon_16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon_32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon_128x128.png" sizes="128x128">
+
+    <title>
+      RC return statement
+    </title>
+    <link rel="canonical" href="https://mjec.blog/2016/06/30/rc-return-statement/">
+
+    <style>
+  * {
+    border:0;
+    font:inherit;
+    font-size:100%;
+    vertical-align:baseline;
+    margin:0;
+    padding:0;
+    color: black;
+    text-decoration-skip: ink;
+    text-decoration-skip-ink: auto;
+  }
+
+  body {
+    font-family:'Open Sans', 'Myriad Pro', Myriad, sans-serif;
+    font-size:17px;
+    line-height:160%;
+    color:#1d1313;
+    max-width:800px;
+    margin:auto;
+  }
+
+  p {
+    margin: 20px 0;
+  }
+
+  a img {
+    border:none;
+  }
+
+  img {
+    margin: 10px auto 10px auto;
+    max-width: 100%;
+    display: block;
+  }
+
+  .left-justify {
+    float: left;
+  }
+
+  .right-justify {
+    float:right;
+  }
+
+  pre, code {
+    font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    background-color: #f7f7f7;
+  }
+  
+  sub {
+    font-size: 65%;
+    vertical-align: sub;
+  }
+
+  sup {
+    font-size: 65%;
+    vertical-align: super;
+  }
+
+  code {
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  pre {
+    margin-top: 0;
+    margin-bottom: 16px;
+    word-wrap: normal;
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+  }
+
+  pre>code {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    word-break: normal;
+    white-space: pre;
+    background: transparent;
+    border: 0;
+  }
+
+  pre code {
+    display: inline;
+    max-width: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+  }
+
+  pre code::before,
+  pre code::after {
+    content: normal;
+  }
+
+  em,q,em,dfn {
+    font-style:italic;
+  }
+
+  .sans,html .gist .gist-file .gist-meta {
+    font-family:"Open Sans","Myriad Pro",Myriad,sans-serif;
+  }
+
+  .mono,pre,code,tt,p code,li code {
+    font-family:Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace;
+  }
+
+  .heading,.serif,h1,h2,h3 {
+    font-family:"Old Standard TT",serif;
+  }
+
+  strong {
+    font-weight:600;
+  }
+
+  q:before {
+    content:"\201C";
+  }
+
+  q:after {
+    content:"\201D";
+  }
+
+  del,s {
+    text-decoration:line-through;
+  }
+
+  blockquote {
+    font-family:"Old Standard TT",serif;
+    text-align:center;
+    padding:50px;
+  }
+  
+  blockquote.long {
+    text-align: left;
+  }
+
+  blockquote p {
+    display:block;
+    font-style:italic;
+    margin: 0;
+  }
+  
+  blockquote.long p {
+    margin: 20px 0 0 0;
+  }
+  
+  blockquote.long p:first-child {
+    margin: 0;
+  }
+  
+  blockquote.long p:last-child {
+    margin-bottom: -2ex;
+  }
+
+  blockquote:before,blockquote:after {
+    font-family:"Old Standard TT",serif;
+    font-size:35px;
+    color:#403c3b;
+  }
+  
+  blockquote:before {
+    content:'\201C';
+    float: left;
+  }
+
+  blockquote:after {
+    content:'\201D';
+    float: right;
+    margin-top: -1ex;
+    position: relative;
+    left: 1ex;
+    top: -0.5ex;
+  }
+  
+  blockquote.long:after {
+    margin-top: 0;
+  }
+
+  hr {
+    width:40%;
+    height: 1px;
+    background:#403c3b;
+    margin: 25px auto;
+  }
+
+  h1 {
+    font-size:35px;
+  }
+
+  h2 {
+    font-size:28px;
+  }
+
+  h3 {
+    font-size:22px;
+    margin-top:18px;
+  }
+
+  h1 a,h2 a,h3 a {
+    text-decoration:none;
+  }
+
+  h1,h2 {
+    margin-top:28px;
+  }
+
+
+  code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: black;
+  }
+
+  #sub-header, #sub-header * {
+    color:#403c3b;
+    font-size:13px;
+  }
+
+  #sub-header {
+    margin: 0 4px;
+  }
+
+  #nav h1 a {
+    font-size:35px;
+    color:#1d1313;
+    line-height:120%;
+  }
+
+  .together {
+    white-space: nowrap;
+  }
+
+  .posts-listing a, #nav a, .tags a {
+    text-decoration: none;
+  }
+
+  .posts-listing h2 small {
+    font-size: 50%;
+  }
+
+  .posts-listing li p.preview {
+    margin: 0;
+    color: #666;
+  }
+
+  li {
+    margin-left: 20px;
+  }
+
+  ul li {
+    margin-left: 1em;
+  }
+
+  ul li {
+    list-style-type: none;
+  }
+  ul li:before {
+    content:"\00BB \0020";
+    margin-left: -1em;
+    float: left;
+  }
+
+  footer {
+    border-top: 1px dotted black;
+    font-size: 80%;
+    margin-top: 20px;
+  }
+  footer p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .rc-scout .rc-scout__link {
+    color: black !important;
+    text-decoration-skip-ink: auto;
+  }
+
+  #nav ul li:before, .posts-listing li:before {
+    content:'';
+    margin-right:0;
+  }
+
+  #content {
+    text-align:left;
+    width:100%;
+    font-size:15px;
+    padding:60px 0 0;
+  }
+
+  #content h1,#content h2 {
+    margin-bottom:5px;
+  }
+
+  #content h2 {
+    font-size:25px;
+  }
+
+  #content .pagination {
+    text-align: center;
+  }
+
+  #content .entry-content {
+    margin-top:15px;
+  }
+
+  #content time {
+    margin-left:3px;
+  }
+
+  #content h1 {
+    font-size:30px;
+  }
+
+  .highlight {
+    margin: 10px 0;
+  }
+
+  .posts-listing {
+    margin:0 0 30px;
+  }
+
+  .posts-listing li {
+    margin:0 0 25px 15px;
+  }
+
+  .posts-listing li a:hover, #nav a:hover, .tags a:hover {
+    text-decoration: underline;
+  }
+
+  #nav {
+    text-align:center;
+    position:static;
+    margin-top:60px;
+  }
+
+  #nav ul {
+    display: table;
+    margin: 8px auto 0 auto;
+  }
+
+  #nav li {
+    list-style-type:none;
+    display:table-cell;
+    font-size:15px;
+    padding: 0 20px;
+  }
+
+  #links {
+    margin: 50px 0 0 0;
+  }
+
+  #links :nth-child(2) {
+    float:right;
+  }
+
+  #not-found {
+    text-align: center;
+  }
+
+  #not-found a {
+    font-family:"Old Standard TT",serif;
+    font-size: 200px;
+    text-decoration: none;
+    display: inline-block;
+    padding-top: 225px;
+  }
+
+  @media (max-width: 750px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:28px;
+    }
+
+    #nav li {
+      font-size:13px;
+      padding: 0 15px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:50px;
+      font-size:14px;
+    }
+
+    #content h1 {
+      font-size:25px;
+    }
+
+    #content h2 {
+      font-size:22px;
+    }
+
+    .posts-listing li div {
+      font-size:12px;
+    }
+    
+    footer {
+      font-size: 12px;
+    }
+    
+    blockquote.long:after {
+      margin-top: 1ex !important;
+    }
+  }
+
+  @media (max-width: 400px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:22px;
+    }
+
+    #nav li {
+      font-size:12px;
+      padding: 0 10px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:20px;
+      font-size:12px;
+    }
+
+    #content h1 {
+      font-size:20px;
+    }
+
+    #content h2 {
+      font-size:18px;
+    }
+
+    .posts-listing li div{
+      font-size:12px;
+    }
+  }
+</style>
+
+
+    
+  </head>
+
+  <body>
+    <section id=nav>
+      <h1><a href="/">mjec&#39;s electric blogaloo</a></h1>
+      <ul>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/tags/">Browse by tag</a></li>
+        
+      </ul>
+    </section>
+
+
+
+<section id=content>
+  <h1> RC return statement </h1>
+
+  <div id=sub-header>
+    30 June 2016 · 6 minute read
+    
+    · <span class="tags">
+        
+            
+            
+            
+        
+            
+            
+            
+        
+        
+        <a href='/tags/text-posts-about-nothing/'>text posts about nothing</a> and <a href='/tags/rc/'>rc</a></span>
+    
+  </div>
+
+  <div class="entry-content">
+    
+
+<p><abbr title="the Recurse Center">RC</abbr> is amazing.</p>
+
+<p>Today is my last day at RC. I am sad I&rsquo;m leaving, and I thought it might be worthwhile to publish a few thoughts about my time here.</p>
+
+<h2 id="the-space">The space</h2>
+
+<p>Picture this: SoHo, New York City. Next to Chinatown and Little Italy. Surrounding streets closed surprisingly often for filming. Locations recognizable from TV. On the second floor, an open plan workspace, with breakout rooms named for giants of computer science. That&rsquo;s RC&rsquo;s space.</p>
+
+<p>The feeling of the space is way more than that though. There are whiteboards in every room, always covered in problem-solving. People write on the glass windows too, and butchers paper, and even one big wall in the space known as Dijkstra.</p>
+
+<p>I think it was in <a href="http://simonsingh.net/books/fermats-last-theorem/">Fermat&rsquo;s Last Theorem</a> I read about a mathematics conference where they had blackboards in the elevator, in case you wanted to discuss a problem there too. That&rsquo;s what RC is like.</p>
+
+<p>The space is genuinely open 24 hours. There are people here every time of the day or night. Some people get in early, some people leave late. I&rsquo;ve been the last to leave only a couple of times; it&rsquo;s not unusual for people to still be around at three or four in the morning. There are people around on weekends.</p>
+
+<p>Somehow, though, it&rsquo;s still not that hard to be productive. You can head to one of the side rooms (including <a href="https://en.wikipedia.org/wiki/Alonzo_Church">Church</a>, a dedicated quiet room). You can work at a table, or on beanbags in the library, or on couches. You can work with others or with headphones on.</p>
+
+<h2 id="the-people">The people</h2>
+
+<p>Someone told me RC interviews select for niceness. That seems at least partially true.</p>
+
+<p>It is actually amazing how excellent the people are. There are <em>no</em> bad people here. None. I don&rsquo;t know how they do it; it seems impossible in two Skype interviews and a simple application form. Somehow, though, they manage it. Everyone here is nice, and helpful, and interested in things.</p>
+
+<p>For me, that last one is kind of the biggest deal. I was briefly in the <a href="http://programsandcourses.anu.edu.au/program/APHSC">PhB program at ANU</a>. I left before the first semester was up because I couldn&rsquo;t stand the unwillingness of others in the program to discuss anything outside their specialization. Organic chemistry students - first year undergraduates mind - didn&rsquo;t care about inorganic chemistry, let alone physics or computing or mathematics or - god forbid - law or sociology or philosophy.</p>
+
+<p>Everyone at RC is a computer programming person. But that is far from all they are. People are happy to talk about science, mathematics, art, law, philosophy, sociology and anything else you want to talk about. Everyone is passionately curious.</p>
+
+<p>For me this is exemplified by an interaction I had with someone where I was helping them to install postgresql on their machine. Having explained the client/server model postgres uses, and having diagnosed the issue as being the server not getting started, this quickly became a discussion about how servers get started generally. And then how initial processes get started. How kernels bootloaders work. How partition tables are structured.</p>
+
+<p>Often people think about depth of learning being to the exclusion of breadth. It turns out to be the opposite at RC. To truly understand something, you have to understand the ecosystem in which it operates, and RC makes that a possibility.</p>
+
+<p>Everyone at RC is also incredibly willing to share their time. Everyone is happy to talk to you, to teach, to learn. You can work on things together, or get a code review. Solve problems together.</p>
+
+<p>I recall one occasion in particular, at 2am after a board games night, with a few people standing around discussing <a href="https://en.wikipedia.org/wiki/Church_encoding">Church encoding</a>. At two in the morning, rather than going home, people were willing to stick around and teach this abstract concept; and people were willing to stick around and learn it.</p>
+
+<h2 id="what-i-ve-learned">What I&rsquo;ve learned</h2>
+
+<p>I feel like I&rsquo;ve learned everything.</p>
+
+<p>I worked in languages I only vaguely knew existed before, most notably Haskell and Go. I&rsquo;ve built C programs that compile. I&rsquo;ve written solutions to fun programming problems in Scheme and bash. I&rsquo;ve learned about lambda calculus and functional paradigms and formal grammars and how to do a whiteboard interview properly. I&rsquo;ve figured out what &ldquo;dynamic programming&rdquo; means and why the best chance for <a href="http://boxinformed.blogspot.com/2015/10/100-prisoners-problem-car-key-box.html">100 prisoners and an arbitrary sentencing rule</a> is to follow cycles. I&rsquo;ve learned about convolutional neural networks and back propagation. I&rsquo;ve seen the <a href="http://l0stinsp4ce.com/index.php/blogggo/disk-io--python-threads/">surprising complexity</a> of asynchronous file IO problems. I&rsquo;ve discovered the joys of ES6 and the pain of webpack and why an immutable datastore might be a good idea. I&rsquo;ve even tried my hand at building shellcode.</p>
+
+<p>Maybe the most important thing I&rsquo;ve learned though is that I&rsquo;m not an <a href="https://en.wikipedia.org/wiki/Impostor_syndrome">imposter</a>. I didn&rsquo;t expect this. It wasn&rsquo;t my aim in coming here.</p>
+
+<h2 id="the-culture">The culture</h2>
+
+<p>This is really the culmination of all of the above.</p>
+
+<p>One of the things RC is famous for is its <a href="https://www.recurse.com/manual#sec-environment">social rules</a>. I cannot emphasize enough their importance.</p>
+
+<p>It turns out the culture of RC is more than just &ldquo;<a href="http://aunty.mmf.com.au/what-goes-on/dickhead-policy/">no dickheads</a>&rdquo;. This is one of the safest spaces I&rsquo;ve ever been in. This makes it easy to ask for help and to learn. It makes it easy to teach. And just as RC claims, it means you don&rsquo;t have to worry about <em>anything</em> except what you&rsquo;re working on.</p>
+
+<p>I want to illustrate this with a small example.</p>
+
+<p>RC has &ldquo;checkins&rdquo;. You show up at 10:30am (or thankfully there&rsquo;s a 1pm option too) and chat about what you did yesterday, what you have planned for today. It&rsquo;s groups of 6-8, and takes less than five minutes. It&rsquo;s a good way of making sure nobody is sitting around doing nothing: lightweight social accountability. (Lightweight is a big thing at RC, and I think that&rsquo;s a powerful way of shaping a community while maintaining independence.)</p>
+
+<p>Early in the second half of my batch someone suggested reinstating what is apparently an old RC tradition: feelings checkins. Late afternoon, a group gets together and everyone says how they&rsquo;re feeling. It&rsquo;s still lightweight, though it tends to take a little longer than five minutes.</p>
+
+<p>Feelings checkins have (at least on some days) been mostly populated by men, many of whom (including myself) would be uncomfortable discussing their feelings in any other context. Even with family and close friends there&rsquo;s a worry about judgement. But the atmosphere at RC excludes toxic masculinity in a way that is totally unexpected. This type of &ldquo;safe space&rdquo; is one that I didn&rsquo;t even realize could exist. I&rsquo;m struggling to find precisely the words to explain this, but it is something truly special.</p>
+
+<h2 id="concluding-thoughts">Concluding thoughts</h2>
+
+<p>RC is amazing.</p>
+
+<p>This has been a transformative experience for me in its primary focus, certainly. I am a better programmer, and I know how to continue to improve as a programmer.</p>
+
+<p>RC has also been personally transformative. This was a time in my life when change was happening anyway, and being in New York was always going to be big. But RC didn&rsquo;t have to be a part of that; and I suspect that even if that wasn&rsquo;t the case, RC would have changed me for the better anyway.</p>
+
+  </div>
+
+  <div id=links>
+    
+      <a class="basic-alignment left" href="https://mjec.blog/2016/06/28/reflections-on-new-york-city/">&laquo; Reflections on New York City</a>
+    
+    
+      <a class="basic-alignment left" href="https://mjec.blog/2016/07/11/australia-should-not-adopt-electronic-voting/">Australia should not adopt electronic voting &raquo;</a>
+    
+  </div>
+</section>
+
+  <footer>
+    <p>Yet another blog from <a href="https://mjec.net">Michael Cordover</a>.
+    <span class="rc-scout"></span></p>
+  </footer>
+
+  <script async defer src="https://www.recurse-scout.com/loader.js?t=7b61c3cc166c3321bfbe79ce44d62586"></script>
+
+  <script type="text/javascript">
+    var _paq = _paq || [];
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//piwik.mjec.net/";
+      _paq.push(['setTrackerUrl', u+'piwik.php']);
+      _paq.push(['setSiteId', 13]);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <noscript><p><img src="//piwik.mjec.net/piwik.php?idsite=13" style="border:0;" alt="" /></p></noscript>
+
+  
+</body>
+</html>
+
+
+

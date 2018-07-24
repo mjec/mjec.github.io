@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on mjec&#39;s electric blogaloo</title>
+    <link>https://mjec.blog/post/</link>
+    <description>Recent content in Posts on mjec&#39;s electric blogaloo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 23 Jul 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://mjec.blog/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>How many atoms are there in an amoeba?</title>
+      <link>https://mjec.blog/2017/07/23/how-many-atoms-are-there-in-an-amoeba/</link>
+      <pubDate>Sun, 23 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2017/07/23/how-many-atoms-are-there-in-an-amoeba/</guid>
+      <description>What follows is a transcript of a letter my father sent to me when I was four years old, with annotations from me typing it up in italics but otherwise reproduced as faithfully as possible. It was written with a word processor and printed on dot matrix paper. My father was working in Indonesia while we were living in Australia. I only hope that if I ever have children, I can answer every question they have in this way.</description>
+    </item>
+    
+    <item>
+      <title>2016</title>
+      <link>https://mjec.blog/2017/01/01/2016/</link>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2017/01/01/2016/</guid>
+      <description>Twenty fucking sixteen. A terrible year for the world, in all sorts of ways. Highlights of shit for me include Brexit, President Trump, the death of Carrie Fisher, the ever-worsening crisis in Syria, the terrible epedemic of opiod addiction, the proliferation of neo-nazis and the increase in systemic discrimination against trans and non-binary individuals.
+For me personally though, 2016 was excellent. Because good is always relative, I want to give you a brief rundown of 2015 first, so you can see why I loved 2016 so much.</description>
+    </item>
+    
+    <item>
+      <title>Australia should not adopt electronic voting</title>
+      <link>https://mjec.blog/2016/07/11/australia-should-not-adopt-electronic-voting/</link>
+      <pubDate>Mon, 11 Jul 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/07/11/australia-should-not-adopt-electronic-voting/</guid>
+      <description>There has been a bunch of discussion about electronic voting recently, from the bipartisan political support to Dan Nolan&amp;rsquo;s nuanced take. As someone with an interest in election technology, I have a few thoughts.
+I don&amp;rsquo;t actually want to get too deep into the technology side of this discussion. There are lots of great critiques of electronic voting technologies. There are also some great technologies: end-to-end systems which provide verification of each individual vote; blockchain systems which provide cryptographic evidence that results are not modified anywhere along the chain.</description>
+    </item>
+    
+    <item>
+      <title>RC return statement</title>
+      <link>https://mjec.blog/2016/06/30/rc-return-statement/</link>
+      <pubDate>Thu, 30 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/06/30/rc-return-statement/</guid>
+      <description>RC is amazing.
+Today is my last day at RC. I am sad I&amp;rsquo;m leaving, and I thought it might be worthwhile to publish a few thoughts about my time here.
+The space Picture this: SoHo, New York City. Next to Chinatown and Little Italy. Surrounding streets closed surprisingly often for filming. Locations recognizable from TV. On the second floor, an open plan workspace, with breakout rooms named for giants of computer science.</description>
+    </item>
+    
+    <item>
+      <title>Reflections on New York City</title>
+      <link>https://mjec.blog/2016/06/28/reflections-on-new-york-city/</link>
+      <pubDate>Tue, 28 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/06/28/reflections-on-new-york-city/</guid>
+      <description>This is one of the nicest cities I&amp;rsquo;ve ever been to. And by that I mean the people in New York City are lovely.
+This came as kind of a shock to me. Everyone talks about how New Yorkers are rude, or how this is a dangerous place. I have never felt that. I have been scared precisely once: walking through &amp;ldquo;downtown Brooklyn&amp;rdquo; at 3am, past a construction site on a dimly lit alley I rounded a hard corner and a plastic bag jumped out at me.</description>
+    </item>
+    
+    <item>
+      <title>Django&#39;s QuerySet union isn&#39;t quite what it seems</title>
+      <link>https://mjec.blog/2016/06/27/djangos-queryset-union-isnt-quite-what-it-seems/</link>
+      <pubDate>Mon, 27 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/06/27/djangos-queryset-union-isnt-quite-what-it-seems/</guid>
+      <description>One of the websites I maintain is for the Tasmanian Debating Union. I built a competition management system, a rewrite in Django of a system originally designed and built in PHP by my friend Pat.
+The database schema for this system includes a table with one row per debate. Those debates have associated teams (one affirmative, one negative) and an outcome (e.g. affirmative win, negative win). There&amp;rsquo;s therefore no single column to select the winning team.</description>
+    </item>
+    
+    <item>
+      <title>Your RDBMS has cool features</title>
+      <link>https://mjec.blog/2016/06/26/your-rdbms-has-cool-features/</link>
+      <pubDate>Sun, 26 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/06/26/your-rdbms-has-cool-features/</guid>
+      <description>Aside: I started writing this post back in May, and have finally had a chance to finish it! Particular thanks to Benson who worked with me on the ultimate solution.
+How did we get here? There&amp;rsquo;s a tendency in a lot of web development to be cautious of the data layer. We outsource persistence to the magic of PostgreSQL (or MySQL or MariaDB or SQL Server or Mongo or Redis or whatever) and just kind of ignore how it works.</description>
+    </item>
+    
+    <item>
+      <title>Liking problematic media</title>
+      <link>https://mjec.blog/2016/05/12/liking-problematic-media/</link>
+      <pubDate>Thu, 12 May 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/05/12/liking-problematic-media/</guid>
+      <description>Note: This post uses and discusses strong profanity, gendered and racist slurs.
+Last night at RC we had a karaoke night of sorts. I queued up Nosebleed Secction and the few Australians in the room sung it with great gusto. It&amp;rsquo;s the first time I&amp;rsquo;ve felt any kind of nationalistic sentiment since I&amp;rsquo;ve been here.
+There&amp;rsquo;s one particular sequence of lyrics which triggered the writing of this post:
+ I wanna hear some lyrics when I wake up</description>
+    </item>
+    
+    <item>
+      <title>Non-proofs</title>
+      <link>https://mjec.blog/2016/04/19/non-proofs/</link>
+      <pubDate>Tue, 19 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/04/19/non-proofs/</guid>
+      <description>Today I read a thread of fake proofs on /r/math. The whole thread is great, but perhaps my favourite is the following &amp;ldquo;proof&amp;rdquo; I reproduce here.
+We attempt to find:
+$$\int \frac{1}{f} \frac{\mathrm{d}f}{\mathrm{d}x}$$
+Let $\mathrm{d}u = - \frac{1}{f^2}\mathrm{d}x$ and $v = f$.
+Then we use the ordinary method of integration by parts:
+$$\int u \mathrm{d}v = uv - \int v \mathrm{d}u$$
+Substituting:
+$$\int \frac{1}{f} \mathrm{d}f = \frac{1}{f}f - \int f - \frac{1}{f^2} \mathrm{d}f$$</description>
+    </item>
+    
+    <item>
+      <title>An idea for trusted brute-force-resistant two-factor-authenticated full disk encryption</title>
+      <link>https://mjec.blog/2016/04/15/an-idea-for-trusted-brute-force-resistant-two-factor-authenticated-full-disk-encryption/</link>
+      <pubDate>Fri, 15 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/04/15/an-idea-for-trusted-brute-force-resistant-two-factor-authenticated-full-disk-encryption/</guid>
+      <description>I was privileged to see Matthew Garrett&amp;rsquo;s talk at LCA this year on tpmtotp. This is software which enables you to verify that your computer hardware has not been tampered with before you are required to enter your full disk encryption password. It does this by sealing the TOTP secret in the TPM against a particular set of platform control register values. This means that if any aspect of the boot configuration changes the secret cannot be unsealed, so an attacker cannot pretend to be you.</description>
+    </item>
+    
+    <item>
+      <title>My Haskell was slow</title>
+      <link>https://mjec.blog/2016/04/12/my-haskell-was-slow/</link>
+      <pubDate>Tue, 12 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/04/12/my-haskell-was-slow/</guid>
+      <description>I have a Haskell function that builds frequency tables. It is very slow (and not very good). Originally this post was to look at why, and try to find a way to speed it up.
+It turns out that GHC (the Haskell compiler) includes some nice profiling tools. You can set &amp;ldquo;cost centres&amp;rdquo; you want to look at using the {-# SCC &amp;quot;cost-centre-name&amp;quot; #-} pragma. So that&amp;rsquo;s what I did, and I have ended up with this:</description>
+    </item>
+    
+    <item>
+      <title>Finding subsets with particular sums</title>
+      <link>https://mjec.blog/2016/04/11/finding-subsets-with-particular-sums/</link>
+      <pubDate>Mon, 11 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/04/11/finding-subsets-with-particular-sums/</guid>
+      <description>On Friday I came in on the tail end of a conversation explaining the solution to this problem. I think it&amp;rsquo;s pretty interesting.
+Given a list of integers L and a target sum S, what&amp;rsquo;s the best way to find the pair x, y where x and y are both distinct elements of L such that x + y = S? We also want to be able to determine if there is no such pair.</description>
+    </item>
+    
+    <item>
+      <title>Fibonacci numbers and the golden ratio</title>
+      <link>https://mjec.blog/2016/04/07/fibonacci-numbers-and-the-golden-ratio/</link>
+      <pubDate>Thu, 07 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/04/07/fibonacci-numbers-and-the-golden-ratio/</guid>
+      <description>SICP is one of the standard books people study at RC. It&amp;rsquo;s definitely pretty cool, and something I&amp;rsquo;ve had a bit of experience with since getting half way through the 1986 lectures based on the book.
+We have a study group for SICP that I have been involved with. Today one of the problems we looked at was 1.13, which is as follows:
+ Prove that $Fib(n)$ is the closest integer to $\frac{\phi^n}{\sqrt{5}}$, where $\phi = \frac{1 + \sqrt{5}}{2}$.</description>
+    </item>
+    
+    <item>
+      <title>Some weeks are better than others</title>
+      <link>https://mjec.blog/2016/04/04/some-weeks-are-better-than-others/</link>
+      <pubDate>Mon, 04 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/04/04/some-weeks-are-better-than-others/</guid>
+      <description>Last week was my first week at RC. That was obviously amazing. I did a heap of cool new stuff. It was very exciting. I stayed late most nights - once til about 3am. I learned Haskell&amp;rsquo;s basics and I started studying algorithms. Algorithm study meant spending some time doing mathematics again, which was very cool. At the end of the week I spent some time fixing bugs in the TDU website, which meant thinking back in the python/web model.</description>
+    </item>
+    
+    <item>
+      <title>Learning Haskell</title>
+      <link>https://mjec.blog/2016/03/30/learning-haskell/</link>
+      <pubDate>Wed, 30 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/03/30/learning-haskell/</guid>
+      <description>I was surprised to hear that Haskell isn&amp;rsquo;t really a functional language so much as it&amp;rsquo;s a strongly typed one. I was of course aware that it had both these properties but it took really using it to see why the typing was so important.
+I started on Monday afternoon with Learn You A Haskell. It&amp;rsquo;s pretty good. That, combined with a couple of group discussions sessions, has meant I&amp;rsquo;m feeling pretty confident.</description>
+    </item>
+    
+    <item>
+      <title>RC Day One</title>
+      <link>https://mjec.blog/2016/03/28/rc-day-one/</link>
+      <pubDate>Mon, 28 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/03/28/rc-day-one/</guid>
+      <description>My first day of RC is today. I&amp;rsquo;ve been here for not quite four hours and so far:
+ I have had conversations about mathematics education, the law and artificial intelligence
+ I listened in on a conversation about graph theory
+ I have met a number of awesome people from awesome places
+ I have had a tongue-in-cheek vim vs emacs argument (vim 4 lyf!)
+ I have been complimented on my tshirt at least three times</description>
+    </item>
+    
+    <item>
+      <title>Day one</title>
+      <link>https://mjec.blog/2016/03/22/day-one/</link>
+      <pubDate>Tue, 22 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/03/22/day-one/</guid>
+      <description>According to my watch pedometer, I walked 23,160 steps in the last six hours.
+I started at about eight this morning by walking to the nearest train station. Realising that it was rush hour and I hadn&amp;rsquo;t had breakfast, I doubled back to have breakfast before trying to negotiate the subway. I had a two egg and cheese; the guy behind the counter asked me what sort of bread and I said &amp;ldquo;bagel.</description>
+    </item>
+    
+    <item>
+      <title>I have arrived</title>
+      <link>https://mjec.blog/2016/03/21/i-have-arrived/</link>
+      <pubDate>Mon, 21 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/03/21/i-have-arrived/</guid>
+      <description>Door to door was about 30 hours, but I&amp;rsquo;m now in New York City. It&amp;rsquo;s 7:30pm and I&amp;rsquo;m about to go to bed.
+I watched a lot of TV on the plane. Of it all, my favourite line came from an episode of Bored To Death: &amp;ldquo;He was Jewish and really smart. A member of menscha!&amp;rdquo; What I didn&amp;rsquo;t do much of on the plane was sleep.
+The first thing that struck me about New York is that it&amp;rsquo;s big.</description>
+    </item>
+    
+    <item>
+      <title>Travelling is hard</title>
+      <link>https://mjec.blog/2016/03/20/travelling-is-hard/</link>
+      <pubDate>Sun, 20 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/03/20/travelling-is-hard/</guid>
+      <description>I have a place to live. I have tickets. I have a purpose, starting 28 March. Now I just need to get there.
+I always forget how much effort is involved in travelling. I have the rest of the day to pack my things and then I leave the house around 4am tomorrow. I&amp;rsquo;ll arrive at my temporary accommodation about thirty hours later (assuming no delays).
+Packing itself is hard. There is a lot just in deciding what to take (and what to take carry-on).</description>
+    </item>
+    
+    <item>
+      <title>Yet another new beginning</title>
+      <link>https://mjec.blog/2016/03/13/yet-another-new-beginning/</link>
+      <pubDate>Sun, 13 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/03/13/yet-another-new-beginning/</guid>
+      <description>I&amp;rsquo;ve decided to start a blog. Again.
+This time, I have something of a focus. I&amp;rsquo;ll be heading to New York City in a week or so to attend the recurse center.</description>
+    </item>
+    
+  </channel>
+</rss>

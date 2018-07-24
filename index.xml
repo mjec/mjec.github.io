@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mjec&#39;s electric blogaloo</title>
+    <link>https://mjec.blog/</link>
+    <description>Recent content on mjec&#39;s electric blogaloo</description>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 23 Jul 2017 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="https://mjec.blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>How many atoms are there in an amoeba?</title>
+      <link>https://mjec.blog/2017/07/23/how-many-atoms-are-there-in-an-amoeba/</link>
+      <pubDate>Sun, 23 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2017/07/23/how-many-atoms-are-there-in-an-amoeba/</guid>
+      <description>I asked this question of my father when I was 4 years old. This is his answer.</description>
+    </item>
+    
+    <item>
+      <title>2016</title>
+      <link>https://mjec.blog/2017/01/01/2016/</link>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2017/01/01/2016/</guid>
+      <description>2016 was a terrible year for the world, but a great year for me.</description>
+    </item>
+    
+    <item>
+      <title>Australia should not adopt electronic voting</title>
+      <link>https://mjec.blog/2016/07/11/australia-should-not-adopt-electronic-voting/</link>
+      <pubDate>Mon, 11 Jul 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/07/11/australia-should-not-adopt-electronic-voting/</guid>
+      <description>There&#39;s been some talk recently about electronic voting in Australia. Here are my thoughts on why we shouldn&#39;t move away from the paper voting system.</description>
+    </item>
+    
+    <item>
+      <title>RC return statement</title>
+      <link>https://mjec.blog/2016/06/30/rc-return-statement/</link>
+      <pubDate>Thu, 30 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/06/30/rc-return-statement/</guid>
+      <description>A few reflections on my time at the Recurse Center.</description>
+    </item>
+    
+    <item>
+      <title>Reflections on New York City</title>
+      <link>https://mjec.blog/2016/06/28/reflections-on-new-york-city/</link>
+      <pubDate>Tue, 28 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/06/28/reflections-on-new-york-city/</guid>
+      <description>I&#39;ve been here three months now, and I love this city.</description>
+    </item>
+    
+    <item>
+      <title>Django&#39;s QuerySet union isn&#39;t quite what it seems</title>
+      <link>https://mjec.blog/2016/06/27/djangos-queryset-union-isnt-quite-what-it-seems/</link>
+      <pubDate>Mon, 27 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/06/27/djangos-queryset-union-isnt-quite-what-it-seems/</guid>
+      <description>Django claims that QuerySets support a union operator. It turns out that doesn&#39;t actually give you a union of two query sets, and it can silently munge your query.</description>
+    </item>
+    
+    <item>
+      <title>Your RDBMS has cool features</title>
+      <link>https://mjec.blog/2016/06/26/your-rdbms-has-cool-features/</link>
+      <pubDate>Sun, 26 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/06/26/your-rdbms-has-cool-features/</guid>
+      <description>There are plenty of cool features in relational database management systems (e.g. PostgreSQL, MariaDB). It turns out it actually makes sense to use them when building applications.</description>
+    </item>
+    
+    <item>
+      <title>Liking problematic media</title>
+      <link>https://mjec.blog/2016/05/12/liking-problematic-media/</link>
+      <pubDate>Thu, 12 May 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/05/12/liking-problematic-media/</guid>
+      <description>Sometimes it&#39;s nice to enjoy things that aren&#39;t so nice. And that might be okay, as long as you are willing to acknowledge its problems. (Note that this post uses and discusses strong profanity, gendered and racist slurs.)</description>
+    </item>
+    
+    <item>
+      <title>Non-proofs</title>
+      <link>https://mjec.blog/2016/04/19/non-proofs/</link>
+      <pubDate>Tue, 19 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/04/19/non-proofs/</guid>
+      <description>I&#39;ve enjoyed reading a few spurious proofs today</description>
+    </item>
+    
+    <item>
+      <title>An idea for trusted brute-force-resistant two-factor-authenticated full disk encryption</title>
+      <link>https://mjec.blog/2016/04/15/an-idea-for-trusted-brute-force-resistant-two-factor-authenticated-full-disk-encryption/</link>
+      <pubDate>Fri, 15 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/04/15/an-idea-for-trusted-brute-force-resistant-two-factor-authenticated-full-disk-encryption/</guid>
+      <description>Combining a trusted platform module with a smart card (e.g. YubiKey) enables trusted booting with full disk encryption and without the ability to brute force passwords.</description>
+    </item>
+    
+    <item>
+      <title>My Haskell was slow</title>
+      <link>https://mjec.blog/2016/04/12/my-haskell-was-slow/</link>
+      <pubDate>Tue, 12 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/04/12/my-haskell-was-slow/</guid>
+      <description>This is how I fixed it, blogged live.</description>
+    </item>
+    
+    <item>
+      <title>Finding subsets with particular sums</title>
+      <link>https://mjec.blog/2016/04/11/finding-subsets-with-particular-sums/</link>
+      <pubDate>Mon, 11 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/04/11/finding-subsets-with-particular-sums/</guid>
+      <description>Given a list L and a sum S, what&#39;s the best way to find x, y in L such that x + y = S? What about a set of n integers with that sum, instead of a pair? I don&#39;t have a good answer for the second question; suggestions welcome!</description>
+    </item>
+    
+    <item>
+      <title>Fibonacci numbers and the golden ratio</title>
+      <link>https://mjec.blog/2016/04/07/fibonacci-numbers-and-the-golden-ratio/</link>
+      <pubDate>Thu, 07 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/04/07/fibonacci-numbers-and-the-golden-ratio/</guid>
+      <description>In which I solve exercise 1.13 of Structure and Interpretation of Computer Programs</description>
+    </item>
+    
+    <item>
+      <title>Some weeks are better than others</title>
+      <link>https://mjec.blog/2016/04/04/some-weeks-are-better-than-others/</link>
+      <pubDate>Mon, 04 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/04/04/some-weeks-are-better-than-others/</guid>
+      <description>Last week was amazing. The weekend sucked. And now I&#39;m struggling.</description>
+    </item>
+    
+    <item>
+      <title>Learning Haskell</title>
+      <link>https://mjec.blog/2016/03/30/learning-haskell/</link>
+      <pubDate>Wed, 30 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/03/30/learning-haskell/</guid>
+      <description>I have started to learn Haskell. It&#39;s amazing.</description>
+    </item>
+    
+    <item>
+      <title>RC Day One</title>
+      <link>https://mjec.blog/2016/03/28/rc-day-one/</link>
+      <pubDate>Mon, 28 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/03/28/rc-day-one/</guid>
+      <description>I think I&#39;m going to fit in here</description>
+    </item>
+    
+    <item>
+      <title>Day one</title>
+      <link>https://mjec.blog/2016/03/22/day-one/</link>
+      <pubDate>Tue, 22 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/03/22/day-one/</guid>
+      <description>In which I explore the city a bit.</description>
+    </item>
+    
+    <item>
+      <title>I have arrived</title>
+      <link>https://mjec.blog/2016/03/21/i-have-arrived/</link>
+      <pubDate>Mon, 21 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/03/21/i-have-arrived/</guid>
+      <description>New York City, I am in you.</description>
+    </item>
+    
+    <item>
+      <title>Travelling is hard</title>
+      <link>https://mjec.blog/2016/03/20/travelling-is-hard/</link>
+      <pubDate>Sun, 20 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/03/20/travelling-is-hard/</guid>
+      <description>Flying sucks. Packing is much worse.</description>
+    </item>
+    
+    <item>
+      <title>Yet another new beginning</title>
+      <link>https://mjec.blog/2016/03/13/yet-another-new-beginning/</link>
+      <pubDate>Sun, 13 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/03/13/yet-another-new-beginning/</guid>
+      <description>I&#39;ve decided to start a blog. Again.</description>
+    </item>
+    
+  </channel>
+</rss>

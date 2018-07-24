@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Algorithms on mjec&#39;s electric blogaloo</title>
+    <link>https://mjec.blog/tags/algorithms/</link>
+    <description>Recent content in Algorithms on mjec&#39;s electric blogaloo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 11 Apr 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://mjec.blog/tags/algorithms/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Finding subsets with particular sums</title>
+      <link>https://mjec.blog/2016/04/11/finding-subsets-with-particular-sums/</link>
+      <pubDate>Mon, 11 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/04/11/finding-subsets-with-particular-sums/</guid>
+      <description>On Friday I came in on the tail end of a conversation explaining the solution to this problem. I think it&amp;rsquo;s pretty interesting.
+Given a list of integers L and a target sum S, what&amp;rsquo;s the best way to find the pair x, y where x and y are both distinct elements of L such that x + y = S? We also want to be able to determine if there is no such pair.</description>
+    </item>
+    
+  </channel>
+</rss>

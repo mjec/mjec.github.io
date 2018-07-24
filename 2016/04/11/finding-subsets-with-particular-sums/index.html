@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400|Old+Standard+TT:400' rel='stylesheet' type='text/css'>
+
+    <link rel="icon" type="image/png" href="/favicon_16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon_32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon_128x128.png" sizes="128x128">
+
+    <title>
+      Finding subsets with particular sums
+    </title>
+    <link rel="canonical" href="https://mjec.blog/2016/04/11/finding-subsets-with-particular-sums/">
+
+    <style>
+  * {
+    border:0;
+    font:inherit;
+    font-size:100%;
+    vertical-align:baseline;
+    margin:0;
+    padding:0;
+    color: black;
+    text-decoration-skip: ink;
+    text-decoration-skip-ink: auto;
+  }
+
+  body {
+    font-family:'Open Sans', 'Myriad Pro', Myriad, sans-serif;
+    font-size:17px;
+    line-height:160%;
+    color:#1d1313;
+    max-width:800px;
+    margin:auto;
+  }
+
+  p {
+    margin: 20px 0;
+  }
+
+  a img {
+    border:none;
+  }
+
+  img {
+    margin: 10px auto 10px auto;
+    max-width: 100%;
+    display: block;
+  }
+
+  .left-justify {
+    float: left;
+  }
+
+  .right-justify {
+    float:right;
+  }
+
+  pre, code {
+    font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    background-color: #f7f7f7;
+  }
+  
+  sub {
+    font-size: 65%;
+    vertical-align: sub;
+  }
+
+  sup {
+    font-size: 65%;
+    vertical-align: super;
+  }
+
+  code {
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  pre {
+    margin-top: 0;
+    margin-bottom: 16px;
+    word-wrap: normal;
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+  }
+
+  pre>code {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    word-break: normal;
+    white-space: pre;
+    background: transparent;
+    border: 0;
+  }
+
+  pre code {
+    display: inline;
+    max-width: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+  }
+
+  pre code::before,
+  pre code::after {
+    content: normal;
+  }
+
+  em,q,em,dfn {
+    font-style:italic;
+  }
+
+  .sans,html .gist .gist-file .gist-meta {
+    font-family:"Open Sans","Myriad Pro",Myriad,sans-serif;
+  }
+
+  .mono,pre,code,tt,p code,li code {
+    font-family:Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace;
+  }
+
+  .heading,.serif,h1,h2,h3 {
+    font-family:"Old Standard TT",serif;
+  }
+
+  strong {
+    font-weight:600;
+  }
+
+  q:before {
+    content:"\201C";
+  }
+
+  q:after {
+    content:"\201D";
+  }
+
+  del,s {
+    text-decoration:line-through;
+  }
+
+  blockquote {
+    font-family:"Old Standard TT",serif;
+    text-align:center;
+    padding:50px;
+  }
+  
+  blockquote.long {
+    text-align: left;
+  }
+
+  blockquote p {
+    display:block;
+    font-style:italic;
+    margin: 0;
+  }
+  
+  blockquote.long p {
+    margin: 20px 0 0 0;
+  }
+  
+  blockquote.long p:first-child {
+    margin: 0;
+  }
+  
+  blockquote.long p:last-child {
+    margin-bottom: -2ex;
+  }
+
+  blockquote:before,blockquote:after {
+    font-family:"Old Standard TT",serif;
+    font-size:35px;
+    color:#403c3b;
+  }
+  
+  blockquote:before {
+    content:'\201C';
+    float: left;
+  }
+
+  blockquote:after {
+    content:'\201D';
+    float: right;
+    margin-top: -1ex;
+    position: relative;
+    left: 1ex;
+    top: -0.5ex;
+  }
+  
+  blockquote.long:after {
+    margin-top: 0;
+  }
+
+  hr {
+    width:40%;
+    height: 1px;
+    background:#403c3b;
+    margin: 25px auto;
+  }
+
+  h1 {
+    font-size:35px;
+  }
+
+  h2 {
+    font-size:28px;
+  }
+
+  h3 {
+    font-size:22px;
+    margin-top:18px;
+  }
+
+  h1 a,h2 a,h3 a {
+    text-decoration:none;
+  }
+
+  h1,h2 {
+    margin-top:28px;
+  }
+
+
+  code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: black;
+  }
+
+  #sub-header, #sub-header * {
+    color:#403c3b;
+    font-size:13px;
+  }
+
+  #sub-header {
+    margin: 0 4px;
+  }
+
+  #nav h1 a {
+    font-size:35px;
+    color:#1d1313;
+    line-height:120%;
+  }
+
+  .together {
+    white-space: nowrap;
+  }
+
+  .posts-listing a, #nav a, .tags a {
+    text-decoration: none;
+  }
+
+  .posts-listing h2 small {
+    font-size: 50%;
+  }
+
+  .posts-listing li p.preview {
+    margin: 0;
+    color: #666;
+  }
+
+  li {
+    margin-left: 20px;
+  }
+
+  ul li {
+    margin-left: 1em;
+  }
+
+  ul li {
+    list-style-type: none;
+  }
+  ul li:before {
+    content:"\00BB \0020";
+    margin-left: -1em;
+    float: left;
+  }
+
+  footer {
+    border-top: 1px dotted black;
+    font-size: 80%;
+    margin-top: 20px;
+  }
+  footer p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .rc-scout .rc-scout__link {
+    color: black !important;
+    text-decoration-skip-ink: auto;
+  }
+
+  #nav ul li:before, .posts-listing li:before {
+    content:'';
+    margin-right:0;
+  }
+
+  #content {
+    text-align:left;
+    width:100%;
+    font-size:15px;
+    padding:60px 0 0;
+  }
+
+  #content h1,#content h2 {
+    margin-bottom:5px;
+  }
+
+  #content h2 {
+    font-size:25px;
+  }
+
+  #content .pagination {
+    text-align: center;
+  }
+
+  #content .entry-content {
+    margin-top:15px;
+  }
+
+  #content time {
+    margin-left:3px;
+  }
+
+  #content h1 {
+    font-size:30px;
+  }
+
+  .highlight {
+    margin: 10px 0;
+  }
+
+  .posts-listing {
+    margin:0 0 30px;
+  }
+
+  .posts-listing li {
+    margin:0 0 25px 15px;
+  }
+
+  .posts-listing li a:hover, #nav a:hover, .tags a:hover {
+    text-decoration: underline;
+  }
+
+  #nav {
+    text-align:center;
+    position:static;
+    margin-top:60px;
+  }
+
+  #nav ul {
+    display: table;
+    margin: 8px auto 0 auto;
+  }
+
+  #nav li {
+    list-style-type:none;
+    display:table-cell;
+    font-size:15px;
+    padding: 0 20px;
+  }
+
+  #links {
+    margin: 50px 0 0 0;
+  }
+
+  #links :nth-child(2) {
+    float:right;
+  }
+
+  #not-found {
+    text-align: center;
+  }
+
+  #not-found a {
+    font-family:"Old Standard TT",serif;
+    font-size: 200px;
+    text-decoration: none;
+    display: inline-block;
+    padding-top: 225px;
+  }
+
+  @media (max-width: 750px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:28px;
+    }
+
+    #nav li {
+      font-size:13px;
+      padding: 0 15px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:50px;
+      font-size:14px;
+    }
+
+    #content h1 {
+      font-size:25px;
+    }
+
+    #content h2 {
+      font-size:22px;
+    }
+
+    .posts-listing li div {
+      font-size:12px;
+    }
+    
+    footer {
+      font-size: 12px;
+    }
+    
+    blockquote.long:after {
+      margin-top: 1ex !important;
+    }
+  }
+
+  @media (max-width: 400px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:22px;
+    }
+
+    #nav li {
+      font-size:12px;
+      padding: 0 10px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:20px;
+      font-size:12px;
+    }
+
+    #content h1 {
+      font-size:20px;
+    }
+
+    #content h2 {
+      font-size:18px;
+    }
+
+    .posts-listing li div{
+      font-size:12px;
+    }
+  }
+</style>
+
+
+    
+  </head>
+
+  <body>
+    <section id=nav>
+      <h1><a href="/">mjec&#39;s electric blogaloo</a></h1>
+      <ul>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/tags/">Browse by tag</a></li>
+        
+      </ul>
+    </section>
+
+
+
+<section id=content>
+  <h1> Finding subsets with particular sums </h1>
+
+  <div id=sub-header>
+    11 April 2016 · 6 minute read
+    
+    · <span class="tags">
+        
+            
+            
+            
+        
+            
+            
+            
+        
+            
+            
+            
+        
+        
+        <a href='/tags/technical/'>technical</a>, <a href='/tags/rc/'>rc</a> and <a href='/tags/algorithms/'>algorithms</a></span>
+    
+  </div>
+
+  <div class="entry-content">
+    <p>On Friday I came in on the tail end of a conversation explaining the solution to this problem. I think it&rsquo;s pretty interesting.</p>
+
+<p>Given a list of integers <code>L</code> and a target sum <code>S</code>, what&rsquo;s the best way to find the pair <code>x, y</code> where <code>x</code> and <code>y</code> are both distinct elements of <code>L</code> such that <code>x + y = S</code>? We also want to be able to determine if there is no such pair.</p>
+
+<p>The naive solution is to loop over <code>L</code> twice and see if you can find the sum:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#00a8c8">def</span> <span style="color:#75af00">find_pair</span><span style="color:#111">(</span><span style="color:#111">L</span><span style="color:#111">,</span> <span style="color:#111">S</span><span style="color:#111">):</span>
+  <span style="color:#00a8c8">for</span> <span style="color:#111">i</span> <span style="color:#f92672">in</span> <span style="color:#111">L</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">for</span> <span style="color:#111">j</span> <span style="color:#f92672">in</span> <span style="color:#111">L</span><span style="color:#111">:</span>
+      <span style="color:#00a8c8">if</span> <span style="color:#111">i</span> <span style="color:#f92672">+</span> <span style="color:#111">j</span> <span style="color:#f92672">=</span> <span style="color:#111">S</span><span style="color:#111">:</span>
+        <span style="color:#00a8c8">return</span> <span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#111">j</span><span style="color:#111">)</span>
+  <span style="color:#00a8c8">raise</span> <span style="color:#111">NoSuchPair</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>The complexity of this solution is $O(n^2)$, which is not ideal.</p>
+
+<p>The solution that was being explained when I walked in has complexity $O(n \log n)$, which is much better (and I&rsquo;m led to believe is the best general-case solution). That goes something like this:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#00a8c8">def</span> <span style="color:#75af00">find_pair</span><span style="color:#111">(</span><span style="color:#111">L</span><span style="color:#111">,</span> <span style="color:#111">S</span><span style="color:#111">):</span>
+  <span style="color:#111">d</span> <span style="color:#f92672">=</span> <span style="color:#111">{}</span>
+  <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+  <span style="color:#00a8c8">for</span> <span style="color:#111">v</span> <span style="color:#f92672">in</span> <span style="color:#111">L</span><span style="color:#111">:</span>
+    <span style="color:#111">d</span><span style="color:#111">[</span><span style="color:#111">S</span> <span style="color:#f92672">-</span> <span style="color:#111">v</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">i</span>
+    <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#111">i</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+
+  <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+  <span style="color:#00a8c8">for</span> <span style="color:#111">v</span> <span style="color:#f92672">in</span> <span style="color:#111">L</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#111">v</span> <span style="color:#f92672">in</span> <span style="color:#111">d</span><span style="color:#f92672">.</span><span style="color:#111">keys</span><span style="color:#111">()</span> <span style="color:#f92672">and</span> <span style="color:#111">d</span><span style="color:#111">[</span><span style="color:#111">v</span><span style="color:#111">]</span> <span style="color:#f92672">!=</span> <span style="color:#111">i</span><span style="color:#111">:</span>
+      <span style="color:#00a8c8">return</span> <span style="color:#111">(</span><span style="color:#111">v</span><span style="color:#111">,</span> <span style="color:#111">l</span><span style="color:#111">[</span><span style="color:#111">d</span><span style="color:#111">[</span><span style="color:#111">v</span><span style="color:#111">]])</span>
+    <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#111">i</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+  <span style="color:#00a8c8">raise</span> <span style="color:#111">NoSuchPair</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Let&rsquo;s step this through.</p>
+
+<p>We start by initialising a dictionary <code>d</code> and an index <code>i</code>. Then we loop over the list once. We insert an element in the dictionary indexed by the difference between our target sum <code>S</code> and the value of the current element <code>v</code>. The value of this element is the index in the list <code>L</code> of the current element.</p>
+
+<p>Note that we just overwrite the element if it exists.</p>
+
+<p>We now have a dictionary the <em>keys</em> of which are numbers we need to get to our target <code>S</code>, and the <em>values</em> of which are the indices in <code>L</code> of the other half of the pair to get to <code>S</code>.</p>
+
+<p>We then loop over the list <code>L</code> again, and this time check to see whether it is a key in the dictionary. If it is, that means we have found a match between the number in the list (<code>v</code> in the second loop) and a number we need to get to <code>S</code> (some key of <code>d</code>).</p>
+
+<p>We also check to make sure that the index of the number in the dictionary (i.e. its value) is not the same as the index of the number we are looking at. If it were, that would be reusing a number in the dictionary, which is bad.</p>
+
+<p>This is also what makes it okay (and indeed necessary!) to overwrite the value at that key if we already come across it in the first loop. Because each loop through <code>L</code> takes place in the same order, the first time the <em>second</em> loop finds an appropriate key of <code>d</code>, that will be for a different element of <code>L</code> if there is any such element.</p>
+
+<p>Complexity-wise, we only step through the list twice, which is $O(n)$. We also build a dictionary (hash map) from the list, which is $O(n \log n)$. Dictionary lookups are $O(\log n)$ at worst. Overall, therefore, building the dictionary dominates and we end up with $O(n \log n)$. Yay!</p>
+
+<p>We can look at a simple example:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#111">L</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#ae81ff">3</span><span style="color:#111">,</span> <span style="color:#ae81ff">7</span><span style="color:#111">,</span> <span style="color:#ae81ff">5</span><span style="color:#111">,</span> <span style="color:#ae81ff">9</span><span style="color:#111">,</span> <span style="color:#ae81ff">1</span><span style="color:#111">]</span>
+<span style="color:#111">S</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Our function <code>find_pair</code> will first loop through L and build the following dictionary:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#111">{</span>  <span style="color:#ae81ff">3</span><span style="color:#111">:</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span>    <span style="color:#75715e">#  3 (key) = 6 (S) - 3 (v in first loop)</span>
+  <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">:</span> <span style="color:#ae81ff">1</span><span style="color:#111">,</span>    <span style="color:#75715e"># -1 (key) = 6 (S) - 7 (v in first loop)</span>
+   <span style="color:#ae81ff">1</span><span style="color:#111">:</span> <span style="color:#ae81ff">2</span><span style="color:#111">,</span>    <span style="color:#75715e">#  1 (key) = 6 (S) - 5 (v in first loop)</span>
+  <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span><span style="color:#111">:</span> <span style="color:#ae81ff">3</span><span style="color:#111">,</span>    <span style="color:#75715e"># -3 (key) = 6 (S) - 9 (v in first loop)</span>
+   <span style="color:#ae81ff">5</span><span style="color:#111">:</span> <span style="color:#ae81ff">4</span> <span style="color:#111">}</span>   <span style="color:#75715e">#  5 (key) = 6 (S) - 1 (v in first loop)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>We then loop through <code>L</code> again, each step of which looks like this:</p>
+
+<ol>
+<li><code>i == 0</code>, <code>v == 3</code>. <code>3</code> is in <code>d.keys()</code> and <code>d[3] == 0</code>. But <code>i == 0 == d[3]</code> so this is not a solution: it&rsquo;s just doubling a single number in the array.</li>
+<li><code>i == 1</code>, <code>v == 7</code>. <code>7</code> is not in <code>d.keys()</code> so this is not a solution.</li>
+<li><code>i == 2</code>, <code>v == 5</code>. <code>5</code> is in <code>d.keys()</code> and <code>d[5] == 4</code>. Since <code>i == 2 != d[5]</code>, we now have a solution: <code>(5, L[d[5]]) == (5, L[4]) == (5, 1)</code>. Which we can check: <code>5 + 1 == 6</code>.</li>
+</ol>
+
+<p>At that point, we bail out because we have found a solution.</p>
+
+<p>It should be obvious that if we never hit <code>return</code> then we have found there is no such pair, and so we raise an appropriate exception.</p>
+
+<p>This is pretty neat.</p>
+
+<p>For clarity, if <code>L = [3, 3, 3, 4]</code> and <code>S = 6</code>, we would get the solution <code>(3, 3)</code>, because our dictionary would look like this:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#111">{</span>  <span style="color:#ae81ff">3</span><span style="color:#111">:</span> <span style="color:#ae81ff">2</span><span style="color:#111">,</span>    <span style="color:#75715e"># 3 (key) = 6 (S) - 3 (v)</span>
+   <span style="color:#75715e"># L[2] is the last element for which this holds</span>
+   <span style="color:#75715e"># and the last such element overwrites the previous values at key 3,</span>
+   <span style="color:#75715e"># namely {3: 0} and {3: 1}</span>
+   <span style="color:#ae81ff">2</span><span style="color:#111">:</span> <span style="color:#ae81ff">3</span> <span style="color:#111">}</span>   <span style="color:#75715e"># 2 (key) = 6 (S) - 4 (v)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Now for the tough question:</p>
+
+<p>Given a list of integers <code>L</code> and a target sum <code>S</code>, what&rsquo;s the best way to find the set of n integers <code>[x_1, x_2, ..., x_n]</code> where each <code>x_i</code> is a distinct element of <code>L</code> such that <code>x_1 + x_2 + ... + x_n = S</code>? We also want to be able to determine if there is no such set.</p>
+
+<p>This question was raised at the whiteboard, but no definitive solution was worked out. The best solution I have is to recursively call the <code>find_pair</code> algorithm described above. This seems a little silly, but I can&rsquo;t find a better way that deals with the fact that you&rsquo;re not allowed to pull the same element twice. I think the complexity of this is $O((n \log n)^{a - 1})$ where <code>a</code> is the number of integers to find (which can I think be simplified, but this shows how the original algorithm is used). This seems&hellip; bad.</p>
+
+<p>So, anyone have a better solution for the general case? Hit me up <a href="https://twitter.com/mjec">on twitter</a> or something.</p>
+
+  </div>
+
+  <div id=links>
+    
+      <a class="basic-alignment left" href="https://mjec.blog/2016/04/07/fibonacci-numbers-and-the-golden-ratio/">&laquo; Fibonacci numbers and the golden ratio</a>
+    
+    
+      <a class="basic-alignment left" href="https://mjec.blog/2016/04/12/my-haskell-was-slow/">My Haskell was slow &raquo;</a>
+    
+  </div>
+</section>
+
+  <footer>
+    <p>Yet another blog from <a href="https://mjec.net">Michael Cordover</a>.
+    <span class="rc-scout"></span></p>
+  </footer>
+
+  <script async defer src="https://www.recurse-scout.com/loader.js?t=7b61c3cc166c3321bfbe79ce44d62586"></script>
+
+  <script type="text/javascript">
+    var _paq = _paq || [];
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//piwik.mjec.net/";
+      _paq.push(['setTrackerUrl', u+'piwik.php']);
+      _paq.push(['setSiteId', 13]);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <noscript><p><img src="//piwik.mjec.net/piwik.php?idsite=13" style="border:0;" alt="" /></p></noscript>
+
+  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$']],
+      displayMath: [['$$','$$']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+           extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax();
+      for (var i = 0; i - all.length != 0; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+  </script>
+  
+</body>
+</html>
+
+
+

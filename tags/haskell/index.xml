@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Haskell on mjec&#39;s electric blogaloo</title>
+    <link>https://mjec.blog/tags/haskell/</link>
+    <description>Recent content in Haskell on mjec&#39;s electric blogaloo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 12 Apr 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://mjec.blog/tags/haskell/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>My Haskell was slow</title>
+      <link>https://mjec.blog/2016/04/12/my-haskell-was-slow/</link>
+      <pubDate>Tue, 12 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/04/12/my-haskell-was-slow/</guid>
+      <description>I have a Haskell function that builds frequency tables. It is very slow (and not very good). Originally this post was to look at why, and try to find a way to speed it up.
+It turns out that GHC (the Haskell compiler) includes some nice profiling tools. You can set &amp;ldquo;cost centres&amp;rdquo; you want to look at using the {-# SCC &amp;quot;cost-centre-name&amp;quot; #-} pragma. So that&amp;rsquo;s what I did, and I have ended up with this:</description>
+    </item>
+    
+    <item>
+      <title>Learning Haskell</title>
+      <link>https://mjec.blog/2016/03/30/learning-haskell/</link>
+      <pubDate>Wed, 30 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/03/30/learning-haskell/</guid>
+      <description>I was surprised to hear that Haskell isn&amp;rsquo;t really a functional language so much as it&amp;rsquo;s a strongly typed one. I was of course aware that it had both these properties but it took really using it to see why the typing was so important.
+I started on Monday afternoon with Learn You A Haskell. It&amp;rsquo;s pretty good. That, combined with a couple of group discussions sessions, has meant I&amp;rsquo;m feeling pretty confident.</description>
+    </item>
+    
+  </channel>
+</rss>

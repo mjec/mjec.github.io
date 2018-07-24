@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400|Old+Standard+TT:400' rel='stylesheet' type='text/css'>
+
+    <link rel="icon" type="image/png" href="/favicon_16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon_32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon_128x128.png" sizes="128x128">
+
+    <title>
+      Django&#39;s QuerySet union isn&#39;t quite what it seems
+    </title>
+    <link rel="canonical" href="https://mjec.blog/2016/06/27/djangos-queryset-union-isnt-quite-what-it-seems/">
+
+    <style>
+  * {
+    border:0;
+    font:inherit;
+    font-size:100%;
+    vertical-align:baseline;
+    margin:0;
+    padding:0;
+    color: black;
+    text-decoration-skip: ink;
+    text-decoration-skip-ink: auto;
+  }
+
+  body {
+    font-family:'Open Sans', 'Myriad Pro', Myriad, sans-serif;
+    font-size:17px;
+    line-height:160%;
+    color:#1d1313;
+    max-width:800px;
+    margin:auto;
+  }
+
+  p {
+    margin: 20px 0;
+  }
+
+  a img {
+    border:none;
+  }
+
+  img {
+    margin: 10px auto 10px auto;
+    max-width: 100%;
+    display: block;
+  }
+
+  .left-justify {
+    float: left;
+  }
+
+  .right-justify {
+    float:right;
+  }
+
+  pre, code {
+    font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    background-color: #f7f7f7;
+  }
+  
+  sub {
+    font-size: 65%;
+    vertical-align: sub;
+  }
+
+  sup {
+    font-size: 65%;
+    vertical-align: super;
+  }
+
+  code {
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  pre {
+    margin-top: 0;
+    margin-bottom: 16px;
+    word-wrap: normal;
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+  }
+
+  pre>code {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    word-break: normal;
+    white-space: pre;
+    background: transparent;
+    border: 0;
+  }
+
+  pre code {
+    display: inline;
+    max-width: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+  }
+
+  pre code::before,
+  pre code::after {
+    content: normal;
+  }
+
+  em,q,em,dfn {
+    font-style:italic;
+  }
+
+  .sans,html .gist .gist-file .gist-meta {
+    font-family:"Open Sans","Myriad Pro",Myriad,sans-serif;
+  }
+
+  .mono,pre,code,tt,p code,li code {
+    font-family:Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace;
+  }
+
+  .heading,.serif,h1,h2,h3 {
+    font-family:"Old Standard TT",serif;
+  }
+
+  strong {
+    font-weight:600;
+  }
+
+  q:before {
+    content:"\201C";
+  }
+
+  q:after {
+    content:"\201D";
+  }
+
+  del,s {
+    text-decoration:line-through;
+  }
+
+  blockquote {
+    font-family:"Old Standard TT",serif;
+    text-align:center;
+    padding:50px;
+  }
+  
+  blockquote.long {
+    text-align: left;
+  }
+
+  blockquote p {
+    display:block;
+    font-style:italic;
+    margin: 0;
+  }
+  
+  blockquote.long p {
+    margin: 20px 0 0 0;
+  }
+  
+  blockquote.long p:first-child {
+    margin: 0;
+  }
+  
+  blockquote.long p:last-child {
+    margin-bottom: -2ex;
+  }
+
+  blockquote:before,blockquote:after {
+    font-family:"Old Standard TT",serif;
+    font-size:35px;
+    color:#403c3b;
+  }
+  
+  blockquote:before {
+    content:'\201C';
+    float: left;
+  }
+
+  blockquote:after {
+    content:'\201D';
+    float: right;
+    margin-top: -1ex;
+    position: relative;
+    left: 1ex;
+    top: -0.5ex;
+  }
+  
+  blockquote.long:after {
+    margin-top: 0;
+  }
+
+  hr {
+    width:40%;
+    height: 1px;
+    background:#403c3b;
+    margin: 25px auto;
+  }
+
+  h1 {
+    font-size:35px;
+  }
+
+  h2 {
+    font-size:28px;
+  }
+
+  h3 {
+    font-size:22px;
+    margin-top:18px;
+  }
+
+  h1 a,h2 a,h3 a {
+    text-decoration:none;
+  }
+
+  h1,h2 {
+    margin-top:28px;
+  }
+
+
+  code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: black;
+  }
+
+  #sub-header, #sub-header * {
+    color:#403c3b;
+    font-size:13px;
+  }
+
+  #sub-header {
+    margin: 0 4px;
+  }
+
+  #nav h1 a {
+    font-size:35px;
+    color:#1d1313;
+    line-height:120%;
+  }
+
+  .together {
+    white-space: nowrap;
+  }
+
+  .posts-listing a, #nav a, .tags a {
+    text-decoration: none;
+  }
+
+  .posts-listing h2 small {
+    font-size: 50%;
+  }
+
+  .posts-listing li p.preview {
+    margin: 0;
+    color: #666;
+  }
+
+  li {
+    margin-left: 20px;
+  }
+
+  ul li {
+    margin-left: 1em;
+  }
+
+  ul li {
+    list-style-type: none;
+  }
+  ul li:before {
+    content:"\00BB \0020";
+    margin-left: -1em;
+    float: left;
+  }
+
+  footer {
+    border-top: 1px dotted black;
+    font-size: 80%;
+    margin-top: 20px;
+  }
+  footer p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .rc-scout .rc-scout__link {
+    color: black !important;
+    text-decoration-skip-ink: auto;
+  }
+
+  #nav ul li:before, .posts-listing li:before {
+    content:'';
+    margin-right:0;
+  }
+
+  #content {
+    text-align:left;
+    width:100%;
+    font-size:15px;
+    padding:60px 0 0;
+  }
+
+  #content h1,#content h2 {
+    margin-bottom:5px;
+  }
+
+  #content h2 {
+    font-size:25px;
+  }
+
+  #content .pagination {
+    text-align: center;
+  }
+
+  #content .entry-content {
+    margin-top:15px;
+  }
+
+  #content time {
+    margin-left:3px;
+  }
+
+  #content h1 {
+    font-size:30px;
+  }
+
+  .highlight {
+    margin: 10px 0;
+  }
+
+  .posts-listing {
+    margin:0 0 30px;
+  }
+
+  .posts-listing li {
+    margin:0 0 25px 15px;
+  }
+
+  .posts-listing li a:hover, #nav a:hover, .tags a:hover {
+    text-decoration: underline;
+  }
+
+  #nav {
+    text-align:center;
+    position:static;
+    margin-top:60px;
+  }
+
+  #nav ul {
+    display: table;
+    margin: 8px auto 0 auto;
+  }
+
+  #nav li {
+    list-style-type:none;
+    display:table-cell;
+    font-size:15px;
+    padding: 0 20px;
+  }
+
+  #links {
+    margin: 50px 0 0 0;
+  }
+
+  #links :nth-child(2) {
+    float:right;
+  }
+
+  #not-found {
+    text-align: center;
+  }
+
+  #not-found a {
+    font-family:"Old Standard TT",serif;
+    font-size: 200px;
+    text-decoration: none;
+    display: inline-block;
+    padding-top: 225px;
+  }
+
+  @media (max-width: 750px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:28px;
+    }
+
+    #nav li {
+      font-size:13px;
+      padding: 0 15px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:50px;
+      font-size:14px;
+    }
+
+    #content h1 {
+      font-size:25px;
+    }
+
+    #content h2 {
+      font-size:22px;
+    }
+
+    .posts-listing li div {
+      font-size:12px;
+    }
+    
+    footer {
+      font-size: 12px;
+    }
+    
+    blockquote.long:after {
+      margin-top: 1ex !important;
+    }
+  }
+
+  @media (max-width: 400px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:22px;
+    }
+
+    #nav li {
+      font-size:12px;
+      padding: 0 10px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:20px;
+      font-size:12px;
+    }
+
+    #content h1 {
+      font-size:20px;
+    }
+
+    #content h2 {
+      font-size:18px;
+    }
+
+    .posts-listing li div{
+      font-size:12px;
+    }
+  }
+</style>
+
+
+    
+  </head>
+
+  <body>
+    <section id=nav>
+      <h1><a href="/">mjec&#39;s electric blogaloo</a></h1>
+      <ul>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/tags/">Browse by tag</a></li>
+        
+      </ul>
+    </section>
+
+
+
+<section id=content>
+  <h1> Django&#39;s QuerySet union isn&#39;t quite what it seems </h1>
+
+  <div id=sub-header>
+    27 June 2016 · 3 minute read
+    
+    · <span class="tags">
+        
+            
+            
+            
+        
+            
+            
+            
+        
+            
+            
+            
+        
+            
+            
+            
+        
+            
+            
+            
+        
+        
+        <a href='/tags/technical/'>technical</a>, <a href='/tags/django/'>django</a>, <a href='/tags/python/'>python</a>, <a href='/tags/web-development/'>web development</a> and <a href='/tags/rc/'>rc</a></span>
+    
+  </div>
+
+  <div class="entry-content">
+    <p>One of the websites I maintain is for the <a href="https://tdu.org.au/">Tasmanian Debating Union</a>. I built a competition management system, a rewrite in Django of a system originally designed and built in PHP by my friend <a href="http://www.publicself.com.au/">Pat</a>.</p>
+
+<p>The database schema for this system includes a table with one row per debate. Those debates have associated teams (one affirmative, one negative) and an outcome (e.g. affirmative win, negative win). There&rsquo;s therefore no single column to select the winning team.</p>
+
+<p>As an aside, this particular database structure is something I chose, a change from Pat&rsquo;s system (which had aff, neg and winner IDs). This way is more normalized (it&rsquo;s impossible, even without constraints, for a winner to be a team which did not participate in the debate) but I&rsquo;m not sure it is particularly advantageous. It does significantly increase the complexity of certain types of queries.</p>
+
+<p>One such example is a query designed to fetch the IDs of winning teams in a particular round, with the intention of having those winners move on to the next round. (In the <abbr title="Tasmanian Debating Union">TDU</abbr>&rsquo;s competition, this only happens in finals.)</p>
+
+<p>I had originally conceived of this query in the following way:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL"><span style="color:#00a8c8">SELECT</span> <span style="color:#111">aff_id</span> <span style="color:#00a8c8">AS</span> <span style="color:#111">team</span>
+    <span style="color:#00a8c8">FROM</span> <span style="color:#111">debate</span>
+    <span style="color:#00a8c8">WHERE</span> <span style="color:#111">round_id</span> <span style="color:#f92672">=</span> <span style="color:#f92672">?</span> <span style="color:#00a8c8">AND</span> <span style="color:#111">outcome</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;affwin&#39;</span>
+<span style="color:#00a8c8">UNION</span>
+<span style="color:#00a8c8">SELECT</span> <span style="color:#111">neg_id</span> <span style="color:#00a8c8">AS</span> <span style="color:#111">team</span>
+    <span style="color:#00a8c8">FROM</span> <span style="color:#111">debate</span>
+    <span style="color:#00a8c8">WHERE</span> <span style="color:#111">round_id</span> <span style="color:#f92672">=</span> <span style="color:#f92672">?</span> <span style="color:#00a8c8">AND</span> <span style="color:#111">outcome</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;negwin&#39;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>I then translated that into what I thought was its natural Django representation:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">12
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#111">team_ids</span> <span style="color:#f92672">=</span> <span style="color:#111">(</span>
+    <span style="color:#111">Debate</span>
+    <span style="color:#f92672">.</span><span style="color:#111">objects</span>
+    <span style="color:#f92672">.</span><span style="color:#111">filter</span><span style="color:#111">(</span><span style="color:#111">round</span><span style="color:#f92672">=</span><span style="color:#111">previous_round</span><span style="color:#111">,</span> <span style="color:#111">outcome</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;affwin&#39;</span><span style="color:#111">)</span>
+    <span style="color:#f92672">.</span><span style="color:#111">only</span><span style="color:#111">(</span><span style="color:#d88200">&#39;aff&#39;</span><span style="color:#111">)</span>
+    <span style="color:#f92672">.</span><span style="color:#111">annotate</span><span style="color:#111">(</span><span style="color:#111">team</span><span style="color:#f92672">=</span><span style="color:#111">F</span><span style="color:#111">(</span><span style="color:#d88200">&#39;aff&#39;</span><span style="color:#111">))</span> <span style="color:#f92672">|</span>
+    <span style="color:#111">Debate</span>
+    <span style="color:#f92672">.</span><span style="color:#111">objects</span>
+    <span style="color:#f92672">.</span><span style="color:#111">filter</span><span style="color:#111">(</span><span style="color:#111">round</span><span style="color:#f92672">=</span><span style="color:#111">previous_round</span><span style="color:#111">,</span> <span style="color:#111">outcome</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;negwin&#39;</span><span style="color:#111">)</span>
+    <span style="color:#f92672">.</span><span style="color:#111">only</span><span style="color:#111">(</span><span style="color:#d88200">&#39;neg&#39;</span><span style="color:#111">)</span>
+    <span style="color:#f92672">.</span><span style="color:#111">annotate</span><span style="color:#111">(</span><span style="color:#111">team</span><span style="color:#f92672">=</span><span style="color:#111">F</span><span style="color:#111">(</span><span style="color:#d88200">&#39;neg&#39;</span><span style="color:#111">))</span>
+<span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">order_by</span><span style="color:#111">(</span><span style="color:#d88200">&#39;debate_number&#39;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">values_list</span><span style="color:#111">(</span><span style="color:#d88200">&#39;team&#39;</span><span style="color:#111">,</span> <span style="color:#111">flat</span><span style="color:#f92672">=</span><span style="color:#111">True</span><span style="color:#111">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Note that I&rsquo;ve used the <code>|</code> operator between those two <code>QuerySet</code>s. I understood that this generated the <code>UNION</code> between them. Not so! To my surprise, the SQL that I ended up with was of the form:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL"><span style="color:#00a8c8">SELECT</span> <span style="color:#111">aff_id</span> <span style="color:#00a8c8">AS</span> <span style="color:#111">team</span>
+    <span style="color:#00a8c8">FROM</span> <span style="color:#111">debate</span>
+    <span style="color:#00a8c8">WHERE</span> <span style="color:#111">(</span><span style="color:#111">round_id</span> <span style="color:#f92672">=</span> <span style="color:#f92672">?</span> <span style="color:#00a8c8">AND</span> <span style="color:#111">outcome</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;affwin&#39;</span><span style="color:#111">)</span> <span style="color:#00a8c8">OR</span>
+        <span style="color:#111">(</span><span style="color:#111">round_id</span> <span style="color:#f92672">=</span> <span style="color:#f92672">?</span> <span style="color:#00a8c8">AND</span> <span style="color:#111">outcome</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;negwin&#39;</span><span style="color:#111">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>The <code>.annotate(team=F('neg'))</code> was totally clobbered.</p>
+
+<p>This behaviour is actually not totally unreasonable - it is a significant optimization if it is what&rsquo;s intended. However, it wasn&rsquo;t what I wanted at all.</p>
+
+<p>What I ended up doing was what I ought to have done the whole time, and represents a pattern I see a lot for this table structure:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#111">team_ids</span> <span style="color:#f92672">=</span> <span style="color:#111">(</span>
+    <span style="color:#111">Debate</span>
+    <span style="color:#f92672">.</span><span style="color:#111">objects</span>
+    <span style="color:#f92672">.</span><span style="color:#111">filter</span><span style="color:#111">(</span><span style="color:#111">round</span><span style="color:#f92672">=</span><span style="color:#111">previous_round</span><span style="color:#111">)</span>
+    <span style="color:#f92672">.</span><span style="color:#111">annotate</span><span style="color:#111">(</span>
+        <span style="color:#111">team</span><span style="color:#f92672">=</span><span style="color:#111">Case</span><span style="color:#111">(</span>
+            <span style="color:#111">When</span><span style="color:#111">(</span><span style="color:#111">outcome</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;affwin&#39;</span><span style="color:#111">,</span> <span style="color:#111">then</span><span style="color:#f92672">=</span><span style="color:#111">F</span><span style="color:#111">(</span><span style="color:#d88200">&#39;aff&#39;</span><span style="color:#111">)),</span>
+            <span style="color:#111">When</span><span style="color:#111">(</span><span style="color:#111">outcome</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;negwin&#39;</span><span style="color:#111">,</span> <span style="color:#111">then</span><span style="color:#f92672">=</span><span style="color:#111">F</span><span style="color:#111">(</span><span style="color:#d88200">&#39;neg&#39;</span><span style="color:#111">)),</span>
+        <span style="color:#111">)</span>
+    <span style="color:#111">)</span>
+<span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">order_by</span><span style="color:#111">(</span><span style="color:#d88200">&#39;debate_number&#39;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">values_list</span><span style="color:#111">(</span><span style="color:#d88200">&#39;team&#39;</span><span style="color:#111">,</span> <span style="color:#111">flat</span><span style="color:#f92672">=</span><span style="color:#111">True</span><span style="color:#111">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>This is actually a lot cleaner, and the SQL surely runs faster. Overall, a better outcome. But if I actually need <code>UNION</code>, it&rsquo;s good to know I can&rsquo;t really get it with the Django ORM.</p>
+
+  </div>
+
+  <div id=links>
+    
+      <a class="basic-alignment left" href="https://mjec.blog/2016/06/26/your-rdbms-has-cool-features/">&laquo; Your RDBMS has cool features</a>
+    
+    
+      <a class="basic-alignment left" href="https://mjec.blog/2016/06/28/reflections-on-new-york-city/">Reflections on New York City &raquo;</a>
+    
+  </div>
+</section>
+
+  <footer>
+    <p>Yet another blog from <a href="https://mjec.net">Michael Cordover</a>.
+    <span class="rc-scout"></span></p>
+  </footer>
+
+  <script async defer src="https://www.recurse-scout.com/loader.js?t=7b61c3cc166c3321bfbe79ce44d62586"></script>
+
+  <script type="text/javascript">
+    var _paq = _paq || [];
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//piwik.mjec.net/";
+      _paq.push(['setTrackerUrl', u+'piwik.php']);
+      _paq.push(['setSiteId', 13]);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <noscript><p><img src="//piwik.mjec.net/piwik.php?idsite=13" style="border:0;" alt="" /></p></noscript>
+
+  
+</body>
+</html>
+
+
+

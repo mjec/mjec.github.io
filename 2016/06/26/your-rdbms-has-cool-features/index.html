@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400|Old+Standard+TT:400' rel='stylesheet' type='text/css'>
+
+    <link rel="icon" type="image/png" href="/favicon_16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon_32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon_128x128.png" sizes="128x128">
+
+    <title>
+      Your RDBMS has cool features
+    </title>
+    <link rel="canonical" href="https://mjec.blog/2016/06/26/your-rdbms-has-cool-features/">
+
+    <style>
+  * {
+    border:0;
+    font:inherit;
+    font-size:100%;
+    vertical-align:baseline;
+    margin:0;
+    padding:0;
+    color: black;
+    text-decoration-skip: ink;
+    text-decoration-skip-ink: auto;
+  }
+
+  body {
+    font-family:'Open Sans', 'Myriad Pro', Myriad, sans-serif;
+    font-size:17px;
+    line-height:160%;
+    color:#1d1313;
+    max-width:800px;
+    margin:auto;
+  }
+
+  p {
+    margin: 20px 0;
+  }
+
+  a img {
+    border:none;
+  }
+
+  img {
+    margin: 10px auto 10px auto;
+    max-width: 100%;
+    display: block;
+  }
+
+  .left-justify {
+    float: left;
+  }
+
+  .right-justify {
+    float:right;
+  }
+
+  pre, code {
+    font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    background-color: #f7f7f7;
+  }
+  
+  sub {
+    font-size: 65%;
+    vertical-align: sub;
+  }
+
+  sup {
+    font-size: 65%;
+    vertical-align: super;
+  }
+
+  code {
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  pre {
+    margin-top: 0;
+    margin-bottom: 16px;
+    word-wrap: normal;
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+  }
+
+  pre>code {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    word-break: normal;
+    white-space: pre;
+    background: transparent;
+    border: 0;
+  }
+
+  pre code {
+    display: inline;
+    max-width: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+  }
+
+  pre code::before,
+  pre code::after {
+    content: normal;
+  }
+
+  em,q,em,dfn {
+    font-style:italic;
+  }
+
+  .sans,html .gist .gist-file .gist-meta {
+    font-family:"Open Sans","Myriad Pro",Myriad,sans-serif;
+  }
+
+  .mono,pre,code,tt,p code,li code {
+    font-family:Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace;
+  }
+
+  .heading,.serif,h1,h2,h3 {
+    font-family:"Old Standard TT",serif;
+  }
+
+  strong {
+    font-weight:600;
+  }
+
+  q:before {
+    content:"\201C";
+  }
+
+  q:after {
+    content:"\201D";
+  }
+
+  del,s {
+    text-decoration:line-through;
+  }
+
+  blockquote {
+    font-family:"Old Standard TT",serif;
+    text-align:center;
+    padding:50px;
+  }
+  
+  blockquote.long {
+    text-align: left;
+  }
+
+  blockquote p {
+    display:block;
+    font-style:italic;
+    margin: 0;
+  }
+  
+  blockquote.long p {
+    margin: 20px 0 0 0;
+  }
+  
+  blockquote.long p:first-child {
+    margin: 0;
+  }
+  
+  blockquote.long p:last-child {
+    margin-bottom: -2ex;
+  }
+
+  blockquote:before,blockquote:after {
+    font-family:"Old Standard TT",serif;
+    font-size:35px;
+    color:#403c3b;
+  }
+  
+  blockquote:before {
+    content:'\201C';
+    float: left;
+  }
+
+  blockquote:after {
+    content:'\201D';
+    float: right;
+    margin-top: -1ex;
+    position: relative;
+    left: 1ex;
+    top: -0.5ex;
+  }
+  
+  blockquote.long:after {
+    margin-top: 0;
+  }
+
+  hr {
+    width:40%;
+    height: 1px;
+    background:#403c3b;
+    margin: 25px auto;
+  }
+
+  h1 {
+    font-size:35px;
+  }
+
+  h2 {
+    font-size:28px;
+  }
+
+  h3 {
+    font-size:22px;
+    margin-top:18px;
+  }
+
+  h1 a,h2 a,h3 a {
+    text-decoration:none;
+  }
+
+  h1,h2 {
+    margin-top:28px;
+  }
+
+
+  code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: black;
+  }
+
+  #sub-header, #sub-header * {
+    color:#403c3b;
+    font-size:13px;
+  }
+
+  #sub-header {
+    margin: 0 4px;
+  }
+
+  #nav h1 a {
+    font-size:35px;
+    color:#1d1313;
+    line-height:120%;
+  }
+
+  .together {
+    white-space: nowrap;
+  }
+
+  .posts-listing a, #nav a, .tags a {
+    text-decoration: none;
+  }
+
+  .posts-listing h2 small {
+    font-size: 50%;
+  }
+
+  .posts-listing li p.preview {
+    margin: 0;
+    color: #666;
+  }
+
+  li {
+    margin-left: 20px;
+  }
+
+  ul li {
+    margin-left: 1em;
+  }
+
+  ul li {
+    list-style-type: none;
+  }
+  ul li:before {
+    content:"\00BB \0020";
+    margin-left: -1em;
+    float: left;
+  }
+
+  footer {
+    border-top: 1px dotted black;
+    font-size: 80%;
+    margin-top: 20px;
+  }
+  footer p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .rc-scout .rc-scout__link {
+    color: black !important;
+    text-decoration-skip-ink: auto;
+  }
+
+  #nav ul li:before, .posts-listing li:before {
+    content:'';
+    margin-right:0;
+  }
+
+  #content {
+    text-align:left;
+    width:100%;
+    font-size:15px;
+    padding:60px 0 0;
+  }
+
+  #content h1,#content h2 {
+    margin-bottom:5px;
+  }
+
+  #content h2 {
+    font-size:25px;
+  }
+
+  #content .pagination {
+    text-align: center;
+  }
+
+  #content .entry-content {
+    margin-top:15px;
+  }
+
+  #content time {
+    margin-left:3px;
+  }
+
+  #content h1 {
+    font-size:30px;
+  }
+
+  .highlight {
+    margin: 10px 0;
+  }
+
+  .posts-listing {
+    margin:0 0 30px;
+  }
+
+  .posts-listing li {
+    margin:0 0 25px 15px;
+  }
+
+  .posts-listing li a:hover, #nav a:hover, .tags a:hover {
+    text-decoration: underline;
+  }
+
+  #nav {
+    text-align:center;
+    position:static;
+    margin-top:60px;
+  }
+
+  #nav ul {
+    display: table;
+    margin: 8px auto 0 auto;
+  }
+
+  #nav li {
+    list-style-type:none;
+    display:table-cell;
+    font-size:15px;
+    padding: 0 20px;
+  }
+
+  #links {
+    margin: 50px 0 0 0;
+  }
+
+  #links :nth-child(2) {
+    float:right;
+  }
+
+  #not-found {
+    text-align: center;
+  }
+
+  #not-found a {
+    font-family:"Old Standard TT",serif;
+    font-size: 200px;
+    text-decoration: none;
+    display: inline-block;
+    padding-top: 225px;
+  }
+
+  @media (max-width: 750px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:28px;
+    }
+
+    #nav li {
+      font-size:13px;
+      padding: 0 15px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:50px;
+      font-size:14px;
+    }
+
+    #content h1 {
+      font-size:25px;
+    }
+
+    #content h2 {
+      font-size:22px;
+    }
+
+    .posts-listing li div {
+      font-size:12px;
+    }
+    
+    footer {
+      font-size: 12px;
+    }
+    
+    blockquote.long:after {
+      margin-top: 1ex !important;
+    }
+  }
+
+  @media (max-width: 400px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:22px;
+    }
+
+    #nav li {
+      font-size:12px;
+      padding: 0 10px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:20px;
+      font-size:12px;
+    }
+
+    #content h1 {
+      font-size:20px;
+    }
+
+    #content h2 {
+      font-size:18px;
+    }
+
+    .posts-listing li div{
+      font-size:12px;
+    }
+  }
+</style>
+
+
+    
+  </head>
+
+  <body>
+    <section id=nav>
+      <h1><a href="/">mjec&#39;s electric blogaloo</a></h1>
+      <ul>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/tags/">Browse by tag</a></li>
+        
+      </ul>
+    </section>
+
+
+
+<section id=content>
+  <h1> Your RDBMS has cool features </h1>
+
+  <div id=sub-header>
+    26 June 2016 · 16 minute read
+    
+    · <span class="tags">
+        
+            
+            
+            
+        
+            
+            
+            
+        
+            
+            
+            
+        
+            
+            
+            
+        
+        
+        <a href='/tags/technical/'>technical</a>, <a href='/tags/postgresql/'>postgresql</a>, <a href='/tags/web-development/'>web development</a> and <a href='/tags/rc/'>rc</a></span>
+    
+  </div>
+
+  <div class="entry-content">
+    
+
+<p><em>Aside: I started writing this post back in May, and have finally had a chance to finish it! Particular thanks to <a href="http://l0stinsp4ce.com/">Benson</a> who worked with me on the ultimate solution.</em></p>
+
+<h2 id="how-did-we-get-here">How did we get here?</h2>
+
+<p>There&rsquo;s a tendency in a lot of web development to be cautious of the data layer. We outsource persistence to the magic of PostgreSQL (or MySQL or MariaDB or SQL Server or Mongo or Redis or whatever) and just kind of ignore how it works. In fact, this has now gotten to the point where the preferred means of keeping persistent data is with an ORM, whether that&rsquo;s the Django ORM, SQLAlchemy, Ruby on Rails&rsquo; ActiveRecord or whatever the PHP folks are using these days (I know Doctrine was a thing?)</p>
+
+<p>This is really the natural progression (for me at least) from the days of <a href="http://php.net/manual/en/book.pdo.php">PDO</a>. There&rsquo;s an expectation that we should abstract out data access. With PDO and the like the intention was always that you could use different database backends. I guess this makes sense for some applications - Wordpress, for example - but for many a switch in database server seems unlikely.</p>
+
+<p>In fact the data access layer paradigm comes from a very enterprisey model, where the data access layer is responsible for persistence but also for translation. Often this particular application&rsquo;s objects might not be precisely what is stored in the database. And the <a href="http://thecodelesscode.com/names/Elephant's+Footprint+Clan">Elephant&rsquo;s Footprint Clan</a> is free to use the enterprisey features of the server. Stored procedures and triggers abound.</p>
+
+<p>So, I&rsquo;ve decided to see what happens when I do data processing in my database rather than my application.</p>
+
+<h2 id="the-task-at-hand">The task at hand</h2>
+
+<p>I built and host the current iteration of the <a href="https://tdu.org.au/">Tasmanian Debating Union&rsquo;s debating management system</a>. It is a hacky Django project, hosted on the same AWS micro instance as everything else I run, from IRC loggers to this very blog.</p>
+
+<p>One of the things that the system does is determine the current <a href="https://tdu.org.au/ladder/division/34">ladder</a> for a particular division. Ranking on the ladder is determined by applying the following rules:</p>
+
+<ol>
+<li>For each debate, teams receive points as follows:
+
+<ul>
+<li>+3 points for a win;</li>
+<li>+1 point for a loss;</li>
+<li>+0 points for a forfeit (<em>or a bye, at the moment; but this may change</em>);</li>
+<li>-1 point for a late forfeit or disqualification.</li>
+</ul></li>
+<li>Teams are then ordered by their points, with the team with the highest number of points ranked higher on the ladder.</li>
+<li>Where teams have an equal number of points, their ordering is determined by the average rank of their speakers across all debates, where the lower average rank is better.</li>
+<li>Where teams have an equal number of points and equal average ranks and the teams have debated against each other once, the team which won that debate ranks higher on the ladder.</li>
+<li>Where the above rules cannot determine the order on the ladder, behaviour is undefined.</li>
+</ol>
+
+<p>It is worth noting that rule (4) may result in a cycle where more than two teams are on the same number of points and same ranks. For example, if A, B and C are all equal to that point, and A beat B head to head, B beat C and C beat A, then no ordering can be determined.</p>
+
+<p>It is also worth noting that &ldquo;undefined&rdquo; behaviour is not really a good thing in any competition. There are several established means of resolving these types of conflicts, all with different pros and cons. Some such methods include:</p>
+
+<ul>
+<li>rank teams by random process (e.g. coin flip);</li>
+<li>adjudicators meet and choose an ordering;</li>
+<li>hold one or more further debates to resolve the ambiguity;</li>
+<li>the team with the higher total raw scores ranks higher;</li>
+<li>the team with the highest net margins of wins ranks higher; or</li>
+<li>teams are ranked based on the ranks of the teams they defeated who are not deadlocked with them.</li>
+</ul>
+
+<p>The last three of these are of course also not guaranteed to give a clear answer.</p>
+
+<p>It turns out that since initially writing this post we ended up with precisely that undefined outcome happening. The first idea we had was to resolve it by looking at the ranks of the teams the deadlocked teams defeated; but that also resulted in an undefined outcome. The rule which was added was that teams are ranked by the average points margin of their debates (with winning margins counted as positive and losing margins counted as negative). This resolved the ambiguity, at least for now.</p>
+
+<h2 id="the-old-solution">The old solution</h2>
+
+<p>For better or for worse, here is my old means of generating a ladder. You can see that it involves at least six database queries per team, meaning 96 aggregating queries to calculate the ladder for one division. This is a very expensive operation.</p>
+
+<p>At the moment it&rsquo;s not wrapped in a transaction, but it should be.</p>
+
+<p>I have some pretty aggressive caching, so I avoid running this if at all possible. But this is really a data processing task being done in the application layer. Do we do any better moving it to the database server?</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">  1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">  2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">  3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">  4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">  5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">  6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">  7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">  8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">  9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 46
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 47
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 48
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 49
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 50
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 51
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 52
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 53
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 54
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 55
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 56
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 57
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 58
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 59
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 60
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 61
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 62
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 63
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 64
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 65
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 66
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 67
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 68
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 69
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 70
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 71
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 72
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 73
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 74
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 75
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 76
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 77
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 78
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 79
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 80
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 81
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 82
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 83
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 84
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 85
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 86
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 87
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 88
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 89
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 90
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 91
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 92
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 93
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 94
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 95
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 96
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 97
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 98
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 99
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">100
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">101
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">102
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">103
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">104
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">105
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">106
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">107
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">108
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">109
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">110
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">111
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">112
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">113
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">114
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">115
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">116
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">117
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">118
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">119
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">120
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">121
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">122
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">123
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">124
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">125
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">126
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">127
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">128
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">129
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">130
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">131
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">132
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">133
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">134
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">135
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">136
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">137
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">138
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">139
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">140
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">141
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">142
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">143
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">144
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">145
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">146
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">147
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#00a8c8">def</span> <span style="color:#75af00">generate_ladder</span><span style="color:#111">(</span><span style="color:#111">debates</span><span style="color:#111">,</span> <span style="color:#111">teams</span><span style="color:#111">):</span>
+    <span style="color:#111">ladder</span> <span style="color:#f92672">=</span> <span style="color:#111">{}</span>
+    <span style="color:#00a8c8">for</span> <span style="color:#111">team</span> <span style="color:#f92672">in</span> <span style="color:#111">teams</span><span style="color:#111">:</span>
+        <span style="color:#111">ladder</span><span style="color:#111">[</span><span style="color:#111">team</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">TeamOnLadder</span><span style="color:#111">(</span><span style="color:#111">team</span><span style="color:#111">,</span> <span style="color:#111">debates</span><span style="color:#111">)</span>
+<span style="color:#111">;</span> <span style="color:#111">though</span> <span style="color:#111">that</span> <span style="color:#111">benefit</span> <span style="color:#f92672">is</span> <span style="color:#111">also</span> <span style="color:#111">obviously</span> <span style="color:#111">available</span> <span style="color:#111">using</span> <span style="color:#111">a</span> <span style="color:#111">queue</span>
+        <span style="color:#75715e"># Add points for aff wins/losses/etc</span>
+        <span style="color:#111">pts</span> <span style="color:#f92672">=</span> <span style="color:#111">(</span>
+            <span style="color:#111">debates</span>
+            <span style="color:#f92672">.</span><span style="color:#111">filter</span><span style="color:#111">(</span><span style="color:#111">aff_id</span><span style="color:#f92672">=</span><span style="color:#111">team</span><span style="color:#111">)</span>
+            <span style="color:#f92672">.</span><span style="color:#111">values</span><span style="color:#111">(</span><span style="color:#d88200">&#34;aff_id&#34;</span><span style="color:#111">)</span>
+            <span style="color:#f92672">.</span><span style="color:#111">order_by</span><span style="color:#111">()</span>
+            <span style="color:#f92672">.</span><span style="color:#111">annotate</span><span style="color:#111">(</span>
+                <span style="color:#111">points</span><span style="color:#f92672">=</span><span style="color:#111">Sum</span><span style="color:#111">(</span>
+                    <span style="color:#111">Case</span><span style="color:#111">(</span>
+                        <span style="color:#111">When</span><span style="color:#111">(</span><span style="color:#111">final_outcome__startswith</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;A&#34;</span><span style="color:#111">,</span> <span style="color:#111">then</span><span style="color:#f92672">=</span><span style="color:#111">Value</span><span style="color:#111">(</span><span style="color:#ae81ff">3</span><span style="color:#111">)),</span>  <span style="color:#75715e"># aff won</span>
+                        <span style="color:#111">When</span><span style="color:#111">(</span><span style="color:#111">final_outcome</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;NF&#34;</span><span style="color:#111">,</span> <span style="color:#111">then</span><span style="color:#f92672">=</span><span style="color:#111">Value</span><span style="color:#111">(</span><span style="color:#ae81ff">0</span><span style="color:#111">)),</span>             <span style="color:#75715e"># aff forfeited</span>
+                        <span style="color:#111">When</span><span style="color:#111">(</span><span style="color:#111">final_outcome</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;NL&#34;</span><span style="color:#111">,</span> <span style="color:#111">then</span><span style="color:#f92672">=</span><span style="color:#111">Value</span><span style="color:#111">(</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">)),</span>            <span style="color:#75715e"># aff forfeited late</span>
+                        <span style="color:#111">When</span><span style="color:#111">(</span><span style="color:#111">final_outcome</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;ND&#34;</span><span style="color:#111">,</span> <span style="color:#111">then</span><span style="color:#f92672">=</span><span style="color:#111">Value</span><span style="color:#111">(</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">)),</span>            <span style="color:#75715e"># aff was disqualified</span>
+                        <span style="color:#111">When</span><span style="color:#111">(</span><span style="color:#111">final_outcome</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;NW&#34;</span><span style="color:#111">,</span> <span style="color:#111">then</span><span style="color:#f92672">=</span><span style="color:#111">Value</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)),</span>             <span style="color:#75715e"># aff was defeated</span>
+                        <span style="color:#111">default</span><span style="color:#f92672">=</span><span style="color:#111">Value</span><span style="color:#111">(</span><span style="color:#ae81ff">0</span><span style="color:#111">),</span>                                    <span style="color:#75715e"># ignore anything else</span>
+                        <span style="color:#111">output_field</span><span style="color:#f92672">=</span><span style="color:#111">IntegerField</span><span style="color:#111">()))</span>
+            <span style="color:#111">))</span>
+        <span style="color:#00a8c8">if</span> <span style="color:#111">pts</span><span style="color:#f92672">.</span><span style="color:#111">count</span><span style="color:#111">()</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span><span style="color:#111">:</span>
+            <span style="color:#111">ladder</span><span style="color:#111">[</span><span style="color:#111">team</span><span style="color:#111">]</span><span style="color:#f92672">.</span><span style="color:#111">add_points</span><span style="color:#111">(</span>
+                <span style="color:#111">pts</span><span style="color:#111">[</span><span style="color:#ae81ff">0</span><span style="color:#111">][</span><span style="color:#d88200">&#39;points&#39;</span><span style="color:#111">]</span>
+            <span style="color:#111">)</span>
+
+        <span style="color:#75715e"># Add points for neg wins/losses/etc</span>
+        <span style="color:#111">pts</span> <span style="color:#f92672">=</span> <span style="color:#111">(</span>
+            <span style="color:#111">debates</span>
+            <span style="color:#f92672">.</span><span style="color:#111">filter</span><span style="color:#111">(</span><span style="color:#111">neg_id</span><span style="color:#f92672">=</span><span style="color:#111">team</span><span style="color:#111">)</span>
+            <span style="color:#f92672">.</span><span style="color:#111">values</span><span style="color:#111">(</span><span style="color:#d88200">&#34;neg_id&#34;</span><span style="color:#111">)</span>
+            <span style="color:#f92672">.</span><span style="color:#111">order_by</span><span style="color:#111">()</span>
+            <span style="color:#f92672">.</span><span style="color:#111">annotate</span><span style="color:#111">(</span>
+                <span style="color:#111">points</span><span style="color:#f92672">=</span><span style="color:#111">Sum</span><span style="color:#111">(</span>
+                    <span style="color:#111">Case</span><span style="color:#111">(</span>
+                        <span style="color:#111">When</span><span style="color:#111">(</span><span style="color:#111">final_outcome__startswith</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;N&#34;</span><span style="color:#111">,</span> <span style="color:#111">then</span><span style="color:#f92672">=</span><span style="color:#111">Value</span><span style="color:#111">(</span><span style="color:#ae81ff">3</span><span style="color:#111">)),</span>  <span style="color:#75715e"># neg won</span>
+                        <span style="color:#111">When</span><span style="color:#111">(</span><span style="color:#111">final_outcome</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;AF&#34;</span><span style="color:#111">,</span> <span style="color:#111">then</span><span style="color:#f92672">=</span><span style="color:#111">Value</span><span style="color:#111">(</span><span style="color:#ae81ff">0</span><span style="color:#111">)),</span>             <span style="color:#75715e"># neg forfeited</span>
+                        <span style="color:#111">When</span><span style="color:#111">(</span><span style="color:#111">final_outcome</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;AL&#34;</span><span style="color:#111">,</span> <span style="color:#111">then</span><span style="color:#f92672">=</span><span style="color:#111">Value</span><span style="color:#111">(</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">)),</span>            <span style="color:#75715e"># neg forfeited late</span>
+                        <span style="color:#111">When</span><span style="color:#111">(</span><span style="color:#111">final_outcome</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;AD&#34;</span><span style="color:#111">,</span> <span style="color:#111">then</span><span style="color:#f92672">=</span><span style="color:#111">Value</span><span style="color:#111">(</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">)),</span>            <span style="color:#75715e"># neg was disqualified</span>
+                        <span style="color:#111">When</span><span style="color:#111">(</span><span style="color:#111">final_outcome</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;AW&#34;</span><span style="color:#111">,</span> <span style="color:#111">then</span><span style="color:#f92672">=</span><span style="color:#111">Value</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)),</span>             <span style="color:#75715e"># neg was defeated</span>
+                        <span style="color:#111">default</span><span style="color:#f92672">=</span><span style="color:#111">Value</span><span style="color:#111">(</span><span style="color:#ae81ff">0</span><span style="color:#111">),</span>                                    <span style="color:#75715e"># ignore anything else</span>
+                        <span style="color:#111">output_field</span><span style="color:#f92672">=</span><span style="color:#111">IntegerField</span><span style="color:#111">()))</span>
+            <span style="color:#111">))</span>
+        <span style="color:#00a8c8">if</span> <span style="color:#111">pts</span><span style="color:#f92672">.</span><span style="color:#111">count</span><span style="color:#111">()</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span><span style="color:#111">:</span>
+            <span style="color:#111">ladder</span><span style="color:#111">[</span><span style="color:#111">team</span><span style="color:#111">]</span><span style="color:#f92672">.</span><span style="color:#111">add_points</span><span style="color:#111">(</span>
+                <span style="color:#111">pts</span><span style="color:#111">[</span><span style="color:#ae81ff">0</span><span style="color:#111">][</span><span style="color:#d88200">&#39;points&#39;</span><span style="color:#111">]</span>
+            <span style="color:#111">)</span>
+
+        <span style="color:#75715e"># Add average ranks from aff appearances</span>
+        <span style="color:#111">ladder</span><span style="color:#111">[</span><span style="color:#111">team</span><span style="color:#111">]</span><span style="color:#f92672">.</span><span style="color:#111">adjust_rank</span><span style="color:#111">(</span>
+            <span style="color:#111">Score</span><span style="color:#f92672">.</span><span style="color:#111">objects</span><span style="color:#f92672">.</span><span style="color:#111">filter</span><span style="color:#111">(</span>
+                <span style="color:#111">official</span><span style="color:#f92672">=</span><span style="color:#111">True</span><span style="color:#111">,</span>
+                <span style="color:#111">debate__aff_id</span><span style="color:#f92672">=</span><span style="color:#111">team</span><span style="color:#111">,</span>
+                <span style="color:#111">position__in</span><span style="color:#f92672">=</span><span style="color:#111">[</span><span style="color:#d88200">&#39;1A&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;2A&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;3A&#39;</span><span style="color:#111">]</span>
+            <span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">order_by</span><span style="color:#111">()</span><span style="color:#f92672">.</span><span style="color:#111">aggregate</span><span style="color:#111">(</span><span style="color:#111">Avg</span><span style="color:#111">(</span><span style="color:#d88200">&#39;rank&#39;</span><span style="color:#111">))[</span><span style="color:#d88200">&#39;rank__avg&#39;</span><span style="color:#111">],</span>
+            <span style="color:#111">Score</span><span style="color:#f92672">.</span><span style="color:#111">objects</span><span style="color:#f92672">.</span><span style="color:#111">filter</span><span style="color:#111">(</span>
+                <span style="color:#111">official</span><span style="color:#f92672">=</span><span style="color:#111">True</span><span style="color:#111">,</span>
+                <span style="color:#111">debate__aff_id</span><span style="color:#f92672">=</span><span style="color:#111">team</span><span style="color:#111">,</span>
+                <span style="color:#111">position__in</span><span style="color:#f92672">=</span><span style="color:#111">[</span><span style="color:#d88200">&#39;1A&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;2A&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;3A&#39;</span><span style="color:#111">]</span>
+            <span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">order_by</span><span style="color:#111">()</span><span style="color:#f92672">.</span><span style="color:#111">distinct</span><span style="color:#111">(</span><span style="color:#d88200">&#39;debate_id&#39;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">count</span><span style="color:#111">()</span>
+        <span style="color:#111">)</span>
+
+        <span style="color:#75715e"># Add average ranks from neg appearances</span>
+        <span style="color:#111">ladder</span><span style="color:#111">[</span><span style="color:#111">team</span><span style="color:#111">]</span><span style="color:#f92672">.</span><span style="color:#111">adjust_rank</span><span style="color:#111">(</span>
+            <span style="color:#111">Score</span><span style="color:#f92672">.</span><span style="color:#111">objects</span><span style="color:#f92672">.</span><span style="color:#111">filter</span><span style="color:#111">(</span>
+                <span style="color:#111">official</span><span style="color:#f92672">=</span><span style="color:#111">True</span><span style="color:#111">,</span>
+                <span style="color:#111">debate__neg_id</span><span style="color:#f92672">=</span><span style="color:#111">team</span><span style="color:#111">,</span>
+                <span style="color:#111">position__in</span><span style="color:#f92672">=</span><span style="color:#111">[</span><span style="color:#d88200">&#39;1N&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;2N&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;3N&#39;</span><span style="color:#111">]</span>
+            <span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">order_by</span><span style="color:#111">()</span><span style="color:#f92672">.</span><span style="color:#111">aggregate</span><span style="color:#111">(</span><span style="color:#111">Avg</span><span style="color:#111">(</span><span style="color:#d88200">&#39;rank&#39;</span><span style="color:#111">))[</span><span style="color:#d88200">&#39;rank__avg&#39;</span><span style="color:#111">],</span>
+            <span style="color:#111">Score</span><span style="color:#f92672">.</span><span style="color:#111">objects</span><span style="color:#f92672">.</span><span style="color:#111">filter</span><span style="color:#111">(</span>
+                <span style="color:#111">official</span><span style="color:#f92672">=</span><span style="color:#111">True</span><span style="color:#111">,</span>
+                <span style="color:#111">debate__neg_id</span><span style="color:#f92672">=</span><span style="color:#111">team</span><span style="color:#111">,</span>
+                <span style="color:#111">position__in</span><span style="color:#f92672">=</span><span style="color:#111">[</span><span style="color:#d88200">&#39;1N&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;2N&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;3N&#39;</span><span style="color:#111">]</span>
+            <span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">order_by</span><span style="color:#111">()</span><span style="color:#f92672">.</span><span style="color:#111">distinct</span><span style="color:#111">(</span><span style="color:#d88200">&#39;debate_id&#39;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">count</span><span style="color:#111">()</span>
+        <span style="color:#111">)</span>
+
+    <span style="color:#111">ret</span> <span style="color:#f92672">=</span> <span style="color:#111">[]</span>
+    <span style="color:#00a8c8">for</span> <span style="color:#111">i</span> <span style="color:#f92672">in</span> <span style="color:#111">sorted</span><span style="color:#111">(</span><span style="color:#111">ladder</span><span style="color:#111">,</span> <span style="color:#111">key</span><span style="color:#f92672">=</span><span style="color:#111">ladder</span><span style="color:#f92672">.</span><span style="color:#111">get</span><span style="color:#111">,</span> <span style="color:#111">reverse</span><span style="color:#f92672">=</span><span style="color:#111">True</span><span style="color:#111">):</span>
+        <span style="color:#111">ret</span><span style="color:#f92672">.</span><span style="color:#111">append</span><span style="color:#111">({</span>
+            <span style="color:#d88200">&#39;team_id&#39;</span><span style="color:#111">:</span> <span style="color:#111">i</span><span style="color:#111">,</span>
+            <span style="color:#d88200">&#39;points&#39;</span><span style="color:#111">:</span> <span style="color:#111">ladder</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]</span><span style="color:#f92672">.</span><span style="color:#111">points</span><span style="color:#111">,</span>
+            <span style="color:#d88200">&#39;avg_rank&#39;</span><span style="color:#111">:</span> <span style="color:#111">ladder</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]</span><span style="color:#f92672">.</span><span style="color:#111">avg_rank</span><span style="color:#111">,</span>
+        <span style="color:#111">})</span>
+
+    <span style="color:#00a8c8">return</span> <span style="color:#111">ret</span>
+
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">TeamOnLadder</span><span style="color:#111">():</span>
+    <span style="color:#00a8c8">def</span> <span style="color:#111">__init__</span><span style="color:#111">(</span><span style="color:#111">self</span><span style="color:#111">,</span> <span style="color:#111">team_id</span><span style="color:#111">,</span> <span style="color:#111">debates</span><span style="color:#111">):</span>
+        <span style="color:#111">self</span><span style="color:#f92672">.</span><span style="color:#111">team_id</span> <span style="color:#f92672">=</span> <span style="color:#111">team_id</span>
+        <span style="color:#111">self</span><span style="color:#f92672">.</span><span style="color:#111">points</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        <span style="color:#111">self</span><span style="color:#f92672">.</span><span style="color:#111">avg_rank</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        <span style="color:#111">self</span><span style="color:#f92672">.</span><span style="color:#111">count</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        <span style="color:#111">self</span><span style="color:#f92672">.</span><span style="color:#111">debates</span> <span style="color:#f92672">=</span> <span style="color:#111">debates</span>
+
+    <span style="color:#00a8c8">def</span> <span style="color:#75af00">add_points</span><span style="color:#111">(</span><span style="color:#111">self</span><span style="color:#111">,</span> <span style="color:#111">points</span><span style="color:#111">):</span>
+        <span style="color:#111">self</span><span style="color:#f92672">.</span><span style="color:#111">points</span> <span style="color:#f92672">+=</span> <span style="color:#111">points</span>
+
+    <span style="color:#00a8c8">def</span> <span style="color:#75af00">adjust_rank</span><span style="color:#111">(</span><span style="color:#111">self</span><span style="color:#111">,</span> <span style="color:#111">rank</span><span style="color:#111">,</span> <span style="color:#111">count</span><span style="color:#111">):</span>
+        <span style="color:#00a8c8">if</span> <span style="color:#111">rank</span> <span style="color:#f92672">is</span> <span style="color:#111">None</span><span style="color:#111">:</span>
+            <span style="color:#00a8c8">return</span>
+        <span style="color:#111">self</span><span style="color:#f92672">.</span><span style="color:#111">avg_rank</span> <span style="color:#f92672">=</span> \
+            <span style="color:#111">((</span><span style="color:#111">self</span><span style="color:#f92672">.</span><span style="color:#111">count</span> <span style="color:#f92672">*</span> <span style="color:#111">self</span><span style="color:#f92672">.</span><span style="color:#111">avg_rank</span><span style="color:#111">)</span> <span style="color:#f92672">+</span> <span style="color:#111">(</span><span style="color:#111">count</span> <span style="color:#f92672">*</span> <span style="color:#111">rank</span><span style="color:#111">))</span> \
+            <span style="color:#f92672">/</span> <span style="color:#111">(</span><span style="color:#111">self</span><span style="color:#f92672">.</span><span style="color:#111">count</span> <span style="color:#f92672">+</span> <span style="color:#111">count</span><span style="color:#111">)</span>
+        <span style="color:#111">self</span><span style="color:#f92672">.</span><span style="color:#111">count</span> <span style="color:#f92672">+=</span> <span style="color:#111">count</span>
+
+    <span style="color:#00a8c8">def</span> <span style="color:#111">__cmp__</span><span style="color:#111">(</span><span style="color:#111">self</span><span style="color:#111">,</span> <span style="color:#111">other</span><span style="color:#111">):</span>
+        <span style="color:#00a8c8">if</span> <span style="color:#111">self</span><span style="color:#f92672">.</span><span style="color:#111">points</span> <span style="color:#f92672">&gt;</span> <span style="color:#111">other</span><span style="color:#f92672">.</span><span style="color:#111">points</span><span style="color:#111">:</span>
+            <span style="color:#00a8c8">return</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+        <span style="color:#00a8c8">if</span> <span style="color:#111">self</span><span style="color:#f92672">.</span><span style="color:#111">points</span> <span style="color:#f92672">&lt;</span> <span style="color:#111">other</span><span style="color:#f92672">.</span><span style="color:#111">points</span><span style="color:#111">:</span>
+            <span style="color:#00a8c8">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>
+
+        <span style="color:#00a8c8">if</span> <span style="color:#111">self</span><span style="color:#f92672">.</span><span style="color:#111">avg_rank</span> <span style="color:#f92672">&lt;</span> <span style="color:#111">other</span><span style="color:#f92672">.</span><span style="color:#111">avg_rank</span><span style="color:#111">:</span>
+            <span style="color:#00a8c8">return</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+        <span style="color:#00a8c8">if</span> <span style="color:#111">self</span><span style="color:#f92672">.</span><span style="color:#111">avg_rank</span> <span style="color:#f92672">&gt;</span> <span style="color:#111">other</span><span style="color:#f92672">.</span><span style="color:#111">avg_rank</span><span style="color:#111">:</span>
+            <span style="color:#00a8c8">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>
+
+        <span style="color:#75715e"># We select all debates in the season between this team and other.</span>
+        <span style="color:#75715e"># We give +1 for any debate this team won, and -1 for any team the other won.</span>
+        <span style="color:#75715e"># This will result in:</span>
+        <span style="color:#75715e">#   None if there were no debates between them</span>
+        <span style="color:#75715e">#   0 if they each won the same number of debates</span>
+        <span style="color:#75715e">#  &gt;0 if self won more debates against other than other won against self</span>
+        <span style="color:#75715e">#  &lt;0 if other won more debates against self than self won against other</span>
+        <span style="color:#111">head_to_head</span> <span style="color:#f92672">=</span> <span style="color:#111">self</span><span style="color:#f92672">.</span><span style="color:#111">debates</span>\
+            <span style="color:#f92672">.</span><span style="color:#111">filter</span><span style="color:#111">(</span>
+                <span style="color:#111">(</span><span style="color:#111">Q</span><span style="color:#111">(</span><span style="color:#111">aff_id</span><span style="color:#f92672">=</span><span style="color:#111">self</span><span style="color:#f92672">.</span><span style="color:#111">team_id</span><span style="color:#111">)</span> <span style="color:#f92672">&amp;</span> <span style="color:#111">Q</span><span style="color:#111">(</span><span style="color:#111">neg_id</span><span style="color:#f92672">=</span><span style="color:#111">other</span><span style="color:#f92672">.</span><span style="color:#111">team_id</span><span style="color:#111">))</span> <span style="color:#f92672">|</span>
+                <span style="color:#111">(</span><span style="color:#111">Q</span><span style="color:#111">(</span><span style="color:#111">aff_id</span><span style="color:#f92672">=</span><span style="color:#111">other</span><span style="color:#f92672">.</span><span style="color:#111">team_id</span><span style="color:#111">)</span> <span style="color:#f92672">&amp;</span> <span style="color:#111">Q</span><span style="color:#111">(</span><span style="color:#111">neg_id</span><span style="color:#f92672">=</span><span style="color:#111">self</span><span style="color:#f92672">.</span><span style="color:#111">team_id</span><span style="color:#111">))</span>
+            <span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">aggregate</span><span style="color:#111">(</span>
+                <span style="color:#111">head_to_head</span><span style="color:#f92672">=</span><span style="color:#111">Sum</span><span style="color:#111">(</span><span style="color:#111">Case</span><span style="color:#111">(</span>
+                    <span style="color:#111">When</span><span style="color:#111">(</span><span style="color:#111">final_outcome__startswith</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;A&#34;</span><span style="color:#111">,</span> <span style="color:#111">aff_id</span><span style="color:#f92672">=</span><span style="color:#111">self</span><span style="color:#f92672">.</span><span style="color:#111">team_id</span><span style="color:#111">,</span>
+                         <span style="color:#111">then</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#111">),</span>    <span style="color:#75715e"># self won</span>
+                    <span style="color:#111">When</span><span style="color:#111">(</span><span style="color:#111">final_outcome__startswith</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;N&#34;</span><span style="color:#111">,</span> <span style="color:#111">neg_id</span><span style="color:#f92672">=</span><span style="color:#111">self</span><span style="color:#f92672">.</span><span style="color:#111">team_id</span><span style="color:#111">,</span>
+                         <span style="color:#111">then</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#111">),</span>    <span style="color:#75715e"># self won</span>
+                    <span style="color:#111">When</span><span style="color:#111">(</span><span style="color:#111">final_outcome__startswith</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;A&#34;</span><span style="color:#111">,</span> <span style="color:#111">aff_id</span><span style="color:#f92672">=</span><span style="color:#111">other</span><span style="color:#f92672">.</span><span style="color:#111">team_id</span><span style="color:#111">,</span>
+                         <span style="color:#111">then</span><span style="color:#f92672">=-</span><span style="color:#ae81ff">1</span><span style="color:#111">),</span>  <span style="color:#75715e"># other won</span>
+                    <span style="color:#111">When</span><span style="color:#111">(</span><span style="color:#111">final_outcome__startswith</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;N&#34;</span><span style="color:#111">,</span> <span style="color:#111">neg_id</span><span style="color:#f92672">=</span><span style="color:#111">other</span><span style="color:#f92672">.</span><span style="color:#111">team_id</span><span style="color:#111">,</span>
+                         <span style="color:#111">then</span><span style="color:#f92672">=-</span><span style="color:#ae81ff">1</span><span style="color:#111">),</span>  <span style="color:#75715e"># other won</span>
+                    <span style="color:#111">default</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">,</span>  <span style="color:#75715e"># ignore unresolved</span>
+                    <span style="color:#111">output_field</span><span style="color:#f92672">=</span><span style="color:#111">IntegerField</span><span style="color:#111">()))</span>
+            <span style="color:#111">)[</span><span style="color:#d88200">&#39;head_to_head&#39;</span><span style="color:#111">]</span>
+
+        <span style="color:#00a8c8">if</span> <span style="color:#111">head_to_head</span> <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> <span style="color:#111">None</span><span style="color:#111">:</span>
+            <span style="color:#00a8c8">return</span> <span style="color:#111">head_to_head</span>
+
+        <span style="color:#75715e"># The teams did not compete against each other</span>
+        <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="the-new-idea">The new idea</h2>
+
+<p>There are a couple of different ways to do this, but I think there are two things I would particularly like to have:</p>
+
+<ol>
+<li>a (materialized?) view which has columns <code>team_id</code>, <code>points</code> and <code>avg_rank</code>; and</li>
+<li>potentially an ordering function so I can do a query with <code>ORDER BY ladder(team_id)</code>.</li>
+</ol>
+
+<p>Using a materialized view for the first part is nice because it gives us an aggressive cache, and we actually have some pretty easy triggers for refreshing it (an insert/delete of a team; a change to a debate outcome; or an insert/delete in scores). This can all be handled in PostgreSQL, so I know it will never affect the application (and will happen outside the request/response lifecycle of the web application).</p>
+
+<p>The other thing that&rsquo;s nice about this is that it&rsquo;s cached in the database layer, not in the web layer. This means that a clearing the web cache (as might happen for a range of reasons) won&rsquo;t force us to redo 100 queries unnecessarily.</p>
+
+<p>It turns out that just the materialized view will be enough. This key insight was <a href="http://l0stinsp4ce.com/">Benson</a>&rsquo;s: have a view with columns for points, average rank, and number of head-to-head wins. An appropriate ordering can then be had from those columns alone.</p>
+
+<p>Together Benson and I spent more than an hour working through this SQL. Here I&rsquo;ll show you the complete <code>CREATE MATERIALIZED VIEW</code> we ended up with below. There are comments throughout.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">  1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">  2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">  3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">  4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">  5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">  6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">  7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">  8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">  9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 46
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 47
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 48
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 49
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 50
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 51
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 52
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 53
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 54
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 55
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 56
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 57
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 58
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 59
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 60
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 61
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 62
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 63
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 64
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 65
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 66
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 67
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 68
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 69
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 70
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 71
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 72
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 73
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 74
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 75
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 76
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 77
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 78
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 79
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 80
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 81
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 82
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 83
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 84
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 85
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 86
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 87
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 88
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 89
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 90
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 91
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 92
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 93
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 94
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 95
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 96
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 97
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 98
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 99
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">100
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">101
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">102
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">103
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">104
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">105
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">106
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">107
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">108
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">109
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">110
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">111
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">112
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">113
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">114
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">115
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">116
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">117
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">118
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">119
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">120
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">121
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">122
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">123
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">124
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">125
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">126
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">127
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">128
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">129
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">130
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">131
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">132
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">133
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">134
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">135
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">136
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">137
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">138
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">139
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">140
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">141
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">142
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">143
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">144
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">145
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">146
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">147
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">148
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">149
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">150
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">151
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">152
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">153
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">154
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">155
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">156
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">157
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">158
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">159
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">160
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">161
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">162
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">163
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">164
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">165
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">166
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL"><span style="color:#00a8c8">CREATE</span> <span style="color:#111">MATERIALIZED</span> <span style="color:#00a8c8">VIEW</span> <span style="color:#111">ladder</span> <span style="color:#00a8c8">as</span>
+<span style="color:#111">(</span><span style="color:#00a8c8">with</span>
+    <span style="color:#111">match_points</span> <span style="color:#00a8c8">as</span> <span style="color:#111">(</span>
+        <span style="color:#75715e">-- This gives us points awarded to aff and neg for each debate outcome
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">-- i.e. aff_id, neg_id, aff_points, neg_points for every row in
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">-- debate_debate.
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">--
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">-- Team Points will be awarded as follows:
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">-- Win: three (3) points
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">-- Defeat: one (1) point
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">-- Forfeit: zero (0) points
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">-- Late Forfeit (after noon on the day of the debate): minus one (-1) point
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">-- Disqualification: minus 1 (-1) point
+</span><span style="color:#75715e"></span>        <span style="color:#00a8c8">select</span>
+            <span style="color:#00a8c8">case</span>
+                <span style="color:#00a8c8">WHEN</span> <span style="color:#111">final_outcome</span> <span style="color:#00a8c8">LIKE</span> <span style="color:#d88200">&#39;A%&#39;</span> <span style="color:#00a8c8">THEN</span> <span style="color:#ae81ff">3</span> <span style="color:#75715e">-- Aff win
+</span><span style="color:#75715e"></span>                <span style="color:#00a8c8">WHEN</span> <span style="color:#111">final_outcome</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;NF&#39;</span> <span style="color:#00a8c8">THEN</span>  <span style="color:#ae81ff">0</span>   <span style="color:#75715e">-- Aff win by neg forfeit
+</span><span style="color:#75715e"></span>                <span style="color:#00a8c8">WHEN</span> <span style="color:#111">final_outcome</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;NL&#39;</span> <span style="color:#00a8c8">THEN</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>   <span style="color:#75715e">--   ... late forfeit
+</span><span style="color:#75715e"></span>                <span style="color:#00a8c8">WHEN</span> <span style="color:#111">final_outcome</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;ND&#39;</span> <span style="color:#00a8c8">THEN</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>   <span style="color:#75715e">--   ... disqualification
+</span><span style="color:#75715e"></span>                <span style="color:#00a8c8">WHEN</span> <span style="color:#111">final_outcome</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;NW&#39;</span> <span style="color:#00a8c8">THEN</span>  <span style="color:#ae81ff">1</span>   <span style="color:#75715e">--   ... withdrawal
+</span><span style="color:#75715e"></span>            <span style="color:#00a8c8">end</span> <span style="color:#00a8c8">as</span> <span style="color:#111">aff_points</span><span style="color:#111">,</span>
+            <span style="color:#00a8c8">case</span>
+                <span style="color:#00a8c8">WHEN</span> <span style="color:#111">final_outcome</span> <span style="color:#00a8c8">LIKE</span> <span style="color:#d88200">&#39;N%&#39;</span> <span style="color:#00a8c8">THEN</span> <span style="color:#ae81ff">3</span> <span style="color:#75715e">-- Neg win
+</span><span style="color:#75715e"></span>                <span style="color:#00a8c8">WHEN</span> <span style="color:#111">final_outcome</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;AF&#39;</span> <span style="color:#00a8c8">THEN</span>  <span style="color:#ae81ff">0</span>   <span style="color:#75715e">-- Neg win by neg forfeit
+</span><span style="color:#75715e"></span>                <span style="color:#00a8c8">WHEN</span> <span style="color:#111">final_outcome</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;AL&#39;</span> <span style="color:#00a8c8">THEN</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>   <span style="color:#75715e">--   ... late forfeit
+</span><span style="color:#75715e"></span>                <span style="color:#00a8c8">WHEN</span> <span style="color:#111">final_outcome</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;AD&#39;</span> <span style="color:#00a8c8">THEN</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>   <span style="color:#75715e">--   ... disqualification
+</span><span style="color:#75715e"></span>                <span style="color:#00a8c8">WHEN</span> <span style="color:#111">final_outcome</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;AW&#39;</span> <span style="color:#00a8c8">THEN</span>  <span style="color:#ae81ff">1</span>   <span style="color:#75715e">--   ... withdrawal
+</span><span style="color:#75715e"></span>            <span style="color:#00a8c8">end</span> <span style="color:#00a8c8">as</span> <span style="color:#111">neg_points</span><span style="color:#111">,</span>
+            <span style="color:#111">aff_id</span><span style="color:#111">,</span>
+            <span style="color:#111">neg_id</span>
+        <span style="color:#00a8c8">from</span> <span style="color:#111">debate_debate</span>
+        <span style="color:#111">),</span>
+
+    <span style="color:#111">team_ranks</span> <span style="color:#00a8c8">as</span> <span style="color:#111">(</span>
+        <span style="color:#75715e">-- The average of ranks of team speakers; nice and easy
+</span><span style="color:#75715e"></span>        <span style="color:#00a8c8">select</span>
+            <span style="color:#111">team_id</span><span style="color:#111">,</span> <span style="color:#00a8c8">avg</span><span style="color:#111">(</span><span style="color:#111">rank</span><span style="color:#111">)</span> <span style="color:#00a8c8">as</span> <span style="color:#111">avg_rank</span>
+        <span style="color:#00a8c8">from</span>
+            <span style="color:#111">debate_score</span>
+        <span style="color:#00a8c8">where</span>
+            <span style="color:#111">rank</span> <span style="color:#00a8c8">is</span> <span style="color:#00a8c8">not</span> <span style="color:#00a8c8">null</span> <span style="color:#75715e">-- ranks can be null for reply speeches
+</span><span style="color:#75715e"></span>            <span style="color:#00a8c8">AND</span> <span style="color:#111">official</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">true</span> <span style="color:#75715e">-- official scores only
+</span><span style="color:#75715e"></span>        <span style="color:#00a8c8">group</span> <span style="color:#00a8c8">by</span> <span style="color:#111">team_id</span>
+        <span style="color:#111">),</span>
+
+    <span style="color:#111">ladder_figures</span> <span style="color:#00a8c8">as</span> <span style="color:#111">(</span>
+        <span style="color:#75715e">-- This lets us select the total number of points for a particular team.
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">-- We also have to give that team their average points for a bye
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">-- (otherwise teams with byes end up not getting any points for that
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">-- debate, which is unfair).
+</span><span style="color:#75715e"></span>        <span style="color:#00a8c8">select</span>
+            <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">id</span> <span style="color:#00a8c8">as</span> <span style="color:#111">team_id</span><span style="color:#111">,</span>    <span style="color:#75715e">-- what you&#39;d expect
+</span><span style="color:#75715e"></span>                    <span style="color:#111">avg_rank</span><span style="color:#111">,</span>   <span style="color:#75715e">-- because we have this above
+</span><span style="color:#75715e"></span>                    <span style="color:#00a8c8">sum</span><span style="color:#111">(</span>        <span style="color:#75715e">-- this is their &#34;earned&#34; points
+</span><span style="color:#75715e"></span>                        <span style="color:#00a8c8">case</span>
+                         <span style="color:#00a8c8">when</span> <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#111">aff_id</span> <span style="color:#f92672">=</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">id</span> <span style="color:#00a8c8">then</span> <span style="color:#111">aff_points</span>
+                         <span style="color:#00a8c8">when</span> <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#111">neg_id</span> <span style="color:#f92672">=</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">id</span> <span style="color:#00a8c8">then</span> <span style="color:#111">neg_points</span>
+                        <span style="color:#00a8c8">end</span>
+                    <span style="color:#111">)</span> <span style="color:#f92672">+</span> <span style="color:#111">(</span><span style="color:#00a8c8">avg</span><span style="color:#111">(</span>   <span style="color:#75715e">-- plus average points for each by
+</span><span style="color:#75715e"></span>                        <span style="color:#00a8c8">case</span>
+                         <span style="color:#00a8c8">when</span> <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#111">aff_id</span> <span style="color:#f92672">=</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">id</span> <span style="color:#00a8c8">then</span> <span style="color:#111">aff_points</span>
+                         <span style="color:#00a8c8">when</span> <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#111">neg_id</span> <span style="color:#f92672">=</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">id</span> <span style="color:#00a8c8">then</span> <span style="color:#111">neg_points</span>
+                        <span style="color:#00a8c8">end</span>
+                    <span style="color:#111">)</span> <span style="color:#f92672">*</span> <span style="color:#00a8c8">count</span><span style="color:#111">(</span><span style="color:#00a8c8">distinct</span> <span style="color:#111">bye_debates</span><span style="color:#111">.</span><span style="color:#111">id</span><span style="color:#111">))</span> <span style="color:#00a8c8">as</span> <span style="color:#111">points</span>
+        <span style="color:#00a8c8">from</span> <span style="color:#111">competition_team</span> <span style="color:#111">t</span>
+        <span style="color:#00a8c8">left</span> <span style="color:#00a8c8">join</span> <span style="color:#111">team_ranks</span> <span style="color:#111">r</span> <span style="color:#00a8c8">on</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">id</span> <span style="color:#f92672">=</span> <span style="color:#111">r</span><span style="color:#111">.</span><span style="color:#111">team_id</span>
+        <span style="color:#00a8c8">join</span> <span style="color:#111">match_points</span> <span style="color:#111">p</span> <span style="color:#00a8c8">on</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">id</span> <span style="color:#00a8c8">in</span> <span style="color:#111">(</span><span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#111">neg_id</span><span style="color:#111">,</span> <span style="color:#111">p</span><span style="color:#111">.</span><span style="color:#111">aff_id</span><span style="color:#111">)</span>
+        <span style="color:#00a8c8">left</span> <span style="color:#00a8c8">join</span> <span style="color:#111">debate_debate</span> <span style="color:#111">bye_debates</span>
+            <span style="color:#00a8c8">on</span> <span style="color:#111">bye_debates</span><span style="color:#111">.</span><span style="color:#111">final_outcome</span> <span style="color:#00a8c8">LIKE</span> <span style="color:#d88200">&#39;B%&#39;</span> <span style="color:#00a8c8">and</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">id</span> <span style="color:#00a8c8">in</span> <span style="color:#111">(</span><span style="color:#111">bye_debates</span><span style="color:#111">.</span><span style="color:#111">aff_id</span><span style="color:#111">,</span> <span style="color:#111">bye_debates</span><span style="color:#111">.</span><span style="color:#111">neg_id</span><span style="color:#111">)</span>
+            <span style="color:#75715e">-- Byes have a NULL aff_id or neg_id and an outcome of BA or BN
+</span><span style="color:#75715e"></span>            <span style="color:#75715e">-- so we can safely use t.id in (aff_id, neg_id) where that is the
+</span><span style="color:#75715e"></span>            <span style="color:#75715e">-- outcome.
+</span><span style="color:#75715e"></span>        <span style="color:#00a8c8">group</span> <span style="color:#00a8c8">by</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">id</span><span style="color:#111">,</span> <span style="color:#111">avg_rank</span>
+        <span style="color:#75715e">-- we have to include avg_rank in group by to select it
+</span><span style="color:#75715e"></span>        <span style="color:#111">),</span>
+
+    <span style="color:#111">tied_teams</span> <span style="color:#00a8c8">as</span> <span style="color:#111">(</span>
+        <span style="color:#75715e">-- This gives us an array of team_ids where all teams within the array
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">-- are tied (by points and rank) and are in the same division.
+</span><span style="color:#75715e"></span>        <span style="color:#00a8c8">select</span> <span style="color:#111">array_agg</span><span style="color:#111">(</span><span style="color:#111">l</span><span style="color:#111">.</span><span style="color:#111">team_id</span><span style="color:#111">)</span> <span style="color:#00a8c8">as</span> <span style="color:#111">ids</span>
+             <span style="color:#00a8c8">from</span> <span style="color:#111">ladder_figures</span> <span style="color:#111">l</span>
+             <span style="color:#00a8c8">inner</span> <span style="color:#00a8c8">join</span> <span style="color:#111">competition_team</span> <span style="color:#111">t</span> <span style="color:#00a8c8">on</span> <span style="color:#111">l</span><span style="color:#111">.</span><span style="color:#111">team_id</span> <span style="color:#f92672">=</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">id</span>
+             <span style="color:#00a8c8">group</span> <span style="color:#00a8c8">by</span> <span style="color:#111">(</span><span style="color:#111">l</span><span style="color:#111">.</span><span style="color:#111">avg_rank</span><span style="color:#111">,</span> <span style="color:#111">l</span><span style="color:#111">.</span><span style="color:#111">points</span><span style="color:#111">,</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">division_id</span><span style="color:#111">)</span>
+             <span style="color:#00a8c8">having</span> <span style="color:#00a8c8">count</span><span style="color:#111">(</span><span style="color:#00a8c8">distinct</span> <span style="color:#111">l</span><span style="color:#111">.</span><span style="color:#111">team_id</span><span style="color:#111">)</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#111">),</span>
+
+    <span style="color:#111">h2h</span> <span style="color:#00a8c8">as</span> <span style="color:#111">(</span>
+        <span style="color:#75715e">-- Head to head comparisons for tied teams. We begin by unnest()ing the
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">-- team_ids array. We then count the number of wins and return that for
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">-- each such id, given the team is againsta nother team that is also
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">-- tied.
+</span><span style="color:#75715e"></span>        <span style="color:#00a8c8">select</span>
+            <span style="color:#00a8c8">unnest</span><span style="color:#111">(</span><span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">ids</span><span style="color:#111">)</span> <span style="color:#00a8c8">as</span> <span style="color:#111">team_id</span><span style="color:#111">,</span>
+            <span style="color:#00a8c8">sum</span><span style="color:#111">(</span>
+                <span style="color:#111">(</span><span style="color:#00a8c8">unnest</span><span style="color:#111">(</span><span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">ids</span><span style="color:#111">)</span> <span style="color:#f92672">=</span> <span style="color:#111">d</span><span style="color:#111">.</span><span style="color:#111">aff_id</span><span style="color:#111">)::</span><span style="color:#111">int</span> <span style="color:#f92672">*</span> <span style="color:#00a8c8">case</span> <span style="color:#00a8c8">when</span> <span style="color:#111">final_outcome</span> <span style="color:#00a8c8">like</span> <span style="color:#d88200">&#39;A%&#39;</span> <span style="color:#00a8c8">then</span> <span style="color:#ae81ff">1</span> <span style="color:#00a8c8">else</span> <span style="color:#ae81ff">0</span> <span style="color:#00a8c8">end</span>
+              <span style="color:#f92672">+</span> <span style="color:#111">(</span><span style="color:#00a8c8">unnest</span><span style="color:#111">(</span><span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">ids</span><span style="color:#111">)</span> <span style="color:#f92672">=</span> <span style="color:#111">d</span><span style="color:#111">.</span><span style="color:#111">neg_id</span><span style="color:#111">)::</span><span style="color:#111">int</span> <span style="color:#f92672">*</span> <span style="color:#00a8c8">case</span> <span style="color:#00a8c8">when</span> <span style="color:#111">final_outcome</span> <span style="color:#00a8c8">like</span> <span style="color:#d88200">&#39;N%&#39;</span> <span style="color:#00a8c8">then</span> <span style="color:#ae81ff">1</span> <span style="color:#00a8c8">else</span> <span style="color:#ae81ff">0</span> <span style="color:#00a8c8">end</span>
+            <span style="color:#111">)</span> <span style="color:#00a8c8">as</span> <span style="color:#111">wins</span>
+        <span style="color:#00a8c8">from</span>
+            <span style="color:#111">debate_debate</span> <span style="color:#111">d</span>
+        <span style="color:#00a8c8">join</span>
+            <span style="color:#111">tied_teams</span> <span style="color:#111">t</span>
+        <span style="color:#00a8c8">on</span> <span style="color:#111">(</span><span style="color:#111">d</span><span style="color:#111">.</span><span style="color:#111">aff_id</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">ANY</span><span style="color:#111">(</span><span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">ids</span><span style="color:#111">)</span> <span style="color:#00a8c8">and</span> <span style="color:#111">d</span><span style="color:#111">.</span><span style="color:#111">neg_id</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">ANY</span><span style="color:#111">(</span><span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">ids</span><span style="color:#111">))</span>
+        <span style="color:#00a8c8">group</span> <span style="color:#00a8c8">by</span> <span style="color:#00a8c8">unnest</span><span style="color:#111">(</span><span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">ids</span><span style="color:#111">)</span>
+        <span style="color:#111">),</span>
+
+    <span style="color:#111">margins</span> <span style="color:#00a8c8">as</span> <span style="color:#111">(</span>
+        <span style="color:#75715e">-- Average margins across all debates
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">-- Note that debate_score.poi can be NULL, and SUM() across a NULL
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">-- value will be NULL, so we have to use COALESCE.
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">-- We want margins of wins to count as +ve and margins of losses to
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">-- count as -ve.         
+</span><span style="color:#75715e"></span>        <span style="color:#00a8c8">SELECT</span>
+            <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">id</span> <span style="color:#00a8c8">AS</span> <span style="color:#111">team_id</span><span style="color:#111">,</span>
+            <span style="color:#00a8c8">AVG</span><span style="color:#111">(</span><span style="color:#00a8c8">CASE</span>
+                <span style="color:#00a8c8">WHEN</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">id</span> <span style="color:#f92672">=</span> <span style="color:#111">raw_margins</span><span style="color:#111">.</span><span style="color:#111">aff_id</span> <span style="color:#00a8c8">THEN</span> <span style="color:#111">raw_margins</span><span style="color:#111">.</span><span style="color:#111">aff_margin</span>
+                <span style="color:#00a8c8">WHEN</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">id</span> <span style="color:#f92672">=</span> <span style="color:#111">raw_margins</span><span style="color:#111">.</span><span style="color:#111">neg_id</span> <span style="color:#00a8c8">THEN</span> <span style="color:#111">raw_margins</span><span style="color:#111">.</span><span style="color:#111">neg_margin</span>
+                <span style="color:#00a8c8">ELSE</span> <span style="color:#00a8c8">NULL</span> <span style="color:#00a8c8">END</span>
+            <span style="color:#111">)</span> <span style="color:#00a8c8">AS</span> <span style="color:#111">avg_margin</span>
+        <span style="color:#00a8c8">FROM</span> <span style="color:#111">(</span>
+                <span style="color:#75715e">-- This subquery gives us margins for each debate, both for
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">-- the aff and the neg. It is probably a little inefficient to
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">-- do this, because aff_margin will always be -neg_margin, but
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">-- it makes the above select simpler (because we don&#39;t have
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">-- to figure out who won).
+</span><span style="color:#75715e"></span>                <span style="color:#00a8c8">SELECT</span>
+                    <span style="color:#111">d</span><span style="color:#111">.</span><span style="color:#111">aff_id</span> <span style="color:#00a8c8">as</span> <span style="color:#111">aff_id</span><span style="color:#111">,</span>
+                    <span style="color:#00a8c8">SUM</span><span style="color:#111">(</span><span style="color:#00a8c8">CASE</span>
+                        <span style="color:#00a8c8">WHEN</span> <span style="color:#111">s</span><span style="color:#111">.</span><span style="color:#111">team_id</span> <span style="color:#f92672">=</span> <span style="color:#111">d</span><span style="color:#111">.</span><span style="color:#111">aff_id</span> <span style="color:#00a8c8">THEN</span> <span style="color:#111">s</span><span style="color:#111">.</span><span style="color:#111">matter</span> <span style="color:#f92672">+</span> <span style="color:#111">s</span><span style="color:#111">.</span><span style="color:#111">manner</span> <span style="color:#f92672">+</span> <span style="color:#111">s</span><span style="color:#111">.</span><span style="color:#00a8c8">method</span> <span style="color:#f92672">+</span> <span style="color:#111">COALESCE</span><span style="color:#111">(</span><span style="color:#111">s</span><span style="color:#111">.</span><span style="color:#111">poi</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">)</span>
+                        <span style="color:#00a8c8">ELSE</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">-</span> <span style="color:#111">s</span><span style="color:#111">.</span><span style="color:#111">matter</span> <span style="color:#f92672">-</span> <span style="color:#111">s</span><span style="color:#111">.</span><span style="color:#111">manner</span> <span style="color:#f92672">-</span> <span style="color:#111">s</span><span style="color:#111">.</span><span style="color:#00a8c8">method</span> <span style="color:#f92672">-</span> <span style="color:#111">COALESCE</span><span style="color:#111">(</span><span style="color:#111">s</span><span style="color:#111">.</span><span style="color:#111">poi</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">)</span>
+                    <span style="color:#00a8c8">END</span><span style="color:#111">)</span> <span style="color:#00a8c8">AS</span> <span style="color:#111">aff_margin</span><span style="color:#111">,</span>
+                    <span style="color:#111">d</span><span style="color:#111">.</span><span style="color:#111">neg_id</span> <span style="color:#00a8c8">as</span> <span style="color:#111">neg_id</span><span style="color:#111">,</span>
+                    <span style="color:#00a8c8">SUM</span><span style="color:#111">(</span><span style="color:#00a8c8">CASE</span>
+                        <span style="color:#00a8c8">WHEN</span> <span style="color:#111">s</span><span style="color:#111">.</span><span style="color:#111">team_id</span> <span style="color:#f92672">=</span> <span style="color:#111">d</span><span style="color:#111">.</span><span style="color:#111">neg_id</span> <span style="color:#00a8c8">THEN</span> <span style="color:#111">s</span><span style="color:#111">.</span><span style="color:#111">matter</span> <span style="color:#f92672">+</span> <span style="color:#111">s</span><span style="color:#111">.</span><span style="color:#111">manner</span> <span style="color:#f92672">+</span> <span style="color:#111">s</span><span style="color:#111">.</span><span style="color:#00a8c8">method</span> <span style="color:#f92672">+</span> <span style="color:#111">COALESCE</span><span style="color:#111">(</span><span style="color:#111">s</span><span style="color:#111">.</span><span style="color:#111">poi</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">)</span>
+                        <span style="color:#00a8c8">ELSE</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">-</span> <span style="color:#111">s</span><span style="color:#111">.</span><span style="color:#111">matter</span> <span style="color:#f92672">-</span> <span style="color:#111">s</span><span style="color:#111">.</span><span style="color:#111">manner</span> <span style="color:#f92672">-</span> <span style="color:#111">s</span><span style="color:#111">.</span><span style="color:#00a8c8">method</span> <span style="color:#f92672">-</span> <span style="color:#111">COALESCE</span><span style="color:#111">(</span><span style="color:#111">s</span><span style="color:#111">.</span><span style="color:#111">poi</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">)</span>
+                    <span style="color:#00a8c8">END</span><span style="color:#111">)</span> <span style="color:#00a8c8">AS</span> <span style="color:#111">neg_margin</span>
+                <span style="color:#00a8c8">FROM</span>
+                    <span style="color:#111">debate_score</span> <span style="color:#111">s</span>
+                <span style="color:#00a8c8">LEFT</span> <span style="color:#00a8c8">JOIN</span>
+                    <span style="color:#111">debate_debate</span> <span style="color:#111">d</span> <span style="color:#00a8c8">ON</span> <span style="color:#111">s</span><span style="color:#111">.</span><span style="color:#111">debate_id</span> <span style="color:#f92672">=</span> <span style="color:#111">d</span><span style="color:#111">.</span><span style="color:#111">id</span>
+                <span style="color:#00a8c8">WHERE</span>
+                    <span style="color:#111">official</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">true</span>
+                <span style="color:#00a8c8">GROUP</span> <span style="color:#00a8c8">BY</span> <span style="color:#111">debate_id</span><span style="color:#111">,</span> <span style="color:#111">d</span><span style="color:#111">.</span><span style="color:#111">aff_id</span><span style="color:#111">,</span> <span style="color:#111">d</span><span style="color:#111">.</span><span style="color:#111">neg_id</span>
+            <span style="color:#111">)</span> <span style="color:#00a8c8">AS</span> <span style="color:#111">raw_margins</span>
+        <span style="color:#00a8c8">LEFT</span> <span style="color:#00a8c8">JOIN</span>
+            <span style="color:#111">competition_team</span> <span style="color:#00a8c8">AS</span> <span style="color:#111">t</span> <span style="color:#00a8c8">ON</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">id</span> <span style="color:#f92672">=</span> <span style="color:#111">raw_margins</span><span style="color:#111">.</span><span style="color:#111">aff_id</span> <span style="color:#00a8c8">OR</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">id</span> <span style="color:#f92672">=</span> <span style="color:#111">raw_margins</span><span style="color:#111">.</span><span style="color:#111">neg_id</span>
+        <span style="color:#00a8c8">GROUP</span> <span style="color:#00a8c8">BY</span> <span style="color:#111">t</span><span style="color:#111">.</span><span style="color:#111">id</span>
+        <span style="color:#111">)</span>
+
+    <span style="color:#75715e">-- FINALLY! We get to what we are actually selecting!
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">select</span>
+        <span style="color:#111">l</span><span style="color:#111">.</span><span style="color:#111">team_id</span><span style="color:#111">,</span>
+        <span style="color:#111">l</span><span style="color:#111">.</span><span style="color:#111">points</span><span style="color:#111">,</span>
+        <span style="color:#111">l</span><span style="color:#111">.</span><span style="color:#111">avg_rank</span><span style="color:#111">,</span>
+        <span style="color:#111">h</span><span style="color:#111">.</span><span style="color:#111">wins</span><span style="color:#111">,</span>
+        <span style="color:#111">m</span><span style="color:#111">.</span><span style="color:#111">avg_margin</span>
+    <span style="color:#00a8c8">from</span>
+        <span style="color:#111">ladder_figures</span> <span style="color:#111">l</span>
+    <span style="color:#00a8c8">left</span> <span style="color:#00a8c8">join</span>
+        <span style="color:#111">h2h</span> <span style="color:#111">h</span>
+    <span style="color:#00a8c8">on</span> <span style="color:#111">h</span><span style="color:#111">.</span><span style="color:#111">team_id</span> <span style="color:#f92672">=</span> <span style="color:#111">l</span><span style="color:#111">.</span><span style="color:#111">team_id</span>
+    <span style="color:#00a8c8">left</span> <span style="color:#00a8c8">join</span>
+        <span style="color:#111">margins</span> <span style="color:#111">m</span>
+    <span style="color:#00a8c8">on</span> <span style="color:#111">l</span><span style="color:#111">.</span><span style="color:#111">team_id</span> <span style="color:#f92672">=</span> <span style="color:#111">m</span><span style="color:#111">.</span><span style="color:#111">team_id</span>
+    <span style="color:#75715e">-- We have to order by ranks *ascending*, hence multiplying by -1
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">order</span> <span style="color:#00a8c8">by</span> <span style="color:#111">(</span><span style="color:#111">l</span><span style="color:#111">.</span><span style="color:#111">points</span><span style="color:#111">,</span> <span style="color:#111">(</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">*</span> <span style="color:#111">l</span><span style="color:#111">.</span><span style="color:#111">avg_rank</span><span style="color:#111">),</span> <span style="color:#111">h</span><span style="color:#111">.</span><span style="color:#111">wins</span><span style="color:#111">,</span> <span style="color:#111">m</span><span style="color:#111">.</span><span style="color:#111">avg_margin</span><span style="color:#111">)</span> <span style="color:#00a8c8">DESC</span>
+<span style="color:#111">);</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>This is, by far, the longest SQL query I&rsquo;ve ever used. However, it works amazingly well. We go from a hundred queries to one per division. And it&rsquo;s quick to do so, because it&rsquo;s materialized. We also get to figure out ranks in the database using a window function:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL"><span style="color:#00a8c8">SELECT</span>
+    <span style="color:#111">rank</span><span style="color:#111">()</span> <span style="color:#111">over</span> <span style="color:#111">(</span><span style="color:#00a8c8">order</span> <span style="color:#00a8c8">by</span> <span style="color:#111">points</span> <span style="color:#00a8c8">desc</span><span style="color:#111">,</span> <span style="color:#111">avg_rank</span> <span style="color:#00a8c8">asc</span><span style="color:#111">,</span> <span style="color:#111">wins</span> <span style="color:#00a8c8">desc</span><span style="color:#111">,</span> <span style="color:#111">avg_margin</span> <span style="color:#00a8c8">desc</span><span style="color:#111">)</span> <span style="color:#00a8c8">AS</span> <span style="color:#111">place</span><span style="color:#111">,</span>
+    <span style="color:#111">team_id</span><span style="color:#111">,</span>
+    <span style="color:#111">points</span><span style="color:#111">,</span>
+    <span style="color:#111">avg_rank</span><span style="color:#111">,</span>
+    <span style="color:#111">wins</span><span style="color:#111">,</span>
+    <span style="color:#111">avg_margin</span>
+    <span style="color:#00a8c8">FROM</span> <span style="color:#111">ladder</span>
+    <span style="color:#00a8c8">WHERE</span> <span style="color:#111">team_id</span> <span style="color:#00a8c8">IN</span> <span style="color:#111">(</span>
+        <span style="color:#00a8c8">SELECT</span> <span style="color:#111">id</span> <span style="color:#00a8c8">FROM</span> <span style="color:#111">competition_team</span> <span style="color:#00a8c8">WHERE</span> <span style="color:#111">division_id</span> <span style="color:#f92672">=</span> <span style="color:#f92672">%</span><span style="color:#111">s</span>
+    <span style="color:#111">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>That&rsquo;s it! Nice and simple.</p>
+
+<h2 id="gotchas">Gotchas</h2>
+
+<p>There are a few downsides. We are now a long way from the Django ORM; any change to the structure of the database needs to be reflected in the definition of the view. Any query needs to be done with raw SQL. I become responsible for this, instead of migrations magic.</p>
+
+<p>Being a materialized view, I also need to ensure it doesn&rsquo;t become stale. The way I did this was with triggers:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">23
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL"><span style="color:#00a8c8">CREATE</span> <span style="color:#00a8c8">OR</span> <span style="color:#00a8c8">REPLACE</span> <span style="color:#00a8c8">FUNCTION</span> <span style="color:#111">refresh_ladder_view</span><span style="color:#111">()</span> <span style="color:#00a8c8">RETURNS</span> <span style="color:#00a8c8">trigger</span> <span style="color:#00a8c8">AS</span> <span style="color:#960050;background-color:#1e0010">$$</span>
+    <span style="color:#00a8c8">BEGIN</span>
+        <span style="color:#111">REFRESH</span> <span style="color:#111">MATERIALIZED</span> <span style="color:#00a8c8">VIEW</span> <span style="color:#111">ladder</span><span style="color:#111">;</span>
+        <span style="color:#00a8c8">RETURN</span> <span style="color:#00a8c8">NULL</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">END</span><span style="color:#111">;</span>
+    <span style="color:#960050;background-color:#1e0010">$$</span> <span style="color:#00a8c8">LANGUAGE</span> <span style="color:#111">plpgsql</span> <span style="color:#00a8c8">VOLATILE</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">CREATE</span> <span style="color:#00a8c8">TRIGGER</span> <span style="color:#111">refresh_ladder_new_score</span> <span style="color:#00a8c8">AFTER</span> <span style="color:#00a8c8">INSERT</span> <span style="color:#00a8c8">OR</span> <span style="color:#00a8c8">UPDATE</span> <span style="color:#00a8c8">ON</span> <span style="color:#111">debate_score</span>
+    <span style="color:#00a8c8">EXECUTE</span> <span style="color:#00a8c8">PROCEDURE</span> <span style="color:#111">refresh_ladder_view</span><span style="color:#111">();</span>
+
+<span style="color:#00a8c8">CREATE</span> <span style="color:#00a8c8">TRIGGER</span> <span style="color:#111">refresh_ladder_delete_score</span> <span style="color:#00a8c8">AFTER</span> <span style="color:#00a8c8">DELETE</span> <span style="color:#00a8c8">ON</span> <span style="color:#111">debate_score</span>
+    <span style="color:#00a8c8">EXECUTE</span> <span style="color:#00a8c8">PROCEDURE</span> <span style="color:#111">refresh_ladder_view</span><span style="color:#111">();</span>
+
+<span style="color:#00a8c8">CREATE</span> <span style="color:#00a8c8">TRIGGER</span> <span style="color:#111">refresh_ladder_delete_debate</span> <span style="color:#00a8c8">AFTER</span> <span style="color:#00a8c8">DELETE</span> <span style="color:#00a8c8">ON</span> <span style="color:#111">debate_debate</span>
+    <span style="color:#00a8c8">EXECUTE</span> <span style="color:#00a8c8">PROCEDURE</span> <span style="color:#111">refresh_ladder_view</span><span style="color:#111">();</span>
+
+<span style="color:#00a8c8">CREATE</span> <span style="color:#00a8c8">TRIGGER</span> <span style="color:#111">refresh_ladder_new_debate</span> <span style="color:#00a8c8">AFTER</span> <span style="color:#00a8c8">INSERT</span> <span style="color:#00a8c8">OR</span> <span style="color:#00a8c8">UPDATE</span> <span style="color:#00a8c8">ON</span> <span style="color:#111">debate_debate</span>
+    <span style="color:#00a8c8">FOR</span> <span style="color:#00a8c8">EACH</span> <span style="color:#00a8c8">ROW</span>
+    <span style="color:#00a8c8">WHEN</span> <span style="color:#111">(</span><span style="color:#00a8c8">NEW</span><span style="color:#111">.</span><span style="color:#111">final_outcome</span> <span style="color:#00a8c8">LIKE</span> <span style="color:#d88200">&#39;A%&#39;</span> <span style="color:#00a8c8">OR</span> <span style="color:#00a8c8">NEW</span><span style="color:#111">.</span><span style="color:#111">final_outcome</span> <span style="color:#00a8c8">LIKE</span> <span style="color:#d88200">&#39;N%&#39;</span> <span style="color:#00a8c8">OR</span> <span style="color:#00a8c8">NEW</span><span style="color:#111">.</span><span style="color:#111">final_outcome</span> <span style="color:#00a8c8">LIKE</span> <span style="color:#d88200">&#39;B%&#39;</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">EXECUTE</span> <span style="color:#00a8c8">PROCEDURE</span> <span style="color:#111">refresh_ladder_view</span><span style="color:#111">();</span>
+
+<span style="color:#00a8c8">CREATE</span> <span style="color:#00a8c8">TRIGGER</span> <span style="color:#111">refresh_ladder_team_changes</span> <span style="color:#00a8c8">AFTER</span> <span style="color:#00a8c8">INSERT</span> <span style="color:#00a8c8">OR</span> <span style="color:#00a8c8">DELETE</span> <span style="color:#00a8c8">ON</span> <span style="color:#111">competition_team</span>
+    <span style="color:#00a8c8">EXECUTE</span> <span style="color:#00a8c8">PROCEDURE</span> <span style="color:#111">refresh_ladder_view</span><span style="color:#111">();</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Nice and simple. But again, this comes at a cost. Specifically, the <code>REFRESH MATERIALIZED VIEW</code> call takes a second or two at least. And it runs on every update, delete or insert. Mostly this isn&rsquo;t a problem, but sometimes it is.</p>
+
+<p>In particular, shortly after this I needed to modify the <code>debate_debate</code> table to insert a new column. On my local machine, this <code>ALTER TABLE</code> took 45 minutes (having locked a key table against reads!) before I gave up on it. This obviously would not do.</p>
+
+<p>After a couple of hours of fruitless thought (interspersed with an episode or two of Veep) it occurred to me that the trigger might be the issue. Disable the trigger and bam, the schema change (inserting a new NULLable column) was over in less than a second, as you would expect.</p>
+
+<p>Of course, this meant diving into the Django migration file and manually adding some operations: an <code>ALTER TABLE debate_debate DISABLE TRIGGER USER</code> before the table update and <code>ALTER TABLE debate_debate ENABLE TRIGGER USER</code> afterwards. And you have to make sure there&rsquo;s an appropriate transaction wrapping the whole thing too; or you have to manually run <code>REFRESH MATERIALIZED VIEW</code> afterwards.</p>
+
+<p>Overall though, it was definitely worth the tradeoff. PostgreSQL is far better at manipulating data than I am. It is built for this. It is clever. There are a few things you have to think about, and you lose cross-backend compatibility (at least explicitly), but it works faster and cleaner. That&rsquo;s the name of the game.</p>
+
+  </div>
+
+  <div id=links>
+    
+      <a class="basic-alignment left" href="https://mjec.blog/2016/05/12/liking-problematic-media/">&laquo; Liking problematic media</a>
+    
+    
+      <a class="basic-alignment left" href="https://mjec.blog/2016/06/27/djangos-queryset-union-isnt-quite-what-it-seems/">Django&#39;s QuerySet union isn&#39;t quite what it seems &raquo;</a>
+    
+  </div>
+</section>
+
+  <footer>
+    <p>Yet another blog from <a href="https://mjec.net">Michael Cordover</a>.
+    <span class="rc-scout"></span></p>
+  </footer>
+
+  <script async defer src="https://www.recurse-scout.com/loader.js?t=7b61c3cc166c3321bfbe79ce44d62586"></script>
+
+  <script type="text/javascript">
+    var _paq = _paq || [];
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//piwik.mjec.net/";
+      _paq.push(['setTrackerUrl', u+'piwik.php']);
+      _paq.push(['setSiteId', 13]);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <noscript><p><img src="//piwik.mjec.net/piwik.php?idsite=13" style="border:0;" alt="" /></p></noscript>
+
+  
+</body>
+</html>
+
+
+

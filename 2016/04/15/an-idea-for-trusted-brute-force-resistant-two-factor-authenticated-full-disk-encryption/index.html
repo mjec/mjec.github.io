@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400|Old+Standard+TT:400' rel='stylesheet' type='text/css'>
+
+    <link rel="icon" type="image/png" href="/favicon_16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon_32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon_128x128.png" sizes="128x128">
+
+    <title>
+      An idea for trusted brute-force-resistant two-factor-authenticated full disk encryption
+    </title>
+    <link rel="canonical" href="https://mjec.blog/2016/04/15/an-idea-for-trusted-brute-force-resistant-two-factor-authenticated-full-disk-encryption/">
+
+    <style>
+  * {
+    border:0;
+    font:inherit;
+    font-size:100%;
+    vertical-align:baseline;
+    margin:0;
+    padding:0;
+    color: black;
+    text-decoration-skip: ink;
+    text-decoration-skip-ink: auto;
+  }
+
+  body {
+    font-family:'Open Sans', 'Myriad Pro', Myriad, sans-serif;
+    font-size:17px;
+    line-height:160%;
+    color:#1d1313;
+    max-width:800px;
+    margin:auto;
+  }
+
+  p {
+    margin: 20px 0;
+  }
+
+  a img {
+    border:none;
+  }
+
+  img {
+    margin: 10px auto 10px auto;
+    max-width: 100%;
+    display: block;
+  }
+
+  .left-justify {
+    float: left;
+  }
+
+  .right-justify {
+    float:right;
+  }
+
+  pre, code {
+    font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    background-color: #f7f7f7;
+  }
+  
+  sub {
+    font-size: 65%;
+    vertical-align: sub;
+  }
+
+  sup {
+    font-size: 65%;
+    vertical-align: super;
+  }
+
+  code {
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  pre {
+    margin-top: 0;
+    margin-bottom: 16px;
+    word-wrap: normal;
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+  }
+
+  pre>code {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    word-break: normal;
+    white-space: pre;
+    background: transparent;
+    border: 0;
+  }
+
+  pre code {
+    display: inline;
+    max-width: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+  }
+
+  pre code::before,
+  pre code::after {
+    content: normal;
+  }
+
+  em,q,em,dfn {
+    font-style:italic;
+  }
+
+  .sans,html .gist .gist-file .gist-meta {
+    font-family:"Open Sans","Myriad Pro",Myriad,sans-serif;
+  }
+
+  .mono,pre,code,tt,p code,li code {
+    font-family:Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace;
+  }
+
+  .heading,.serif,h1,h2,h3 {
+    font-family:"Old Standard TT",serif;
+  }
+
+  strong {
+    font-weight:600;
+  }
+
+  q:before {
+    content:"\201C";
+  }
+
+  q:after {
+    content:"\201D";
+  }
+
+  del,s {
+    text-decoration:line-through;
+  }
+
+  blockquote {
+    font-family:"Old Standard TT",serif;
+    text-align:center;
+    padding:50px;
+  }
+  
+  blockquote.long {
+    text-align: left;
+  }
+
+  blockquote p {
+    display:block;
+    font-style:italic;
+    margin: 0;
+  }
+  
+  blockquote.long p {
+    margin: 20px 0 0 0;
+  }
+  
+  blockquote.long p:first-child {
+    margin: 0;
+  }
+  
+  blockquote.long p:last-child {
+    margin-bottom: -2ex;
+  }
+
+  blockquote:before,blockquote:after {
+    font-family:"Old Standard TT",serif;
+    font-size:35px;
+    color:#403c3b;
+  }
+  
+  blockquote:before {
+    content:'\201C';
+    float: left;
+  }
+
+  blockquote:after {
+    content:'\201D';
+    float: right;
+    margin-top: -1ex;
+    position: relative;
+    left: 1ex;
+    top: -0.5ex;
+  }
+  
+  blockquote.long:after {
+    margin-top: 0;
+  }
+
+  hr {
+    width:40%;
+    height: 1px;
+    background:#403c3b;
+    margin: 25px auto;
+  }
+
+  h1 {
+    font-size:35px;
+  }
+
+  h2 {
+    font-size:28px;
+  }
+
+  h3 {
+    font-size:22px;
+    margin-top:18px;
+  }
+
+  h1 a,h2 a,h3 a {
+    text-decoration:none;
+  }
+
+  h1,h2 {
+    margin-top:28px;
+  }
+
+
+  code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: black;
+  }
+
+  #sub-header, #sub-header * {
+    color:#403c3b;
+    font-size:13px;
+  }
+
+  #sub-header {
+    margin: 0 4px;
+  }
+
+  #nav h1 a {
+    font-size:35px;
+    color:#1d1313;
+    line-height:120%;
+  }
+
+  .together {
+    white-space: nowrap;
+  }
+
+  .posts-listing a, #nav a, .tags a {
+    text-decoration: none;
+  }
+
+  .posts-listing h2 small {
+    font-size: 50%;
+  }
+
+  .posts-listing li p.preview {
+    margin: 0;
+    color: #666;
+  }
+
+  li {
+    margin-left: 20px;
+  }
+
+  ul li {
+    margin-left: 1em;
+  }
+
+  ul li {
+    list-style-type: none;
+  }
+  ul li:before {
+    content:"\00BB \0020";
+    margin-left: -1em;
+    float: left;
+  }
+
+  footer {
+    border-top: 1px dotted black;
+    font-size: 80%;
+    margin-top: 20px;
+  }
+  footer p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .rc-scout .rc-scout__link {
+    color: black !important;
+    text-decoration-skip-ink: auto;
+  }
+
+  #nav ul li:before, .posts-listing li:before {
+    content:'';
+    margin-right:0;
+  }
+
+  #content {
+    text-align:left;
+    width:100%;
+    font-size:15px;
+    padding:60px 0 0;
+  }
+
+  #content h1,#content h2 {
+    margin-bottom:5px;
+  }
+
+  #content h2 {
+    font-size:25px;
+  }
+
+  #content .pagination {
+    text-align: center;
+  }
+
+  #content .entry-content {
+    margin-top:15px;
+  }
+
+  #content time {
+    margin-left:3px;
+  }
+
+  #content h1 {
+    font-size:30px;
+  }
+
+  .highlight {
+    margin: 10px 0;
+  }
+
+  .posts-listing {
+    margin:0 0 30px;
+  }
+
+  .posts-listing li {
+    margin:0 0 25px 15px;
+  }
+
+  .posts-listing li a:hover, #nav a:hover, .tags a:hover {
+    text-decoration: underline;
+  }
+
+  #nav {
+    text-align:center;
+    position:static;
+    margin-top:60px;
+  }
+
+  #nav ul {
+    display: table;
+    margin: 8px auto 0 auto;
+  }
+
+  #nav li {
+    list-style-type:none;
+    display:table-cell;
+    font-size:15px;
+    padding: 0 20px;
+  }
+
+  #links {
+    margin: 50px 0 0 0;
+  }
+
+  #links :nth-child(2) {
+    float:right;
+  }
+
+  #not-found {
+    text-align: center;
+  }
+
+  #not-found a {
+    font-family:"Old Standard TT",serif;
+    font-size: 200px;
+    text-decoration: none;
+    display: inline-block;
+    padding-top: 225px;
+  }
+
+  @media (max-width: 750px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:28px;
+    }
+
+    #nav li {
+      font-size:13px;
+      padding: 0 15px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:50px;
+      font-size:14px;
+    }
+
+    #content h1 {
+      font-size:25px;
+    }
+
+    #content h2 {
+      font-size:22px;
+    }
+
+    .posts-listing li div {
+      font-size:12px;
+    }
+    
+    footer {
+      font-size: 12px;
+    }
+    
+    blockquote.long:after {
+      margin-top: 1ex !important;
+    }
+  }
+
+  @media (max-width: 400px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:22px;
+    }
+
+    #nav li {
+      font-size:12px;
+      padding: 0 10px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:20px;
+      font-size:12px;
+    }
+
+    #content h1 {
+      font-size:20px;
+    }
+
+    #content h2 {
+      font-size:18px;
+    }
+
+    .posts-listing li div{
+      font-size:12px;
+    }
+  }
+</style>
+
+
+    
+  </head>
+
+  <body>
+    <section id=nav>
+      <h1><a href="/">mjec&#39;s electric blogaloo</a></h1>
+      <ul>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/tags/">Browse by tag</a></li>
+        
+      </ul>
+    </section>
+
+
+
+<section id=content>
+  <h1> An idea for trusted brute-force-resistant two-factor-authenticated full disk encryption </h1>
+
+  <div id=sub-header>
+    15 April 2016 · 9 minute read
+    
+    · <span class="tags">
+        
+            
+            
+            
+        
+            
+            
+            
+        
+            
+            
+            
+        
+            
+            
+            
+        
+            
+            
+            
+        
+        
+        <a href='/tags/technical/'>technical</a>, <a href='/tags/rc/'>rc</a>, <a href='/tags/security/'>security</a>, <a href='/tags/systems/'>systems</a> and <a href='/tags/cryptography/'>cryptography</a></span>
+    
+  </div>
+
+  <div class="entry-content">
+    
+
+<p>I was privileged to see <a href="https://www.youtube.com/watch?v=rML5DfYUh_k">Matthew Garrett&rsquo;s talk</a> at <abbr title="Linux.conf.au">LCA</abbr> this year on <a href="https://github.com/mjg59/tpmtotp">tpmtotp</a>. This is software which enables you to verify that your computer hardware has not been tampered with before you are required to enter your full disk encryption password. It does this by sealing the <abbr title="Time-based One-time Password Algorithm (RFC 6238)">TOTP</abbr> secret in the <abbr title="trusted platform module">TPM</abbr> against a particular set of platform control register values. This means that if any aspect of the boot configuration changes the secret cannot be unsealed, so an attacker cannot pretend to be you.</p>
+
+<p>This idea was attractive to me. For a long time I carried my laptop&rsquo;s bootloader with me on a USB to ensure that there could be no tampering with it before I entered my disk encryption password. This mitigates against a significant attack, namely the installation of an early boot keylogger.</p>
+
+<p>The recent <a href="https://en.wikipedia.org/wiki/FBI%E2%80%93Apple_encryption_dispute">San Bernardino iPhone case</a> was a nice reminder that when it comes to hardware with a secure element, brute forcing is not always possible. This is a major change to the old orthodoxy that if the attacker has physical access, it&rsquo;s all over.</p>
+
+<p>This afternoon I was thinking about potential system development activities that would enable me to learn <a href="https://www.rust-lang.org/">Rust</a>. I also happened to have the page open for <a href="http://www.yubico.com/">YubiKeys</a>, because now that I&rsquo;m in the US I might be able to buy one without paying obscene amounts for shipping.</p>
+
+<p>Over the course of a walk an idea formed in my head: we can combine the secure element of a YubiKey (or indeed any <a href="http://csrc.nist.gov/groups/SNS/piv/standards.html">FIPS-compliant PIV</a> smart card) with the TPM to develop a system which you know is safe and for which your full disk encryption password is not amenable to brute forcing.</p>
+
+<h2 id="background">Background</h2>
+
+<p>A smart card (specifically a PIV card, but I&rsquo;ll just refer to them as smart cards) performs cryptographic operations on a secure element. These operations are performed without the key ever being released to the user.</p>
+
+<p>Each smart card is protected by a PIN. The precise details of this PIN are left to implementers, but only a limited number of tries are permitted before the PIN becomes locked. In the YubiKey case a PIN can be up to 8 bytes (256 bits) long. Some documentation suggests that a PIN must be alphanumeric, but this is not clear. The YubiKey owner can also set the maximum number of PIN attempts before it becomes locked, anywhere in the range 1 to 255.</p>
+
+<p>If the PIN becomes locked it can be unlocked by use of a separate code known as the PUK. This is subject to the same restrictions as the PIN (and indeed it appears that on the YubiKey the two are implemented in the same way but accessed at different times).</p>
+
+<p>Once the PIN and PUK are both locked, the card can no longer be used to perform cryptographic operations without being reset. The key material is lost.</p>
+
+<p>A smart card contains a number of key slots. These notably include the card authentication key (slot 9E), which can perform encryption/decryption/signing operations without a PIN being entered, and the PIV authentication key (slot 9A), which requires the PIN to be entered before an operation can be performed. Slot 9A is designed for use cases including system login.</p>
+
+<p>A TPM can &ldquo;seal&rdquo; a secret against the values of the process control registers. While the precise details of this are complicated, essentially it serves as cryptographic proof that everything executed on the system at a particular time (and of a particular type) matches a &ldquo;known good&rdquo; state.</p>
+
+<h2 id="set-up">Set up</h2>
+
+<p>I assume that the user has a setup not unlike mine: a &ldquo;main boot partition&rdquo; which prompts for a user password then performs decryption and boots up the actual system following the usual <a href="https://gitlab.com/cryptsetup/cryptsetup/blob/master/README.md">LUKS</a> process.</p>
+
+<p>When a user installs this system, they will be installing an &ldquo;early boot partition&rdquo;. They begin by generating new keys on their smart card (9A and 9E keys described above). These keys are never known to the operating system.</p>
+
+<p>The user then chooses their boot password. This is passed through a key derivation function (KDF), producing eight bytes of output. The PIN for the smart card is set to the output of this KDF.</p>
+
+<p>The user should also set a random PUK of maximal length. This should be written down on a piece of paper but otherwise not stored.</p>
+
+<p>For a YubiKey the user should also set a maximum number of tries before the PIN and PUK are locked. 10 seems an appropriate balance to me.</p>
+
+<p>The user&rsquo;s disk should be encrypted not with their boot password but instead with a randomly generated keyfile of appropriate length, mixed with the user&rsquo;s boot password (for example, using a KDF). The keyfile should then be encrypted with the 9A key (i.e. requiring the PIN to be entered). That encrypted key file should then be stored on the main boot partition.</p>
+
+<p>The main boot partition should be modified to provide some verification visible to the user. This could be as simple as being a secret phrase, it could be a TOTP code, or even an application where the user presents a challenge and the computer responds from a database of responses. It can be arbitrarily complex, and should give the user confident that their program is running.</p>
+
+<p>The main boot partition should be configured to first display this verification, and then prompt for a password. The password should then be passed through the KDF as above, and the result used as the PIN for the smart card. With the PIN, the keyfile can be decrypted using slot 9A. The decrypted keyfile should then be mixed with the original password and the result passed to LUKS to decrypt the main disk.</p>
+
+<p>The main boot partition is going to be some form of in memory file system (initramfs). This is normally built into a <a href="https://wiki.archlinux.org/index.php/Mkinitcpio">single compressed file</a> which is then loaded by the bootloader. At this stage the user will can build their initramfs file.</p>
+
+<p>Next, a random key is generated. This key is used to encrypt the initramfs. A copy of this key (with appropriate protections e.g. readable only by root and protected by symmetric or other encryption) should be stored on the system drive (i.e. the drive that will be the subject of full disk encryption).</p>
+
+<p>That key is also encrypted on the smart card with the 9E (i.e. no PIN) key slot. Then the encrypted key value (the &ldquo;sealed value&rdquo;) should then be sealed to the TPM with a known good state.</p>
+
+<p>We now point our bootloader to the early stage boot loader, and point that to the encrypted initramfs.</p>
+
+<h2 id="the-boot-process">The boot process</h2>
+
+<p>Our early boot partition is called by grub or equivalent.</p>
+
+<p>It then asks the TPM for the sealed value. If this is provided, that proves that the system is in a known good state. If it is not provided, booting will fail at this point.</p>
+
+<p>The sealed value is then passed to the smart card and decrypted using slot 9E. This does not require any intervention by the user. That decrypted value can then be used as a key to decrypt the initramfs.</p>
+
+<p>Our early boot partition can then hand off control to the main boot partition. This main boot partition will present the verification information to the user, then prompt for a password.</p>
+
+<p>If the verification information is absent or incorrect, the user knows that their system has been the subject of tampering. If it is present, that proves we are looking at the correct boot loader.</p>
+
+<p>The password is then passed through the KDF and that provides the main boot partition with the smart card PIN. That PIN can be used to decrypt the keyfile, using the 9A key slot. The keyfile can then be mixed with the password itself, to form the full disk encryption key and the system can proceed to boot.</p>
+
+<p>Importantly, if multiple passwords are tried, this will lock the PIN on the smart card. This prevents password brute forcing.</p>
+
+<h2 id="changes-to-the-system">Changes to the system</h2>
+
+<p>Any change which modifies the PCR will mean that a new copy of the early boot partition encryption key needs to be re-sealed into the TPM. This is why a copy should be saved to the disk (which will ultimately be encrypted in any case).</p>
+
+<h2 id="backups">Backups</h2>
+
+<p>The following elements should be backed up:</p>
+
+<ul>
+<li><p>The PUK - this can be used to change the PIN. The PUK will be necessary for instances where too many incorrect password attempts were made.</p></li>
+
+<li><p>The actual full disk encryption key/raw LUKS headers. These are necessary in case the smart card is ever lost or damaged. It is good practice to keep a back up of these in case of disk corruption in any case.</p></li>
+</ul>
+
+<p>You can of course omit to keep backups - or indeed set the PUK to a random value that is immediately discarded - if you wish to live on the edge and reduce the attack surface.</p>
+
+<h2 id="assumptions">Assumptions</h2>
+
+<p>We assume that the cryptographic processes used here are all authenticated encryption/decryption and are not vulnerable to attack. We assume that the secure element of our smart card is in fact secure, and that the card cannot be cloned.</p>
+
+<p>We assume that the cryptographic operations do not leak information about the plain text (and in particular that mixing the password with a keyfile decrypted using the KDF of the password as PIN for the smart card does not introduce a vulnerability).</p>
+
+<p>We assume that the system starts in a known good state and is not compromised while turned on (because if it were, you can just read the raw disk encryption password from memory).</p>
+
+<h2 id="security-guarantees">Security guarantees</h2>
+
+<p>I believe this provides us with the following guarantees:</p>
+
+<ol>
+<li><p>An attacker cannot recover the disk encryption key without both the smart card and the user&rsquo;s password (two factors of authentication)</p></li>
+
+<li><p>An attacker cannot modify the system without that tampering being evident</p></li>
+
+<li><p>An attacker cannot brute force the password without both the smart card and the PUK</p></li>
+
+<li><p>The compromise of either factor leaves us in a position no worse than with if the remaining factor were our only means of authentication</p></li>
+
+<li><p>An attacker cannot view the verification information without both having possession of the smart card and booting the system into a known good state</p></li>
+
+<li><p>An attacker cannot recover the key without having the password and smart card, <em>and</em> being able to place the system into the known good state (because the sealed value is necessary to access the early boot partition, which is where the key material is stored)</p></li>
+</ol>
+
+<h2 id="risks">Risks</h2>
+
+<ul>
+<li><p>The smart card alone is sufficient for a person with physical access to the machine to see the verification sequence. This is may permit an attacker to replicate the verification sequence. Having a dynamic verification sequence (e.g. TOTP or challenge-response) is a significant mitigation, but can be bypassed through bugs in the early boot partition code or direct memory access.</p></li>
+
+<li><p>The PUK can be used to reset the PIN or incorrect tries counter. We mitigate against this by setting the full disk encryption key to a value returned from the smart card mixed with the user&rsquo;s password. However, an attacker with the PUK can still brute force the password.</p></li>
+</ul>
+
+<p>I am thinking about making this my batch project for my time at <a href="https://www.recurse.com/">RC</a>. I was thinking I wanted to do some system programming, and what better way to start? The only small snag is that I use  a Macbook Pro, so there&rsquo;s no TPM in this computer.</p>
+
+  </div>
+
+  <div id=links>
+    
+      <a class="basic-alignment left" href="https://mjec.blog/2016/04/12/my-haskell-was-slow/">&laquo; My Haskell was slow</a>
+    
+    
+      <a class="basic-alignment left" href="https://mjec.blog/2016/04/19/non-proofs/">Non-proofs &raquo;</a>
+    
+  </div>
+</section>
+
+  <footer>
+    <p>Yet another blog from <a href="https://mjec.net">Michael Cordover</a>.
+    <span class="rc-scout"></span></p>
+  </footer>
+
+  <script async defer src="https://www.recurse-scout.com/loader.js?t=7b61c3cc166c3321bfbe79ce44d62586"></script>
+
+  <script type="text/javascript">
+    var _paq = _paq || [];
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//piwik.mjec.net/";
+      _paq.push(['setTrackerUrl', u+'piwik.php']);
+      _paq.push(['setSiteId', 13]);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <noscript><p><img src="//piwik.mjec.net/piwik.php?idsite=13" style="border:0;" alt="" /></p></noscript>
+
+  
+</body>
+</html>
+
+
+

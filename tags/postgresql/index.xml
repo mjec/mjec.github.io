@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Postgresql on mjec&#39;s electric blogaloo</title>
+    <link>https://mjec.blog/tags/postgresql/</link>
+    <description>Recent content in Postgresql on mjec&#39;s electric blogaloo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 26 Jun 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://mjec.blog/tags/postgresql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Your RDBMS has cool features</title>
+      <link>https://mjec.blog/2016/06/26/your-rdbms-has-cool-features/</link>
+      <pubDate>Sun, 26 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/06/26/your-rdbms-has-cool-features/</guid>
+      <description>Aside: I started writing this post back in May, and have finally had a chance to finish it! Particular thanks to Benson who worked with me on the ultimate solution.
+How did we get here? There&amp;rsquo;s a tendency in a lot of web development to be cautious of the data layer. We outsource persistence to the magic of PostgreSQL (or MySQL or MariaDB or SQL Server or Mongo or Redis or whatever) and just kind of ignore how it works.</description>
+    </item>
+    
+  </channel>
+</rss>

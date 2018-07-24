@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400|Old+Standard+TT:400' rel='stylesheet' type='text/css'>
+
+    <link rel="icon" type="image/png" href="/favicon_16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon_32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon_128x128.png" sizes="128x128">
+
+    <title>
+      Day one
+    </title>
+    <link rel="canonical" href="https://mjec.blog/2016/03/22/day-one/">
+
+    <style>
+  * {
+    border:0;
+    font:inherit;
+    font-size:100%;
+    vertical-align:baseline;
+    margin:0;
+    padding:0;
+    color: black;
+    text-decoration-skip: ink;
+    text-decoration-skip-ink: auto;
+  }
+
+  body {
+    font-family:'Open Sans', 'Myriad Pro', Myriad, sans-serif;
+    font-size:17px;
+    line-height:160%;
+    color:#1d1313;
+    max-width:800px;
+    margin:auto;
+  }
+
+  p {
+    margin: 20px 0;
+  }
+
+  a img {
+    border:none;
+  }
+
+  img {
+    margin: 10px auto 10px auto;
+    max-width: 100%;
+    display: block;
+  }
+
+  .left-justify {
+    float: left;
+  }
+
+  .right-justify {
+    float:right;
+  }
+
+  pre, code {
+    font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    background-color: #f7f7f7;
+  }
+  
+  sub {
+    font-size: 65%;
+    vertical-align: sub;
+  }
+
+  sup {
+    font-size: 65%;
+    vertical-align: super;
+  }
+
+  code {
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  pre {
+    margin-top: 0;
+    margin-bottom: 16px;
+    word-wrap: normal;
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+  }
+
+  pre>code {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    word-break: normal;
+    white-space: pre;
+    background: transparent;
+    border: 0;
+  }
+
+  pre code {
+    display: inline;
+    max-width: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+  }
+
+  pre code::before,
+  pre code::after {
+    content: normal;
+  }
+
+  em,q,em,dfn {
+    font-style:italic;
+  }
+
+  .sans,html .gist .gist-file .gist-meta {
+    font-family:"Open Sans","Myriad Pro",Myriad,sans-serif;
+  }
+
+  .mono,pre,code,tt,p code,li code {
+    font-family:Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace;
+  }
+
+  .heading,.serif,h1,h2,h3 {
+    font-family:"Old Standard TT",serif;
+  }
+
+  strong {
+    font-weight:600;
+  }
+
+  q:before {
+    content:"\201C";
+  }
+
+  q:after {
+    content:"\201D";
+  }
+
+  del,s {
+    text-decoration:line-through;
+  }
+
+  blockquote {
+    font-family:"Old Standard TT",serif;
+    text-align:center;
+    padding:50px;
+  }
+  
+  blockquote.long {
+    text-align: left;
+  }
+
+  blockquote p {
+    display:block;
+    font-style:italic;
+    margin: 0;
+  }
+  
+  blockquote.long p {
+    margin: 20px 0 0 0;
+  }
+  
+  blockquote.long p:first-child {
+    margin: 0;
+  }
+  
+  blockquote.long p:last-child {
+    margin-bottom: -2ex;
+  }
+
+  blockquote:before,blockquote:after {
+    font-family:"Old Standard TT",serif;
+    font-size:35px;
+    color:#403c3b;
+  }
+  
+  blockquote:before {
+    content:'\201C';
+    float: left;
+  }
+
+  blockquote:after {
+    content:'\201D';
+    float: right;
+    margin-top: -1ex;
+    position: relative;
+    left: 1ex;
+    top: -0.5ex;
+  }
+  
+  blockquote.long:after {
+    margin-top: 0;
+  }
+
+  hr {
+    width:40%;
+    height: 1px;
+    background:#403c3b;
+    margin: 25px auto;
+  }
+
+  h1 {
+    font-size:35px;
+  }
+
+  h2 {
+    font-size:28px;
+  }
+
+  h3 {
+    font-size:22px;
+    margin-top:18px;
+  }
+
+  h1 a,h2 a,h3 a {
+    text-decoration:none;
+  }
+
+  h1,h2 {
+    margin-top:28px;
+  }
+
+
+  code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: black;
+  }
+
+  #sub-header, #sub-header * {
+    color:#403c3b;
+    font-size:13px;
+  }
+
+  #sub-header {
+    margin: 0 4px;
+  }
+
+  #nav h1 a {
+    font-size:35px;
+    color:#1d1313;
+    line-height:120%;
+  }
+
+  .together {
+    white-space: nowrap;
+  }
+
+  .posts-listing a, #nav a, .tags a {
+    text-decoration: none;
+  }
+
+  .posts-listing h2 small {
+    font-size: 50%;
+  }
+
+  .posts-listing li p.preview {
+    margin: 0;
+    color: #666;
+  }
+
+  li {
+    margin-left: 20px;
+  }
+
+  ul li {
+    margin-left: 1em;
+  }
+
+  ul li {
+    list-style-type: none;
+  }
+  ul li:before {
+    content:"\00BB \0020";
+    margin-left: -1em;
+    float: left;
+  }
+
+  footer {
+    border-top: 1px dotted black;
+    font-size: 80%;
+    margin-top: 20px;
+  }
+  footer p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .rc-scout .rc-scout__link {
+    color: black !important;
+    text-decoration-skip-ink: auto;
+  }
+
+  #nav ul li:before, .posts-listing li:before {
+    content:'';
+    margin-right:0;
+  }
+
+  #content {
+    text-align:left;
+    width:100%;
+    font-size:15px;
+    padding:60px 0 0;
+  }
+
+  #content h1,#content h2 {
+    margin-bottom:5px;
+  }
+
+  #content h2 {
+    font-size:25px;
+  }
+
+  #content .pagination {
+    text-align: center;
+  }
+
+  #content .entry-content {
+    margin-top:15px;
+  }
+
+  #content time {
+    margin-left:3px;
+  }
+
+  #content h1 {
+    font-size:30px;
+  }
+
+  .highlight {
+    margin: 10px 0;
+  }
+
+  .posts-listing {
+    margin:0 0 30px;
+  }
+
+  .posts-listing li {
+    margin:0 0 25px 15px;
+  }
+
+  .posts-listing li a:hover, #nav a:hover, .tags a:hover {
+    text-decoration: underline;
+  }
+
+  #nav {
+    text-align:center;
+    position:static;
+    margin-top:60px;
+  }
+
+  #nav ul {
+    display: table;
+    margin: 8px auto 0 auto;
+  }
+
+  #nav li {
+    list-style-type:none;
+    display:table-cell;
+    font-size:15px;
+    padding: 0 20px;
+  }
+
+  #links {
+    margin: 50px 0 0 0;
+  }
+
+  #links :nth-child(2) {
+    float:right;
+  }
+
+  #not-found {
+    text-align: center;
+  }
+
+  #not-found a {
+    font-family:"Old Standard TT",serif;
+    font-size: 200px;
+    text-decoration: none;
+    display: inline-block;
+    padding-top: 225px;
+  }
+
+  @media (max-width: 750px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:28px;
+    }
+
+    #nav li {
+      font-size:13px;
+      padding: 0 15px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:50px;
+      font-size:14px;
+    }
+
+    #content h1 {
+      font-size:25px;
+    }
+
+    #content h2 {
+      font-size:22px;
+    }
+
+    .posts-listing li div {
+      font-size:12px;
+    }
+    
+    footer {
+      font-size: 12px;
+    }
+    
+    blockquote.long:after {
+      margin-top: 1ex !important;
+    }
+  }
+
+  @media (max-width: 400px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:22px;
+    }
+
+    #nav li {
+      font-size:12px;
+      padding: 0 10px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:20px;
+      font-size:12px;
+    }
+
+    #content h1 {
+      font-size:20px;
+    }
+
+    #content h2 {
+      font-size:18px;
+    }
+
+    .posts-listing li div{
+      font-size:12px;
+    }
+  }
+</style>
+
+
+    
+  </head>
+
+  <body>
+    <section id=nav>
+      <h1><a href="/">mjec&#39;s electric blogaloo</a></h1>
+      <ul>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/tags/">Browse by tag</a></li>
+        
+      </ul>
+    </section>
+
+
+
+<section id=content>
+  <h1> Day one </h1>
+
+  <div id=sub-header>
+    22 March 2016 · 5 minute read
+    
+    · <span class="tags">
+        
+            
+            
+            
+        
+            
+            
+            
+        
+        
+        <a href='/tags/travel/'>travel</a> and <a href='/tags/nyc/'>nyc</a></span>
+    
+  </div>
+
+  <div class="entry-content">
+    <p>According to my watch pedometer, I walked 23,160 steps in the last six hours.</p>
+
+<p>I started at about eight this morning by walking to the nearest train station. Realising that it was rush hour and I hadn&rsquo;t had breakfast, I doubled back to have breakfast before trying to negotiate the subway. I had a two egg and cheese; the guy behind the counter asked me what sort of bread and I said &ldquo;bagel.&rdquo; He chuckled and asked again; the store (Brooklyn Bagels and Coffee, which I can only assume is chain given I was eating in Queens) has at least a dozen types of bagel. I went with plain.</p>
+
+<p>Appropriately and cheaply nourished (enormous breakfast and bottle of coke: $5.50) I went on to try to get a power cable for my laptop with a US plug. RadioShack didn&rsquo;t have it, because they have gone to shit just as much as rumours had it. Onward, therefore, to the subway. In fact, this section of the subway is above ground. I was moderately confused by the lack of inbound/outbound platforms until I discovered that the station (Astoria-Ditmars) is the end of the line. So off I went to Manhattan.</p>
+
+<p>I got off at Canal St, because I recognised that one. I walked past <a href="https://recurse.com">the Recurse Centre</a> and, still without a plan, started heading North-West. I stopped in at Washington Square Park (a location I recall from Broad City or Jessica Jones or both) for a moment of quiet reflection, then was on my way again.</p>
+
+<p>The climate here is quite nice. Today has been clear and relatively cool; I wore a jumper, which says something if you know me (or at least, if you know me as a casual-clothes-wearer; sorry work folk). The cold was bracing but not uncomfortable, and kept me from overheating as I walked. The other thing which helped in that department is there are no hills in this city. At all. There can&rsquo;t be any ground more than a couple of dozen metres above sea level. It&rsquo;s amazing. I love it. I can walk across flat ground almost indefinitely but hills hurt. It makes Hobart not an ideal home for me.</p>
+
+<p>Onward from Washington Square Park I walked up Fifth Avenue (shmancy, right?) and zig-zagged my way West to 10th. I joined the High Line at 16th or 18th Street and headed North. I walked its length up to 34th Street. I caught glimpses of the Statue of Liberty and the Empire State Building, so that&rsquo;s a thing. The walk is lovely, and the idea of an elevated park like that is something quite special. My phone died quite early on that walk (because I failed to charge it last night; rookie mistake) but I assure you it was beautiful. It has a particular air of culture to it: a blending of public space, art, history and botany that is utterly unique. It helps that it overlooks New York City, I guess.</p>
+
+<p>From the end of the High Line I walked up 11th Ave an then down 38th St (I know I&rsquo;m not the first person ever to mention this, but let me add my voice to the global chorus celebrating this system of numbered streets and avenues). 38th was the only part of the city that felt a little dodgy, but that could just be because it was relatively abandoned. I had lunch there; two slices of pizza (each twice the size of an Australian slice of pizza) and a coke for $2.99. Seriously, food is super cheap here.</p>
+
+<p>I also managed to spill said pizza all through my beard and onto my jumper, so go me.</p>
+
+<p>From there it was a hop skip and a jump to Times Square, which was exactly as croweded and silly as the movies depict. Lots of tourists, but I&rsquo;m just not sure what anyone was looking at. Billboard ads? The light up NYPD sign? I also got hassled in a Burger King for taking a napkin before buying anything, so davka I left without buying anything. Also their soft serve cones are like $2.60.</p>
+
+<p>I wandered around that area some more. I saw Radio City Music Hall and the News Corp headquarters. At this point my feet were starting to hurt and I decided to head home. Onto the N at Times Square and back to Astoria, then a short walk back to my room.</p>
+
+<p>Seriously, this mass tranist thing is amazing. Each trip was $2.50, or roughly the price of a Metro Tasmania short bus trip. Except it&rsquo;s turn-up-and-go trains every few minutes, every day and night. The system is stunningly efficient, and every inch of it is a masterpiece of systems design. I&rsquo;m sure it runs late and is crowded and sucks in all the other ways these systems do, but it&rsquo;s hard to overstate the design challenges in a system of that scale. They&rsquo;ve handled it beautifully. Three cheers for the MTA.</p>
+
+<p>Other things worth noting:</p>
+
+<ul>
+<li><p>One person asked me for directions.</p></li>
+
+<li><p>Three people asked me for money.</p></li>
+
+<li><p>I&rsquo;m still struggling with this &ldquo;plus tax&rdquo; thing.</p></li>
+
+<li><p>I definitely, definitely need new shoes. I might even go out this afternoon to get some. These ones are just a little too narrow.</p></li>
+</ul>
+
+<p>High: sitting half-way along the High Line and watching parent after parent stage photos of their kids overlooking 26th Street.</p>
+
+<p>Low: the blister on my fourth left toe.</p>
+
+  </div>
+
+  <div id=links>
+    
+      <a class="basic-alignment left" href="https://mjec.blog/2016/03/21/i-have-arrived/">&laquo; I have arrived</a>
+    
+    
+      <a class="basic-alignment left" href="https://mjec.blog/2016/03/28/rc-day-one/">RC Day One &raquo;</a>
+    
+  </div>
+</section>
+
+  <footer>
+    <p>Yet another blog from <a href="https://mjec.net">Michael Cordover</a>.
+    <span class="rc-scout"></span></p>
+  </footer>
+
+  <script async defer src="https://www.recurse-scout.com/loader.js?t=7b61c3cc166c3321bfbe79ce44d62586"></script>
+
+  <script type="text/javascript">
+    var _paq = _paq || [];
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//piwik.mjec.net/";
+      _paq.push(['setTrackerUrl', u+'piwik.php']);
+      _paq.push(['setSiteId', 13]);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <noscript><p><img src="//piwik.mjec.net/piwik.php?idsite=13" style="border:0;" alt="" /></p></noscript>
+
+  
+</body>
+</html>
+
+
+

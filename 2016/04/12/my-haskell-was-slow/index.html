@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400|Old+Standard+TT:400' rel='stylesheet' type='text/css'>
+
+    <link rel="icon" type="image/png" href="/favicon_16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon_32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon_128x128.png" sizes="128x128">
+
+    <title>
+      My Haskell was slow
+    </title>
+    <link rel="canonical" href="https://mjec.blog/2016/04/12/my-haskell-was-slow/">
+
+    <style>
+  * {
+    border:0;
+    font:inherit;
+    font-size:100%;
+    vertical-align:baseline;
+    margin:0;
+    padding:0;
+    color: black;
+    text-decoration-skip: ink;
+    text-decoration-skip-ink: auto;
+  }
+
+  body {
+    font-family:'Open Sans', 'Myriad Pro', Myriad, sans-serif;
+    font-size:17px;
+    line-height:160%;
+    color:#1d1313;
+    max-width:800px;
+    margin:auto;
+  }
+
+  p {
+    margin: 20px 0;
+  }
+
+  a img {
+    border:none;
+  }
+
+  img {
+    margin: 10px auto 10px auto;
+    max-width: 100%;
+    display: block;
+  }
+
+  .left-justify {
+    float: left;
+  }
+
+  .right-justify {
+    float:right;
+  }
+
+  pre, code {
+    font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    background-color: #f7f7f7;
+  }
+  
+  sub {
+    font-size: 65%;
+    vertical-align: sub;
+  }
+
+  sup {
+    font-size: 65%;
+    vertical-align: super;
+  }
+
+  code {
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  pre {
+    margin-top: 0;
+    margin-bottom: 16px;
+    word-wrap: normal;
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+  }
+
+  pre>code {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    word-break: normal;
+    white-space: pre;
+    background: transparent;
+    border: 0;
+  }
+
+  pre code {
+    display: inline;
+    max-width: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+  }
+
+  pre code::before,
+  pre code::after {
+    content: normal;
+  }
+
+  em,q,em,dfn {
+    font-style:italic;
+  }
+
+  .sans,html .gist .gist-file .gist-meta {
+    font-family:"Open Sans","Myriad Pro",Myriad,sans-serif;
+  }
+
+  .mono,pre,code,tt,p code,li code {
+    font-family:Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace;
+  }
+
+  .heading,.serif,h1,h2,h3 {
+    font-family:"Old Standard TT",serif;
+  }
+
+  strong {
+    font-weight:600;
+  }
+
+  q:before {
+    content:"\201C";
+  }
+
+  q:after {
+    content:"\201D";
+  }
+
+  del,s {
+    text-decoration:line-through;
+  }
+
+  blockquote {
+    font-family:"Old Standard TT",serif;
+    text-align:center;
+    padding:50px;
+  }
+  
+  blockquote.long {
+    text-align: left;
+  }
+
+  blockquote p {
+    display:block;
+    font-style:italic;
+    margin: 0;
+  }
+  
+  blockquote.long p {
+    margin: 20px 0 0 0;
+  }
+  
+  blockquote.long p:first-child {
+    margin: 0;
+  }
+  
+  blockquote.long p:last-child {
+    margin-bottom: -2ex;
+  }
+
+  blockquote:before,blockquote:after {
+    font-family:"Old Standard TT",serif;
+    font-size:35px;
+    color:#403c3b;
+  }
+  
+  blockquote:before {
+    content:'\201C';
+    float: left;
+  }
+
+  blockquote:after {
+    content:'\201D';
+    float: right;
+    margin-top: -1ex;
+    position: relative;
+    left: 1ex;
+    top: -0.5ex;
+  }
+  
+  blockquote.long:after {
+    margin-top: 0;
+  }
+
+  hr {
+    width:40%;
+    height: 1px;
+    background:#403c3b;
+    margin: 25px auto;
+  }
+
+  h1 {
+    font-size:35px;
+  }
+
+  h2 {
+    font-size:28px;
+  }
+
+  h3 {
+    font-size:22px;
+    margin-top:18px;
+  }
+
+  h1 a,h2 a,h3 a {
+    text-decoration:none;
+  }
+
+  h1,h2 {
+    margin-top:28px;
+  }
+
+
+  code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: black;
+  }
+
+  #sub-header, #sub-header * {
+    color:#403c3b;
+    font-size:13px;
+  }
+
+  #sub-header {
+    margin: 0 4px;
+  }
+
+  #nav h1 a {
+    font-size:35px;
+    color:#1d1313;
+    line-height:120%;
+  }
+
+  .together {
+    white-space: nowrap;
+  }
+
+  .posts-listing a, #nav a, .tags a {
+    text-decoration: none;
+  }
+
+  .posts-listing h2 small {
+    font-size: 50%;
+  }
+
+  .posts-listing li p.preview {
+    margin: 0;
+    color: #666;
+  }
+
+  li {
+    margin-left: 20px;
+  }
+
+  ul li {
+    margin-left: 1em;
+  }
+
+  ul li {
+    list-style-type: none;
+  }
+  ul li:before {
+    content:"\00BB \0020";
+    margin-left: -1em;
+    float: left;
+  }
+
+  footer {
+    border-top: 1px dotted black;
+    font-size: 80%;
+    margin-top: 20px;
+  }
+  footer p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .rc-scout .rc-scout__link {
+    color: black !important;
+    text-decoration-skip-ink: auto;
+  }
+
+  #nav ul li:before, .posts-listing li:before {
+    content:'';
+    margin-right:0;
+  }
+
+  #content {
+    text-align:left;
+    width:100%;
+    font-size:15px;
+    padding:60px 0 0;
+  }
+
+  #content h1,#content h2 {
+    margin-bottom:5px;
+  }
+
+  #content h2 {
+    font-size:25px;
+  }
+
+  #content .pagination {
+    text-align: center;
+  }
+
+  #content .entry-content {
+    margin-top:15px;
+  }
+
+  #content time {
+    margin-left:3px;
+  }
+
+  #content h1 {
+    font-size:30px;
+  }
+
+  .highlight {
+    margin: 10px 0;
+  }
+
+  .posts-listing {
+    margin:0 0 30px;
+  }
+
+  .posts-listing li {
+    margin:0 0 25px 15px;
+  }
+
+  .posts-listing li a:hover, #nav a:hover, .tags a:hover {
+    text-decoration: underline;
+  }
+
+  #nav {
+    text-align:center;
+    position:static;
+    margin-top:60px;
+  }
+
+  #nav ul {
+    display: table;
+    margin: 8px auto 0 auto;
+  }
+
+  #nav li {
+    list-style-type:none;
+    display:table-cell;
+    font-size:15px;
+    padding: 0 20px;
+  }
+
+  #links {
+    margin: 50px 0 0 0;
+  }
+
+  #links :nth-child(2) {
+    float:right;
+  }
+
+  #not-found {
+    text-align: center;
+  }
+
+  #not-found a {
+    font-family:"Old Standard TT",serif;
+    font-size: 200px;
+    text-decoration: none;
+    display: inline-block;
+    padding-top: 225px;
+  }
+
+  @media (max-width: 750px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:28px;
+    }
+
+    #nav li {
+      font-size:13px;
+      padding: 0 15px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:50px;
+      font-size:14px;
+    }
+
+    #content h1 {
+      font-size:25px;
+    }
+
+    #content h2 {
+      font-size:22px;
+    }
+
+    .posts-listing li div {
+      font-size:12px;
+    }
+    
+    footer {
+      font-size: 12px;
+    }
+    
+    blockquote.long:after {
+      margin-top: 1ex !important;
+    }
+  }
+
+  @media (max-width: 400px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:22px;
+    }
+
+    #nav li {
+      font-size:12px;
+      padding: 0 10px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:20px;
+      font-size:12px;
+    }
+
+    #content h1 {
+      font-size:20px;
+    }
+
+    #content h2 {
+      font-size:18px;
+    }
+
+    .posts-listing li div{
+      font-size:12px;
+    }
+  }
+</style>
+
+
+    
+  </head>
+
+  <body>
+    <section id=nav>
+      <h1><a href="/">mjec&#39;s electric blogaloo</a></h1>
+      <ul>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/tags/">Browse by tag</a></li>
+        
+      </ul>
+    </section>
+
+
+
+<section id=content>
+  <h1> My Haskell was slow </h1>
+
+  <div id=sub-header>
+    12 April 2016 · 6 minute read
+    
+    · <span class="tags">
+        
+            
+            
+            
+        
+            
+            
+            
+        
+            
+            
+            
+        
+            
+            
+            
+        
+        
+        <a href='/tags/technical/'>technical</a>, <a href='/tags/rc/'>rc</a>, <a href='/tags/haskell/'>haskell</a> and <a href='/tags/performance/'>performance</a></span>
+    
+  </div>
+
+  <div class="entry-content">
+    <p>I have a Haskell function that builds frequency tables. It is very slow (and not very good). Originally this post was to look at why, and try to find a way to speed it up.</p>
+
+<p>It turns out that GHC (the Haskell compiler) includes some nice profiling tools. You can set &ldquo;cost centres&rdquo; you want to look at using the <code>{-# SCC &quot;cost-centre-name&quot; #-}</code> pragma. So that&rsquo;s what I did, and I have ended up with this:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">12
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="color:#75af00">buidFreqTableRecursive</span> <span style="color:#f92672">::</span> <span style="color:#00a8c8">Map</span><span style="color:#f92672">.</span><span style="color:#00a8c8">Map</span> <span style="color:#00a8c8">Word8</span> <span style="color:#00a8c8">Float</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">Float</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">Float</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">B</span><span style="color:#f92672">.</span><span style="color:#00a8c8">ByteString</span> <span style="color:#f92672">-&gt;</span> <span style="color:#111">(</span><span style="color:#00a8c8">Float</span><span style="color:#111">,</span> <span style="color:#00a8c8">Map</span><span style="color:#f92672">.</span><span style="color:#00a8c8">Map</span> <span style="color:#00a8c8">Word8</span> <span style="color:#00a8c8">Float</span><span style="color:#111">)</span>
+<span style="color:#75af00">buidFreqTableRecursive</span> <span style="color:#75af00">accumulatorMap</span> <span style="color:#75af00">inCount</span> <span style="color:#75af00">totalCount</span> <span style="color:#75af00">bytesToAdd</span>
+    <span style="color:#f92672">|</span> <span style="color:#75af00">isNull</span>    <span style="color:#f92672">=</span> <span style="color:#75715e">{-# SCC &#34;build-branch-null&#34; #-}</span> <span style="color:#111">(</span><span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#75af00">accumulatorMap</span><span style="color:#111">)</span>
+    <span style="color:#f92672">|</span> <span style="color:#75af00">isEmpty</span>   <span style="color:#f92672">=</span> <span style="color:#75715e">{-# SCC &#34;build-branch-empty&#34; #-}</span> <span style="color:#111">((</span><span style="color:#75af00">totalCount</span> <span style="color:#f92672">-</span> <span style="color:#75af00">inCount</span><span style="color:#111">)</span> <span style="color:#f92672">/</span> <span style="color:#75af00">totalCount</span><span style="color:#111">,</span> <span style="color:#00a8c8">Map</span><span style="color:#f92672">.</span><span style="color:#75af00">map</span> <span style="color:#111">(</span><span style="color:#f92672">/</span><span style="color:#75af00">inCount</span><span style="color:#111">)</span> <span style="color:#75af00">accumulatorMap</span><span style="color:#111">)</span>
+    <span style="color:#f92672">|</span> <span style="color:#75af00">isIn</span>      <span style="color:#f92672">=</span> <span style="color:#75715e">{-# SCC &#34;build-branch-in&#34; #-}</span> <span style="color:#00a8c8">let</span> <span style="color:#75af00">newmap</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">Map</span><span style="color:#f92672">.</span><span style="color:#75af00">adjust</span> <span style="color:#111">(</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span> <span style="color:#75af00">hd</span> <span style="color:#75af00">accumulatorMap</span>
+                  <span style="color:#00a8c8">in</span>  <span style="color:#75af00">buidFreqTableRecursive</span> <span style="color:#75af00">newmap</span> <span style="color:#111">(</span><span style="color:#75af00">inCount</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#111">)</span> <span style="color:#111">(</span><span style="color:#75af00">totalCount</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#111">)</span> <span style="color:#75af00">tl</span>
+    <span style="color:#f92672">|</span> <span style="color:#75af00">otherwise</span> <span style="color:#f92672">=</span> <span style="color:#75af00">buidFreqTableRecursive</span> <span style="color:#75af00">accumulatorMap</span> <span style="color:#75af00">inCount</span> <span style="color:#111">(</span><span style="color:#75af00">totalCount</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#111">)</span> <span style="color:#75af00">tl</span>
+    <span style="color:#00a8c8">where</span> <span style="color:#75af00">hd</span> <span style="color:#f92672">=</span> <span style="color:#75715e">{-# SCC &#34;build-head&#34; #-}</span> <span style="color:#00a8c8">B</span><span style="color:#f92672">.</span><span style="color:#75af00">head</span> <span style="color:#75af00">bytesToAdd</span>
+          <span style="color:#75af00">tl</span> <span style="color:#f92672">=</span> <span style="color:#75715e">{-# SCC &#34;build-tail&#34; #-}</span> <span style="color:#00a8c8">B</span><span style="color:#f92672">.</span><span style="color:#75af00">tail</span> <span style="color:#75af00">bytesToAdd</span>
+          <span style="color:#75af00">isIn</span> <span style="color:#f92672">=</span> <span style="color:#75715e">{-# SCC &#34;build-isin?&#34; #-}</span> <span style="color:#00a8c8">Map</span><span style="color:#f92672">.</span><span style="color:#75af00">member</span> <span style="color:#75af00">hd</span> <span style="color:#75af00">accumulatorMap</span>
+          <span style="color:#75af00">isEmpty</span> <span style="color:#f92672">=</span> <span style="color:#75715e">{-# SCC &#34;build-isempty?&#34; #-}</span> <span style="color:#00a8c8">B</span><span style="color:#f92672">.</span><span style="color:#75af00">null</span> <span style="color:#75af00">bytesToAdd</span>
+          <span style="color:#75af00">isNull</span> <span style="color:#f92672">=</span> <span style="color:#75715e">{-# SCC &#34;build-isnull?&#34; #-}</span> <span style="color:#75af00">isEmpty</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#111">(</span><span style="color:#75af00">totalCount</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span><span style="color:#111">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>This function takes a map of <code>Word8</code> to <code>Float</code> (the <code>accumulatorMap</code>), a <code>Float</code> called <code>inCount</code> being the total number of items which are counted, a second Float called <code>totalCount</code> being the total number of bytes processed so far, and a <code>ByteString</code> being the bytes to process.</p>
+
+<p>The function recurses (in the <code>isIn</code> and <code>otherwise</code> branches). The <code>isIn</code> branch passes an <code>accumulatorMap</code> adjusted by adding one to the count for the relevant key, and increments both the counters. It then asks the recursing function to process the rest of the string (<code>B.tail bytesToAdd</code>). The <code>otherwise</code> branch passes an unmodified <code>accumulatorMap</code> and increments only the <code>totalCount</code>, but otherwise is similar.</p>
+
+<p>(It&rsquo;s worth noting that I also looked at memory usage and the amount of time in garbage collection, neither of which was a concern.)</p>
+
+<p>I spent a bit of time trying to figure out how to make this function faster, but it turns out that building tens of thousands of frequency tables (one for each of 256 possibilities for each of 326 strings = 83,456 frequency tables) takes a lot of work. Even so, I did end up with this much more succinct implementation:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="color:#75af00">buildFreqTable</span> <span style="color:#f92672">::</span> <span style="color:#111">(</span><span style="color:#00a8c8">Int</span><span style="color:#111">,</span> <span style="color:#00a8c8">Int</span><span style="color:#111">,</span> <span style="color:#00a8c8">Map</span><span style="color:#f92672">.</span><span style="color:#00a8c8">Map</span> <span style="color:#00a8c8">Word8</span> <span style="color:#00a8c8">Double</span><span style="color:#111">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">B</span><span style="color:#f92672">.</span><span style="color:#00a8c8">ByteString</span> <span style="color:#f92672">-&gt;</span> <span style="color:#111">(</span><span style="color:#00a8c8">Double</span><span style="color:#111">,</span> <span style="color:#00a8c8">Map</span><span style="color:#f92672">.</span><span style="color:#00a8c8">Map</span> <span style="color:#00a8c8">Word8</span> <span style="color:#00a8c8">Double</span><span style="color:#111">)</span>
+<span style="color:#75af00">buildFreqTable</span> <span style="color:#75af00">startingValue</span> <span style="color:#75af00">haystack</span> <span style="color:#f92672">=</span> <span style="color:#111">(</span><span style="color:#75af00">realToFrac</span> <span style="color:#111">(</span><span style="color:#75af00">totalCount</span> <span style="color:#f92672">-</span> <span style="color:#75af00">inCount</span><span style="color:#111">)</span> <span style="color:#f92672">/</span> <span style="color:#75af00">realToFrac</span> <span style="color:#75af00">totalCount</span><span style="color:#111">,</span> <span style="color:#00a8c8">Map</span><span style="color:#f92672">.</span><span style="color:#75af00">map</span> <span style="color:#111">(</span><span style="color:#f92672">/</span><span style="color:#75af00">inCount</span><span style="color:#111">)</span> <span style="color:#75af00">freqMap</span><span style="color:#111">)</span>
+        <span style="color:#00a8c8">where</span> <span style="color:#111">(</span><span style="color:#75af00">inCount</span><span style="color:#111">,</span> <span style="color:#75af00">totalCount</span><span style="color:#111">,</span> <span style="color:#75af00">freqMap</span><span style="color:#111">)</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">B</span><span style="color:#f92672">.</span><span style="color:#75af00">foldl&#39;</span> <span style="color:#75af00">buidFreqTableFold</span> <span style="color:#75af00">startingValue</span> <span style="color:#75af00">haystack</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>That did run marginally slower (about 5%) in my tests. At this point, I was beginning to think there had to be a better way. So I looked at the <em>actual problem I was trying to solve</em>. I&rsquo;m not so much interested in all the frequency tables as I am in which table is most different from the normal distribution of English text. So rather than looping over all this test, building a data structure with the frequencies, comparing them, getting a score and sorting on it, I can do most of this at the same time.</p>
+
+<p>Here&rsquo;s a function which computes a single score of how close the input text is to a baseline frequency table:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="color:#75af00">buildDelta</span> <span style="color:#f92672">::</span> <span style="color:#00a8c8">Int</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">Map</span><span style="color:#f92672">.</span><span style="color:#00a8c8">Map</span> <span style="color:#00a8c8">Word8</span> <span style="color:#00a8c8">Double</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">B</span><span style="color:#f92672">.</span><span style="color:#00a8c8">ByteString</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">Double</span>
+<span style="color:#75af00">buildDelta</span> <span style="color:#75af00">totalCount</span> <span style="color:#75af00">startingMap</span> <span style="color:#75af00">haystack</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">Map</span><span style="color:#f92672">.</span><span style="color:#75af00">fold</span> <span style="color:#111">(</span><span style="color:#75af00">\x</span> <span style="color:#75af00">y</span> <span style="color:#f92672">-&gt;</span> <span style="color:#75af00">abs</span> <span style="color:#75af00">x</span> <span style="color:#f92672">+</span> <span style="color:#75af00">y</span><span style="color:#111">)</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">$</span> <span style="color:#00a8c8">B</span><span style="color:#f92672">.</span><span style="color:#75af00">foldl</span> <span style="color:#111">(</span><span style="color:#75af00">flip</span> <span style="color:#111">(</span><span style="color:#00a8c8">Map</span><span style="color:#f92672">.</span><span style="color:#75af00">adjust</span> <span style="color:#111">(</span><span style="color:#75af00">\a</span> <span style="color:#f92672">-&gt;</span> <span style="color:#75af00">a</span> <span style="color:#f92672">-</span> <span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#75af00">realToFrac</span> <span style="color:#75af00">totalCount</span><span style="color:#111">))))</span> <span style="color:#75af00">startingMap</span> <span style="color:#75af00">haystack</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>We do need the length of the input as a parameter to optimise this, but otherwise it&rsquo;s a pretty straightforward pair of folds. The key was to recognise that rather than getting each frequency separately and summing them up, I could just keep a running total in my fold. It took a (very) little bit of mathematics to figure out that subtracting $\frac{1}{totalCount}$ for each occurrance was equivalent to the difference between the expected value and the total proprtion.</p>
+
+<p>This did require one other change: I no longer have the <code>inCount</code>, being the number of elements which are in the <code>startingMap</code> keys (as opposed to <code>totalCount</code>, being the total number of elements). This can be a problem for short strings with small <code>startingMap</code>s. In particular, when I first started on this stuff I used a standard case-insensitive frequency of English letters. This is a map which excludes a <em>lot</em> of characters. This means that a string of gibberish with a few English letters in it could conceivably score better than unusual English text.</p>
+
+<p>There are a couple of fixes for this, but the key one is to put my expectations into the actual benchmark map (e.g. I expect that byte 0x07 will not occur for most plain text, so rather than not having a 0x07 needle I should have 0x07 -&gt; 0). I built a map of expected ASCII based on the IMDb biographies dataset, and that seems to have been working pretty well so far.</p>
+
+<p>I learned several lessons here. Many of these were how to make my Haskell more like Haskell (e.g. using folds rather than maps when I want to reduce). I also learned a lot about how the Haskell profiler works. It is pretty interesting and gives some excellent data. The only weakness I found was an inability to tell me how long was being spent in a particular fold/map, as opposed to in a function. So for example, I could tell how much time I was spending inside each of my <code>buildDelta</code> lambdas, but not how much time I was spending running down the folds. This would have been useful in particular when experimenting with different types of folds - lazy vs strict, left vs right - but ended up being not an issue. You can certainly do an estimate by subtracting time in lambdas from total time in the outer function.</p>
+
+<p>The key lesson though was to spend more time thinking about the problem. When I first started with Haskell it was exciting to build these tiny composable functions, and where appropriate partially apply them to get functions that do what I want. (That&rsquo;s still exciting, by the way.) But this makes clear that I shouldn&rsquo;t just be building functions which follow my thought process. I need to be looking at what my <em>ultimate</em> inputs and outputs are. If I only want one number at the end, how much of this can I do in one fold? Well, all of it apparently. I went from about 30 lines down to two, including type declaration. It doesn&rsquo;t reflect what the way I think about the problem, but it does reflect the actual mathematical consequence of it (and it&rsquo;s certainly easy enough to read).</p>
+
+  </div>
+
+  <div id=links>
+    
+      <a class="basic-alignment left" href="https://mjec.blog/2016/04/11/finding-subsets-with-particular-sums/">&laquo; Finding subsets with particular sums</a>
+    
+    
+      <a class="basic-alignment left" href="https://mjec.blog/2016/04/15/an-idea-for-trusted-brute-force-resistant-two-factor-authenticated-full-disk-encryption/">An idea for trusted brute-force-resistant two-factor-authenticated full disk encryption &raquo;</a>
+    
+  </div>
+</section>
+
+  <footer>
+    <p>Yet another blog from <a href="https://mjec.net">Michael Cordover</a>.
+    <span class="rc-scout"></span></p>
+  </footer>
+
+  <script async defer src="https://www.recurse-scout.com/loader.js?t=7b61c3cc166c3321bfbe79ce44d62586"></script>
+
+  <script type="text/javascript">
+    var _paq = _paq || [];
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//piwik.mjec.net/";
+      _paq.push(['setTrackerUrl', u+'piwik.php']);
+      _paq.push(['setSiteId', 13]);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <noscript><p><img src="//piwik.mjec.net/piwik.php?idsite=13" style="border:0;" alt="" /></p></noscript>
+
+  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$']],
+      displayMath: [['$$','$$']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+           extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax();
+      for (var i = 0; i - all.length != 0; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+  </script>
+  
+</body>
+</html>
+
+
+

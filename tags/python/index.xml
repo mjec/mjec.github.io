@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on mjec&#39;s electric blogaloo</title>
+    <link>https://mjec.blog/tags/python/</link>
+    <description>Recent content in Python on mjec&#39;s electric blogaloo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 27 Jun 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://mjec.blog/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Django&#39;s QuerySet union isn&#39;t quite what it seems</title>
+      <link>https://mjec.blog/2016/06/27/djangos-queryset-union-isnt-quite-what-it-seems/</link>
+      <pubDate>Mon, 27 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/06/27/djangos-queryset-union-isnt-quite-what-it-seems/</guid>
+      <description>One of the websites I maintain is for the Tasmanian Debating Union. I built a competition management system, a rewrite in Django of a system originally designed and built in PHP by my friend Pat.
+The database schema for this system includes a table with one row per debate. Those debates have associated teams (one affirmative, one negative) and an outcome (e.g. affirmative win, negative win). There&amp;rsquo;s therefore no single column to select the winning team.</description>
+    </item>
+    
+  </channel>
+</rss>

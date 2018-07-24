@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Depression on mjec&#39;s electric blogaloo</title>
+    <link>https://mjec.blog/tags/depression/</link>
+    <description>Recent content in Depression on mjec&#39;s electric blogaloo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://mjec.blog/tags/depression/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>2016</title>
+      <link>https://mjec.blog/2017/01/01/2016/</link>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2017/01/01/2016/</guid>
+      <description>Twenty fucking sixteen. A terrible year for the world, in all sorts of ways. Highlights of shit for me include Brexit, President Trump, the death of Carrie Fisher, the ever-worsening crisis in Syria, the terrible epedemic of opiod addiction, the proliferation of neo-nazis and the increase in systemic discrimination against trans and non-binary individuals.
+For me personally though, 2016 was excellent. Because good is always relative, I want to give you a brief rundown of 2015 first, so you can see why I loved 2016 so much.</description>
+    </item>
+    
+    <item>
+      <title>Some weeks are better than others</title>
+      <link>https://mjec.blog/2016/04/04/some-weeks-are-better-than-others/</link>
+      <pubDate>Mon, 04 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/04/04/some-weeks-are-better-than-others/</guid>
+      <description>Last week was my first week at RC. That was obviously amazing. I did a heap of cool new stuff. It was very exciting. I stayed late most nights - once til about 3am. I learned Haskell&amp;rsquo;s basics and I started studying algorithms. Algorithm study meant spending some time doing mathematics again, which was very cool. At the end of the week I spent some time fixing bugs in the TDU website, which meant thinking back in the python/web model.</description>
+    </item>
+    
+  </channel>
+</rss>

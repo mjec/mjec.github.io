@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Math on mjec&#39;s electric blogaloo</title>
+    <link>https://mjec.blog/tags/math/</link>
+    <description>Recent content in Math on mjec&#39;s electric blogaloo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 19 Apr 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://mjec.blog/tags/math/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Non-proofs</title>
+      <link>https://mjec.blog/2016/04/19/non-proofs/</link>
+      <pubDate>Tue, 19 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/04/19/non-proofs/</guid>
+      <description>Today I read a thread of fake proofs on /r/math. The whole thread is great, but perhaps my favourite is the following &amp;ldquo;proof&amp;rdquo; I reproduce here.
+We attempt to find:
+$$\int \frac{1}{f} \frac{\mathrm{d}f}{\mathrm{d}x}$$
+Let $\mathrm{d}u = - \frac{1}{f^2}\mathrm{d}x$ and $v = f$.
+Then we use the ordinary method of integration by parts:
+$$\int u \mathrm{d}v = uv - \int v \mathrm{d}u$$
+Substituting:
+$$\int \frac{1}{f} \mathrm{d}f = \frac{1}{f}f - \int f - \frac{1}{f^2} \mathrm{d}f$$</description>
+    </item>
+    
+    <item>
+      <title>Fibonacci numbers and the golden ratio</title>
+      <link>https://mjec.blog/2016/04/07/fibonacci-numbers-and-the-golden-ratio/</link>
+      <pubDate>Thu, 07 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2016/04/07/fibonacci-numbers-and-the-golden-ratio/</guid>
+      <description>SICP is one of the standard books people study at RC. It&amp;rsquo;s definitely pretty cool, and something I&amp;rsquo;ve had a bit of experience with since getting half way through the 1986 lectures based on the book.
+We have a study group for SICP that I have been involved with. Today one of the problems we looked at was 1.13, which is as follows:
+ Prove that $Fib(n)$ is the closest integer to $\frac{\phi^n}{\sqrt{5}}$, where $\phi = \frac{1 + \sqrt{5}}{2}$.</description>
+    </item>
+    
+  </channel>
+</rss>

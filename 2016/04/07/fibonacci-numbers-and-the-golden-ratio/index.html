@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400|Old+Standard+TT:400' rel='stylesheet' type='text/css'>
+
+    <link rel="icon" type="image/png" href="/favicon_16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon_32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon_128x128.png" sizes="128x128">
+
+    <title>
+      Fibonacci numbers and the golden ratio
+    </title>
+    <link rel="canonical" href="https://mjec.blog/2016/04/07/fibonacci-numbers-and-the-golden-ratio/">
+
+    <style>
+  * {
+    border:0;
+    font:inherit;
+    font-size:100%;
+    vertical-align:baseline;
+    margin:0;
+    padding:0;
+    color: black;
+    text-decoration-skip: ink;
+    text-decoration-skip-ink: auto;
+  }
+
+  body {
+    font-family:'Open Sans', 'Myriad Pro', Myriad, sans-serif;
+    font-size:17px;
+    line-height:160%;
+    color:#1d1313;
+    max-width:800px;
+    margin:auto;
+  }
+
+  p {
+    margin: 20px 0;
+  }
+
+  a img {
+    border:none;
+  }
+
+  img {
+    margin: 10px auto 10px auto;
+    max-width: 100%;
+    display: block;
+  }
+
+  .left-justify {
+    float: left;
+  }
+
+  .right-justify {
+    float:right;
+  }
+
+  pre, code {
+    font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    background-color: #f7f7f7;
+  }
+  
+  sub {
+    font-size: 65%;
+    vertical-align: sub;
+  }
+
+  sup {
+    font-size: 65%;
+    vertical-align: super;
+  }
+
+  code {
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  pre {
+    margin-top: 0;
+    margin-bottom: 16px;
+    word-wrap: normal;
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+  }
+
+  pre>code {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    word-break: normal;
+    white-space: pre;
+    background: transparent;
+    border: 0;
+  }
+
+  pre code {
+    display: inline;
+    max-width: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+  }
+
+  pre code::before,
+  pre code::after {
+    content: normal;
+  }
+
+  em,q,em,dfn {
+    font-style:italic;
+  }
+
+  .sans,html .gist .gist-file .gist-meta {
+    font-family:"Open Sans","Myriad Pro",Myriad,sans-serif;
+  }
+
+  .mono,pre,code,tt,p code,li code {
+    font-family:Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace;
+  }
+
+  .heading,.serif,h1,h2,h3 {
+    font-family:"Old Standard TT",serif;
+  }
+
+  strong {
+    font-weight:600;
+  }
+
+  q:before {
+    content:"\201C";
+  }
+
+  q:after {
+    content:"\201D";
+  }
+
+  del,s {
+    text-decoration:line-through;
+  }
+
+  blockquote {
+    font-family:"Old Standard TT",serif;
+    text-align:center;
+    padding:50px;
+  }
+  
+  blockquote.long {
+    text-align: left;
+  }
+
+  blockquote p {
+    display:block;
+    font-style:italic;
+    margin: 0;
+  }
+  
+  blockquote.long p {
+    margin: 20px 0 0 0;
+  }
+  
+  blockquote.long p:first-child {
+    margin: 0;
+  }
+  
+  blockquote.long p:last-child {
+    margin-bottom: -2ex;
+  }
+
+  blockquote:before,blockquote:after {
+    font-family:"Old Standard TT",serif;
+    font-size:35px;
+    color:#403c3b;
+  }
+  
+  blockquote:before {
+    content:'\201C';
+    float: left;
+  }
+
+  blockquote:after {
+    content:'\201D';
+    float: right;
+    margin-top: -1ex;
+    position: relative;
+    left: 1ex;
+    top: -0.5ex;
+  }
+  
+  blockquote.long:after {
+    margin-top: 0;
+  }
+
+  hr {
+    width:40%;
+    height: 1px;
+    background:#403c3b;
+    margin: 25px auto;
+  }
+
+  h1 {
+    font-size:35px;
+  }
+
+  h2 {
+    font-size:28px;
+  }
+
+  h3 {
+    font-size:22px;
+    margin-top:18px;
+  }
+
+  h1 a,h2 a,h3 a {
+    text-decoration:none;
+  }
+
+  h1,h2 {
+    margin-top:28px;
+  }
+
+
+  code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: black;
+  }
+
+  #sub-header, #sub-header * {
+    color:#403c3b;
+    font-size:13px;
+  }
+
+  #sub-header {
+    margin: 0 4px;
+  }
+
+  #nav h1 a {
+    font-size:35px;
+    color:#1d1313;
+    line-height:120%;
+  }
+
+  .together {
+    white-space: nowrap;
+  }
+
+  .posts-listing a, #nav a, .tags a {
+    text-decoration: none;
+  }
+
+  .posts-listing h2 small {
+    font-size: 50%;
+  }
+
+  .posts-listing li p.preview {
+    margin: 0;
+    color: #666;
+  }
+
+  li {
+    margin-left: 20px;
+  }
+
+  ul li {
+    margin-left: 1em;
+  }
+
+  ul li {
+    list-style-type: none;
+  }
+  ul li:before {
+    content:"\00BB \0020";
+    margin-left: -1em;
+    float: left;
+  }
+
+  footer {
+    border-top: 1px dotted black;
+    font-size: 80%;
+    margin-top: 20px;
+  }
+  footer p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .rc-scout .rc-scout__link {
+    color: black !important;
+    text-decoration-skip-ink: auto;
+  }
+
+  #nav ul li:before, .posts-listing li:before {
+    content:'';
+    margin-right:0;
+  }
+
+  #content {
+    text-align:left;
+    width:100%;
+    font-size:15px;
+    padding:60px 0 0;
+  }
+
+  #content h1,#content h2 {
+    margin-bottom:5px;
+  }
+
+  #content h2 {
+    font-size:25px;
+  }
+
+  #content .pagination {
+    text-align: center;
+  }
+
+  #content .entry-content {
+    margin-top:15px;
+  }
+
+  #content time {
+    margin-left:3px;
+  }
+
+  #content h1 {
+    font-size:30px;
+  }
+
+  .highlight {
+    margin: 10px 0;
+  }
+
+  .posts-listing {
+    margin:0 0 30px;
+  }
+
+  .posts-listing li {
+    margin:0 0 25px 15px;
+  }
+
+  .posts-listing li a:hover, #nav a:hover, .tags a:hover {
+    text-decoration: underline;
+  }
+
+  #nav {
+    text-align:center;
+    position:static;
+    margin-top:60px;
+  }
+
+  #nav ul {
+    display: table;
+    margin: 8px auto 0 auto;
+  }
+
+  #nav li {
+    list-style-type:none;
+    display:table-cell;
+    font-size:15px;
+    padding: 0 20px;
+  }
+
+  #links {
+    margin: 50px 0 0 0;
+  }
+
+  #links :nth-child(2) {
+    float:right;
+  }
+
+  #not-found {
+    text-align: center;
+  }
+
+  #not-found a {
+    font-family:"Old Standard TT",serif;
+    font-size: 200px;
+    text-decoration: none;
+    display: inline-block;
+    padding-top: 225px;
+  }
+
+  @media (max-width: 750px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:28px;
+    }
+
+    #nav li {
+      font-size:13px;
+      padding: 0 15px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:50px;
+      font-size:14px;
+    }
+
+    #content h1 {
+      font-size:25px;
+    }
+
+    #content h2 {
+      font-size:22px;
+    }
+
+    .posts-listing li div {
+      font-size:12px;
+    }
+    
+    footer {
+      font-size: 12px;
+    }
+    
+    blockquote.long:after {
+      margin-top: 1ex !important;
+    }
+  }
+
+  @media (max-width: 400px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:22px;
+    }
+
+    #nav li {
+      font-size:12px;
+      padding: 0 10px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:20px;
+      font-size:12px;
+    }
+
+    #content h1 {
+      font-size:20px;
+    }
+
+    #content h2 {
+      font-size:18px;
+    }
+
+    .posts-listing li div{
+      font-size:12px;
+    }
+  }
+</style>
+
+
+    
+  </head>
+
+  <body>
+    <section id=nav>
+      <h1><a href="/">mjec&#39;s electric blogaloo</a></h1>
+      <ul>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/tags/">Browse by tag</a></li>
+        
+      </ul>
+    </section>
+
+
+
+<section id=content>
+  <h1> Fibonacci numbers and the golden ratio </h1>
+
+  <div id=sub-header>
+    7 April 2016 · 3 minute read
+    
+    · <span class="tags">
+        
+            
+            
+            
+        
+            
+            
+            
+        
+            
+            
+            
+        
+            
+            
+            
+        
+        
+        <a href='/tags/technical/'>technical</a>, <a href='/tags/rc/'>rc</a>, <a href='/tags/math/'>math</a> and <a href='/tags/sicp/'>sicp</a></span>
+    
+  </div>
+
+  <div class="entry-content">
+    <p><a href="https://mitpress.mit.edu/sicp/full-text/book/book.html"><abbr title="Structure and Interpretation of Computer Programs">SICP</abbr></a> is one of the standard books people study at <abbr title="the Recurse Center">RC</abbr>. It&rsquo;s definitely pretty cool, and something I&rsquo;ve had a bit of experience with since getting half way through the <a href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-001-structure-and-interpretation-of-computer-programs-spring-2005/video-lectures/">1986 lectures based on the book</a>.</p>
+
+<p>We have a study group for SICP that I have been involved with. Today one of the problems we looked at was 1.13, which is as follows:</p>
+
+<blockquote>
+<p>Prove that $Fib(n)$ is the closest integer to $\frac{\phi^n}{\sqrt{5}}$, where $\phi = \frac{1 + \sqrt{5}}{2}$.</p>
+
+<p><em>Hint:</em> Let $\psi = \frac{1 - \sqrt{5}}{2}$. Use induction and the definition of the Fibonacci numbers to prove that $Fib(n) = \frac{\phi^n - \psi^n}{\sqrt{5}}$.</p>
+</blockquote>
+
+<p>I happened to be the whiteboard person for this problem, and I thought the solution was a neat bit of induction. We are working (perhaps obviously) exclusively in the non-negative integers here.</p>
+
+<p>We begin with some basic definitions:</p>
+
+<p>$$
+Fib(n) = \begin{cases}
+  0 &amp; \text{if }n = 0 \\\<br />
+  1 &amp; \text{if }n = 1 \\\<br />
+  Fib(n - 1) + Fib(n - 2) &amp; \text{otherwise}
+\end{cases}
+\\\<br />
+\phi = \frac{1 + \sqrt{5}}{2}
+\\\<br />
+\psi = \frac{1 - \sqrt{5}}{2}
+$$</p>
+
+<p>Next, as suggested, we attempt to prove that</p>
+
+<p>$$\begin{equation}f(n) = Fib(n)\end{equation}$$</p>
+
+<p>given:</p>
+
+<p>$$
+f(n) = \frac{\phi^n - \psi^n}{\sqrt{5}}
+$$</p>
+
+<p>Fairly obviously:</p>
+
+<p>$$
+f(0) = \frac{\phi^0 - \psi^0}{\sqrt{5}} = \frac{1 - 1}{\sqrt{5}} = 0
+$$</p>
+
+<p>and</p>
+
+<p>$$
+f(1) = \frac{\phi^1 - \psi^1}{\sqrt{5}} = \frac{\frac{1 + \sqrt{5}}{2} - \frac{1 - \sqrt{5}}{2}}{\sqrt{5}} = \frac{1 + \sqrt{5} - 1 + \sqrt{5}}{2\sqrt{5}} = 1
+$$</p>
+
+<p>Now, the recursive step.</p>
+
+<p>$$
+Fib(n + 1) = Fib(n) + Fib(n - 1)
+$$</p>
+
+<p>Assume that $(1)$ is true, and we can replace this with:</p>
+
+<p>$$
+\begin{align*}
+Fib(n + 1) &amp; =  Fib(n) + Fib(n - 1) \\\<br />
+&amp; =  f(n) + f(n-1) \\\<br />
+&amp; =  \frac{\phi^n - \psi^n}{\sqrt{5}} + \frac{\phi^{n-1} - \psi^{n-1}}{\sqrt{5}} \\\<br />
+&amp; =  \frac{1}{\sqrt{5}} \lgroup\phi^{n-1}(\phi + 1) - \psi^{n-1}(\psi + 1)\rgroup \\\<br />
+&amp; =  \frac{1}{\sqrt{5}} \lgroup\phi^{n-1}\phi^2 - \psi^{n-1}\psi^2\rgroup \\\<br />
+&amp; =  \frac{1}{\sqrt{5}} \lgroup\phi^{n+1} - \psi^{n+1}\rgroup \\\<br />
+&amp; =  f(n + 1)
+\end{align*}
+$$</p>
+
+<p>We therefore have:</p>
+
+<p>$$
+Fib(n + 1) = f(n + 1)\text{ given }Fib(n) = f(n)\text{,} \\\<br />
+Fib(0) = f(0)\text{ and } \\\<br />
+Fib(1) = f(1)
+$$</p>
+
+<p>meaning that for all non-negative integers n:</p>
+
+<p>$$
+Fib(n) = f(n) = \frac{\phi^n - \psi^n}{\sqrt{5}}
+$$</p>
+
+<p>The only perhaps non-intuitive step so far is to say that: <code>$\phi + 1 = \phi^2$</code>
+and <code>$\psi + 1 = \psi^2$</code>.</p>
+
+<p>This can be easily demonstrated:</p>
+
+<p>$$
+\begin{align*}
+\phi^2 &amp; =  \lgroup\frac{1 + \sqrt{5}}{2}\rgroup{}^2 \\\<br />
+ &amp; =  \frac{1 + 2\sqrt(5) + 5}{4} \\\<br />
+ &amp; =  \frac{6 + 2\sqrt(5)}{4} \\\<br />
+ &amp; =  \frac{3 + \sqrt(5)}{2} \\\<br />
+ &amp; =  \frac{1 + \sqrt(5)}{2} + 1
+\end{align*}
+$$</p>
+
+<p>and similarly for $\psi^2$.</p>
+
+<p>This is not quite the end of the problem though. We still need to show that $Fib(n)$ is the closest integer to $\frac{\phi^n}{\sqrt{5}}$.</p>
+
+<p>$$
+\begin{align*}
+Fib(n) - \frac{\phi^n}{\sqrt{5}} &amp; = \frac{\phi^n - \psi^n}{\sqrt{5}} - \frac{\phi^n}{\sqrt{5}} \\\<br />
+&amp; = \frac{\phi^n - \psi^n - \phi^n}{\sqrt{5}} \\\<br />
+&amp; = \frac{\psi^n}{\sqrt{5}} \\\<br />
+&amp; = \frac{\lgroup\frac{1-\sqrt{5}}{2}\rgroup{}^n}{\sqrt{5}} \\\<br />
+&amp; = \frac{\lgroup{}1-\sqrt{5}\rgroup{}^n}{2^n\sqrt{5}} \\\<br />
+&amp; \approx \frac{-1.236^n}{2^n\sqrt{5}}
+\end{align*}
+$$</p>
+
+<p>For $n=1$ this is approximately $0.276 &lt; 0.5$, and for $n=0$ this is approximately $0.447$. It is clear that $2^n$ grows faster than $(1 - \sqrt(5))^n$ and so the upper bound of $\lvert{}Fib(n) - \frac{\phi^n}{\sqrt{5}}\rvert{}$ is $0.447$.</p>
+
+<p>As such, we can say that $\lvert{}Fib(n) - \frac{\phi^n}{\sqrt{5}}\rvert{} &lt; 0.5$ for all non-negative integers $n$. $\Box$</p>
+
+  </div>
+
+  <div id=links>
+    
+      <a class="basic-alignment left" href="https://mjec.blog/2016/04/04/some-weeks-are-better-than-others/">&laquo; Some weeks are better than others</a>
+    
+    
+      <a class="basic-alignment left" href="https://mjec.blog/2016/04/11/finding-subsets-with-particular-sums/">Finding subsets with particular sums &raquo;</a>
+    
+  </div>
+</section>
+
+  <footer>
+    <p>Yet another blog from <a href="https://mjec.net">Michael Cordover</a>.
+    <span class="rc-scout"></span></p>
+  </footer>
+
+  <script async defer src="https://www.recurse-scout.com/loader.js?t=7b61c3cc166c3321bfbe79ce44d62586"></script>
+
+  <script type="text/javascript">
+    var _paq = _paq || [];
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//piwik.mjec.net/";
+      _paq.push(['setTrackerUrl', u+'piwik.php']);
+      _paq.push(['setSiteId', 13]);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <noscript><p><img src="//piwik.mjec.net/piwik.php?idsite=13" style="border:0;" alt="" /></p></noscript>
+
+  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$']],
+      displayMath: [['$$','$$']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+           extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax();
+      for (var i = 0; i - all.length != 0; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+  </script>
+  
+</body>
+</html>
+
+
+

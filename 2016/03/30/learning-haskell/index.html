@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400|Old+Standard+TT:400' rel='stylesheet' type='text/css'>
+
+    <link rel="icon" type="image/png" href="/favicon_16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon_32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon_128x128.png" sizes="128x128">
+
+    <title>
+      Learning Haskell
+    </title>
+    <link rel="canonical" href="https://mjec.blog/2016/03/30/learning-haskell/">
+
+    <style>
+  * {
+    border:0;
+    font:inherit;
+    font-size:100%;
+    vertical-align:baseline;
+    margin:0;
+    padding:0;
+    color: black;
+    text-decoration-skip: ink;
+    text-decoration-skip-ink: auto;
+  }
+
+  body {
+    font-family:'Open Sans', 'Myriad Pro', Myriad, sans-serif;
+    font-size:17px;
+    line-height:160%;
+    color:#1d1313;
+    max-width:800px;
+    margin:auto;
+  }
+
+  p {
+    margin: 20px 0;
+  }
+
+  a img {
+    border:none;
+  }
+
+  img {
+    margin: 10px auto 10px auto;
+    max-width: 100%;
+    display: block;
+  }
+
+  .left-justify {
+    float: left;
+  }
+
+  .right-justify {
+    float:right;
+  }
+
+  pre, code {
+    font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    background-color: #f7f7f7;
+  }
+  
+  sub {
+    font-size: 65%;
+    vertical-align: sub;
+  }
+
+  sup {
+    font-size: 65%;
+    vertical-align: super;
+  }
+
+  code {
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  pre {
+    margin-top: 0;
+    margin-bottom: 16px;
+    word-wrap: normal;
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+  }
+
+  pre>code {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    word-break: normal;
+    white-space: pre;
+    background: transparent;
+    border: 0;
+  }
+
+  pre code {
+    display: inline;
+    max-width: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+  }
+
+  pre code::before,
+  pre code::after {
+    content: normal;
+  }
+
+  em,q,em,dfn {
+    font-style:italic;
+  }
+
+  .sans,html .gist .gist-file .gist-meta {
+    font-family:"Open Sans","Myriad Pro",Myriad,sans-serif;
+  }
+
+  .mono,pre,code,tt,p code,li code {
+    font-family:Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace;
+  }
+
+  .heading,.serif,h1,h2,h3 {
+    font-family:"Old Standard TT",serif;
+  }
+
+  strong {
+    font-weight:600;
+  }
+
+  q:before {
+    content:"\201C";
+  }
+
+  q:after {
+    content:"\201D";
+  }
+
+  del,s {
+    text-decoration:line-through;
+  }
+
+  blockquote {
+    font-family:"Old Standard TT",serif;
+    text-align:center;
+    padding:50px;
+  }
+  
+  blockquote.long {
+    text-align: left;
+  }
+
+  blockquote p {
+    display:block;
+    font-style:italic;
+    margin: 0;
+  }
+  
+  blockquote.long p {
+    margin: 20px 0 0 0;
+  }
+  
+  blockquote.long p:first-child {
+    margin: 0;
+  }
+  
+  blockquote.long p:last-child {
+    margin-bottom: -2ex;
+  }
+
+  blockquote:before,blockquote:after {
+    font-family:"Old Standard TT",serif;
+    font-size:35px;
+    color:#403c3b;
+  }
+  
+  blockquote:before {
+    content:'\201C';
+    float: left;
+  }
+
+  blockquote:after {
+    content:'\201D';
+    float: right;
+    margin-top: -1ex;
+    position: relative;
+    left: 1ex;
+    top: -0.5ex;
+  }
+  
+  blockquote.long:after {
+    margin-top: 0;
+  }
+
+  hr {
+    width:40%;
+    height: 1px;
+    background:#403c3b;
+    margin: 25px auto;
+  }
+
+  h1 {
+    font-size:35px;
+  }
+
+  h2 {
+    font-size:28px;
+  }
+
+  h3 {
+    font-size:22px;
+    margin-top:18px;
+  }
+
+  h1 a,h2 a,h3 a {
+    text-decoration:none;
+  }
+
+  h1,h2 {
+    margin-top:28px;
+  }
+
+
+  code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: black;
+  }
+
+  #sub-header, #sub-header * {
+    color:#403c3b;
+    font-size:13px;
+  }
+
+  #sub-header {
+    margin: 0 4px;
+  }
+
+  #nav h1 a {
+    font-size:35px;
+    color:#1d1313;
+    line-height:120%;
+  }
+
+  .together {
+    white-space: nowrap;
+  }
+
+  .posts-listing a, #nav a, .tags a {
+    text-decoration: none;
+  }
+
+  .posts-listing h2 small {
+    font-size: 50%;
+  }
+
+  .posts-listing li p.preview {
+    margin: 0;
+    color: #666;
+  }
+
+  li {
+    margin-left: 20px;
+  }
+
+  ul li {
+    margin-left: 1em;
+  }
+
+  ul li {
+    list-style-type: none;
+  }
+  ul li:before {
+    content:"\00BB \0020";
+    margin-left: -1em;
+    float: left;
+  }
+
+  footer {
+    border-top: 1px dotted black;
+    font-size: 80%;
+    margin-top: 20px;
+  }
+  footer p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .rc-scout .rc-scout__link {
+    color: black !important;
+    text-decoration-skip-ink: auto;
+  }
+
+  #nav ul li:before, .posts-listing li:before {
+    content:'';
+    margin-right:0;
+  }
+
+  #content {
+    text-align:left;
+    width:100%;
+    font-size:15px;
+    padding:60px 0 0;
+  }
+
+  #content h1,#content h2 {
+    margin-bottom:5px;
+  }
+
+  #content h2 {
+    font-size:25px;
+  }
+
+  #content .pagination {
+    text-align: center;
+  }
+
+  #content .entry-content {
+    margin-top:15px;
+  }
+
+  #content time {
+    margin-left:3px;
+  }
+
+  #content h1 {
+    font-size:30px;
+  }
+
+  .highlight {
+    margin: 10px 0;
+  }
+
+  .posts-listing {
+    margin:0 0 30px;
+  }
+
+  .posts-listing li {
+    margin:0 0 25px 15px;
+  }
+
+  .posts-listing li a:hover, #nav a:hover, .tags a:hover {
+    text-decoration: underline;
+  }
+
+  #nav {
+    text-align:center;
+    position:static;
+    margin-top:60px;
+  }
+
+  #nav ul {
+    display: table;
+    margin: 8px auto 0 auto;
+  }
+
+  #nav li {
+    list-style-type:none;
+    display:table-cell;
+    font-size:15px;
+    padding: 0 20px;
+  }
+
+  #links {
+    margin: 50px 0 0 0;
+  }
+
+  #links :nth-child(2) {
+    float:right;
+  }
+
+  #not-found {
+    text-align: center;
+  }
+
+  #not-found a {
+    font-family:"Old Standard TT",serif;
+    font-size: 200px;
+    text-decoration: none;
+    display: inline-block;
+    padding-top: 225px;
+  }
+
+  @media (max-width: 750px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:28px;
+    }
+
+    #nav li {
+      font-size:13px;
+      padding: 0 15px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:50px;
+      font-size:14px;
+    }
+
+    #content h1 {
+      font-size:25px;
+    }
+
+    #content h2 {
+      font-size:22px;
+    }
+
+    .posts-listing li div {
+      font-size:12px;
+    }
+    
+    footer {
+      font-size: 12px;
+    }
+    
+    blockquote.long:after {
+      margin-top: 1ex !important;
+    }
+  }
+
+  @media (max-width: 400px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:22px;
+    }
+
+    #nav li {
+      font-size:12px;
+      padding: 0 10px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:20px;
+      font-size:12px;
+    }
+
+    #content h1 {
+      font-size:20px;
+    }
+
+    #content h2 {
+      font-size:18px;
+    }
+
+    .posts-listing li div{
+      font-size:12px;
+    }
+  }
+</style>
+
+
+    
+  </head>
+
+  <body>
+    <section id=nav>
+      <h1><a href="/">mjec&#39;s electric blogaloo</a></h1>
+      <ul>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/tags/">Browse by tag</a></li>
+        
+      </ul>
+    </section>
+
+
+
+<section id=content>
+  <h1> Learning Haskell </h1>
+
+  <div id=sub-header>
+    30 March 2016 · 6 minute read
+    
+    · <span class="tags">
+        
+            
+            
+            
+        
+            
+            
+            
+        
+            
+            
+            
+        
+        
+        <a href='/tags/technical/'>technical</a>, <a href='/tags/rc/'>rc</a> and <a href='/tags/haskell/'>haskell</a></span>
+    
+  </div>
+
+  <div class="entry-content">
+    <p>I was surprised to hear that Haskell isn&rsquo;t really a functional language so much as it&rsquo;s a strongly typed one. I was of course aware that it had both these properties but it took really using it to see why the typing was so important.</p>
+
+<p>I started on Monday afternoon with <a href="http://learnyouahaskell.com/">Learn You A Haskell</a>. It&rsquo;s pretty good. That, combined with a couple of group discussions sessions, has meant I&rsquo;m feeling pretty confident. I&rsquo;m no expert - I&rsquo;m still working my way around the terminology in particular - but I&rsquo;ve started to write actual code.</p>
+
+<p>I decided to start with <a href="http://cryptopals.com/">the matasano crypto challenges</a>. I&rsquo;ve actually done some of these before in Python (something like the first five challenges in set 1), so I thought it would be a nice introduction. I knew what I was looking for and how to solve the problems in the abstract. These actually made for a great intro lesson.</p>
+
+<p>The thing about strongly typed languages is they are <strong>strongly</strong> typed. The very first challenge - and the one that took me the longest - is to read in a hex string and output those bytes encoded in base 64. Haskell has some convenient functions for this: there&rsquo;s <a href="http://hackage.haskell.org/package/bytestring-0.10.6.0/docs/Data-ByteString.html">Data.ByteString</a> for a string of bytes, <a href="http://hackage.haskell.org/package/base16-bytestring-0.1.1.6/docs/Data-ByteString-Base16.html">Data.ByteString.Base16</a> for hexadecimal and <a href="http://hackage.haskell.org/package/base64-bytestring-1.0.0.1/docs/Data-ByteString-Base64.html">Data.ByteString.Base64</a> for base 64. Noting that <code>.</code> is the &ldquo;function composition&rdquo; operator, this makes the solution trivial:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="color:#75af00">hex_to_base64</span> <span style="color:#f92672">::</span> <span style="color:#00a8c8">ByteString</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">ByteString</span>
+<span style="color:#75af00">hex_to_base64</span> <span style="color:#f92672">=</span> <span style="color:#75af00">base64_encode</span> <span style="color:#f92672">.</span> <span style="color:#75af00">base16_decode</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>(I&rsquo;m still not used to camelCase and I keep using underscores. Sorry Haskellers.)</p>
+
+<p>Of course, life is never quite that simple. Your input comes as a <code>String</code> and a <code>String</code> is not a <code>ByteString</code>. This is somewhat unlike Python. Okay, next try:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="color:#75af00">hex_to_base64</span> <span style="color:#f92672">=</span> <span style="color:#75af00">byte_string_to_string</span> <span style="color:#f92672">.</span> <span style="color:#75af00">base64_encode</span> <span style="color:#f92672">.</span> <span style="color:#75af00">base16_decode</span> <span style="color:#f92672">.</span> <span style="color:#75af00">string_to_byte_string</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Well, no. It turns out that the only <code>byte_string_to_string</code> function I could find (<code>Data.ByteString.Char8.unpack</code>) only works on <code>Data.ByteString.Char8.ByteString</code>s. Which are not the same as <code>Data.ByteString.ByteString</code>s. Which are also not the same as <code>Data.ByteString.Lazy.ByteString</code>s, which are what the base 16 and base 64 functions operate on.</p>
+
+<p>It turns out the solution to this is <a href="http://hackage.haskell.org/package/text-1.2.2.1/docs/Data-Text.html">Data.Text</a>, but it took me the better part of a day (and a very helpful nudge from a fellow Recurser) to figure that out.</p>
+
+<p>Now that I know that though, the solution is genuinely trivial. Here it is in full, written as a single function.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="color:#00a8c8">import</span> <span style="color:#00a8c8">qualified</span> <span style="color:#111">Data.ByteString.Base16.Lazy</span> <span style="color:#00a8c8">as</span> <span style="color:#111">B16</span>
+<span style="color:#00a8c8">import</span> <span style="color:#00a8c8">qualified</span> <span style="color:#111">Data.ByteString.Base64.Lazy</span> <span style="color:#00a8c8">as</span> <span style="color:#111">B64</span>
+<span style="color:#00a8c8">import</span> <span style="color:#00a8c8">qualified</span> <span style="color:#111">Data.Text.Lazy</span> <span style="color:#00a8c8">as</span> <span style="color:#111">Txt</span>
+<span style="color:#00a8c8">import</span> <span style="color:#00a8c8">qualified</span> <span style="color:#111">Data.Text.Lazy.Encoding</span> <span style="color:#00a8c8">as</span> <span style="color:#111">TxtEnc</span>
+
+<span style="color:#75af00">hex_to_base64</span> <span style="color:#f92672">::</span> <span style="color:#00a8c8">String</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">String</span>
+<span style="color:#75af00">hex_to_base64</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">Txt</span><span style="color:#f92672">.</span><span style="color:#75af00">unpack</span> <span style="color:#f92672">.</span> <span style="color:#00a8c8">TxtEnc</span><span style="color:#f92672">.</span><span style="color:#75af00">decodeUtf8</span> <span style="color:#f92672">.</span> <span style="color:#00a8c8">B64</span><span style="color:#f92672">.</span><span style="color:#75af00">encode</span> <span style="color:#f92672">.</span> <span style="color:#75af00">fst</span> <span style="color:#f92672">.</span> <span style="color:#00a8c8">B16</span><span style="color:#f92672">.</span><span style="color:#75af00">decode</span> <span style="color:#f92672">.</span> <span style="color:#00a8c8">TxtEnc</span><span style="color:#f92672">.</span><span style="color:#75af00">encodeUtf8</span> <span style="color:#f92672">.</span> <span style="color:#00a8c8">Txt</span><span style="color:#f92672">.</span><span style="color:#75af00">pack</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>My actual code is a little different, because I&rsquo;ve broken it down into functions like <code>hex_to_bytes</code> and <code>bytes_to_base64</code> which I expect (know) I&rsquo;ll use later.</p>
+
+<p>(In case you don&rsquo;t know, <code>hex_to_base64 :: String -&gt; String</code> is an optional type declaration, which says <code>hex_to_base64</code> takes a <code>String</code> paramater and outputs a <code>String</code> paramter. Everything in Haskell is a function, even static data.)</p>
+
+<p>A few things that I find particularly impressive:</p>
+
+<ul>
+<li><p>Genuinely, once it compiles, it works. I spend most of my time debugging type errors and only rarely do I find logic errors. It fails early and often, which turns out to be great.</p></li>
+
+<li><p>I know exactly what is going in and exactly what is coming out.</p></li>
+
+<li><p>It&rsquo;s all one line! Function composition using <code>.</code> means I don&rsquo;t declare my input parameter or what I&rsquo;m returning. I just compose functions, which provably fit together.</p></li>
+</ul>
+
+<p>A few other pieces of code which I think illustrate Haskell&rsquo;s strengths nicely. Here&rsquo;s one which returns true if and only if all characters in the string match the regex <code>[A-Fa-f0-9]+</code>:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="color:#75af00">isHex</span> <span style="color:#f92672">::</span> <span style="color:#00a8c8">String</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">Bool</span>
+<span style="color:#75af00">isHex</span> <span style="color:#75af00">x</span> <span style="color:#f92672">=</span> <span style="color:#75af00">all</span> <span style="color:#111">(`</span><span style="color:#75af00">elem</span><span style="color:#111">`</span> <span style="color:#111">[</span><span style="color:#d88200">&#39;A&#39;</span><span style="color:#f92672">..</span><span style="color:#d88200">&#39;F&#39;</span><span style="color:#111">]</span> <span style="color:#f92672">++</span> <span style="color:#111">[</span><span style="color:#d88200">&#39;a&#39;</span><span style="color:#f92672">..</span><span style="color:#d88200">&#39;f&#39;</span><span style="color:#111">]</span> <span style="color:#f92672">++</span> <span style="color:#111">[</span><span style="color:#d88200">&#39;0&#39;</span><span style="color:#f92672">..</span><span style="color:#d88200">&#39;9&#39;</span><span style="color:#111">])</span> <span style="color:#75af00">x</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>So what, we can all do regex, right? Well, I get to use this to parse my input from the command line like so:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="color:#75af00">challenge1</span> <span style="color:#f92672">::</span> <span style="color:#111">[</span><span style="color:#00a8c8">String</span><span style="color:#111">]</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">IO</span> <span style="color:#111">()</span>
+<span style="color:#75af00">challenge1</span> <span style="color:#111">(</span><span style="color:#75af00">x</span><span style="color:#00a8c8">:[]</span><span style="color:#111">)</span>
+    <span style="color:#f92672">|</span> <span style="color:#75af00">isHex</span> <span style="color:#75af00">x</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">do</span> <span style="color:#75af00">putStrLn</span> <span style="color:#f92672">$</span> <span style="color:#75af00">hex_to_base64</span> <span style="color:#75af00">x</span>
+    <span style="color:#f92672">|</span> <span style="color:#75af00">otherwise</span> <span style="color:#f92672">=</span> <span style="color:#75af00">usage_failure</span> <span style="color:#f92672">$</span> <span style="color:#75af00">unlines</span>
+        <span style="color:#111">[</span> <span style="color:#d88200">&#34;That is not a valid way to run 1-1 (maybe ask for help?)&#34;</span>
+        <span style="color:#111">,</span> <span style="color:#d88200">&#34;Your hex string must be actual hex i.e. [A-Za-z0-9]+&#34;</span><span style="color:#111">]</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>I implemented <code>usage_failure</code> (there&rsquo;s that underscore again) but everything else comes for free. In particular, note the guard syntax: we get to determine the return based on testing the input.</p>
+
+<p>I quite like this one too:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="color:#75af00">bitwiseCombine</span> <span style="color:#f92672">::</span> <span style="color:#111">(</span><span style="color:#00a8c8">Word8</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">Word8</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">Word8</span><span style="color:#111">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">B</span><span style="color:#f92672">.</span><span style="color:#00a8c8">ByteString</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">B</span><span style="color:#f92672">.</span><span style="color:#00a8c8">ByteString</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">B</span><span style="color:#f92672">.</span><span style="color:#00a8c8">ByteString</span>
+<span style="color:#75af00">bitwiseCombine</span> <span style="color:#75af00">f</span> <span style="color:#75af00">x</span> <span style="color:#75af00">y</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">B</span><span style="color:#f92672">.</span><span style="color:#75af00">pack</span> <span style="color:#f92672">$</span> <span style="color:#00a8c8">B</span><span style="color:#f92672">.</span><span style="color:#75af00">zipWith</span> <span style="color:#111">(</span><span style="color:#75af00">\x</span> <span style="color:#75af00">y</span> <span style="color:#f92672">-&gt;</span> <span style="color:#111">(</span><span style="color:#75af00">x</span> <span style="color:#111">`</span><span style="color:#75af00">f</span><span style="color:#111">`</span> <span style="color:#75af00">y</span><span style="color:#111">))</span> <span style="color:#75af00">x</span> <span style="color:#75af00">y</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>This combines two <code>ByteString</code>s by applying the <code>f</code> operator (as an infix) to each byte of the arguments, then returns a new <code>ByteString</code>. You can use this and <a href="https://en.wikipedia.org/wiki/Currying">currying</a> to make a new function for whatever operator you want. For example, I have this:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="color:#75af00">bitwiseXor</span> <span style="color:#f92672">::</span> <span style="color:#00a8c8">B</span><span style="color:#f92672">.</span><span style="color:#00a8c8">ByteString</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">B</span><span style="color:#f92672">.</span><span style="color:#00a8c8">ByteString</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">B</span><span style="color:#f92672">.</span><span style="color:#00a8c8">ByteString</span>
+<span style="color:#75af00">bitwiseXor</span> <span style="color:#f92672">=</span> <span style="color:#75af00">bitwiseCombine</span> <span style="color:#111">`</span><span style="color:#75af00">xor</span><span style="color:#111">`</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>This now only takes two arguments, <code>ByteString</code>s, and returns the <code>xor</code> of them. Bam. One line.</p>
+
+<p>Currying is also why we have that weird type signature: each function takes <em>one</em> argument and returns a new function which returns the next thing separated by a <code>-&gt;</code>. When you get to the end of the list, you have data. The <code>(Word8 -&gt; Word8 -&gt; Word8)</code> in parentheses is a function which has that signature.</p>
+
+<p>Okay, last one. This function takes two &ldquo;maps&rdquo;, each of which is essentially a key-value pair with keys composed of <code>Word8</code>s and values composed of <code>Float</code>s. As the name might suggest, these are frequency tables, where the <code>Word8</code> is a byte (e.g. &lsquo;A&rsquo;) and the <code>Float</code> is what proportion of the whole it makes up (in the range <code>0 .. 1</code>). <code>freqTableDifference</code> takes the absolute values of the differences between paired elements, discarding anything that is not in the intersection of the maps. <code>freqTableDelta</code> sums those differences into a basic score showing roughly how different the two are (think <a href="https://en.wikipedia.org/wiki/Hamming_distance">Hamming distance</a>, but not).</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="color:#75af00">freqTableDelta</span> <span style="color:#f92672">::</span> <span style="color:#00a8c8">Map</span><span style="color:#f92672">.</span><span style="color:#00a8c8">Map</span> <span style="color:#00a8c8">Word8</span> <span style="color:#00a8c8">Float</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">Map</span><span style="color:#f92672">.</span><span style="color:#00a8c8">Map</span> <span style="color:#00a8c8">Word8</span> <span style="color:#00a8c8">Float</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">Float</span>
+<span style="color:#75af00">freqTableDelta</span> <span style="color:#75af00">x</span> <span style="color:#75af00">y</span> <span style="color:#f92672">=</span> <span style="color:#75af00">sum</span> <span style="color:#f92672">$</span> <span style="color:#00a8c8">Map</span><span style="color:#f92672">.</span><span style="color:#75af00">elems</span> <span style="color:#f92672">$</span> <span style="color:#75af00">freqTableDifference</span> <span style="color:#75af00">x</span> <span style="color:#75af00">y</span>
+
+<span style="color:#75af00">freqTableDifference</span> <span style="color:#f92672">::</span> <span style="color:#00a8c8">Map</span><span style="color:#f92672">.</span><span style="color:#00a8c8">Map</span> <span style="color:#00a8c8">Word8</span> <span style="color:#00a8c8">Float</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">Map</span><span style="color:#f92672">.</span><span style="color:#00a8c8">Map</span> <span style="color:#00a8c8">Word8</span> <span style="color:#00a8c8">Float</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">Map</span><span style="color:#f92672">.</span><span style="color:#00a8c8">Map</span> <span style="color:#00a8c8">Word8</span> <span style="color:#00a8c8">Float</span>
+<span style="color:#75af00">freqTableDifference</span> <span style="color:#75af00">x</span> <span style="color:#75af00">y</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">Map</span><span style="color:#f92672">.</span><span style="color:#75af00">differenceWith</span> <span style="color:#111">(</span><span style="color:#75af00">\a</span> <span style="color:#75af00">b</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">Just</span> <span style="color:#f92672">$</span> <span style="color:#75af00">abs</span> <span style="color:#111">(</span><span style="color:#75af00">a</span> <span style="color:#f92672">-</span> <span style="color:#75af00">b</span><span style="color:#111">))</span> <span style="color:#75af00">x</span> <span style="color:#75af00">y</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>That&rsquo;s right, the explanation took far, far longer than the code, <em>even with optional type signatures</em>. That&rsquo;s the beauty of functional programming. Combined with strong types, this experience is incredibly fluid. I hope it&rsquo;s clear how exciting this prospect is for me. Every function I write in Haskell is just as short. The longest section of code which is actually code (and not data) is six lines. That function takes a list of characters to look for (needles) and builds up those frequency tables. It also takes care of edge cases, ensures that there is a value of 0 for items in the needle but not in the string, returns a second paramter showing the proportion of elements in the string not in the needle and takes care of conversion to appropriate data types in both directions. <strong>In six lines</strong> and without becoming <a href="https://en.wikipedia.org/wiki/Just_another_Perl_hacker">Perl</a>.</p>
+
+<p>This has been day three of RC. 87ish more days.</p>
+
+  </div>
+
+  <div id=links>
+    
+      <a class="basic-alignment left" href="https://mjec.blog/2016/03/28/rc-day-one/">&laquo; RC Day One</a>
+    
+    
+      <a class="basic-alignment left" href="https://mjec.blog/2016/04/04/some-weeks-are-better-than-others/">Some weeks are better than others &raquo;</a>
+    
+  </div>
+</section>
+
+  <footer>
+    <p>Yet another blog from <a href="https://mjec.net">Michael Cordover</a>.
+    <span class="rc-scout"></span></p>
+  </footer>
+
+  <script async defer src="https://www.recurse-scout.com/loader.js?t=7b61c3cc166c3321bfbe79ce44d62586"></script>
+
+  <script type="text/javascript">
+    var _paq = _paq || [];
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//piwik.mjec.net/";
+      _paq.push(['setTrackerUrl', u+'piwik.php']);
+      _paq.push(['setSiteId', 13]);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <noscript><p><img src="//piwik.mjec.net/piwik.php?idsite=13" style="border:0;" alt="" /></p></noscript>
+
+  
+</body>
+</html>
+
+
+
