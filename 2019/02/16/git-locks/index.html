@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="A cute little hack to avoid trying to perform multiple git operations at once.">
+
+    <meta name="twitter:creator" content="@mjec">
+    <meta name="twitter:title" content="Git locks">
+    <meta name="twitter:description" content="A cute little hack to avoid trying to perform multiple git operations at once.">
+
+    <link rel="icon" type="image/png" href="/favicon_16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon_32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon_128x128.png" sizes="128x128">
+
+    <title>
+      Git locks
+    </title>
+    <link rel="canonical" href="https://mjec.blog/2019/02/16/git-locks/">
+
+    <style>
+  * {
+    border:0;
+    font:inherit;
+    font-size:100%;
+    vertical-align:baseline;
+    margin:0;
+    padding:0;
+    color: black;
+    text-decoration-skip: ink;
+    text-decoration-skip-ink: auto;
+  }
+
+  body {
+    font-family:'Open Sans', 'Myriad Pro', Myriad, sans-serif;
+    font-size:17px;
+    line-height:160%;
+    color:#1d1313;
+    max-width:800px;
+    margin:auto;
+  }
+
+  p {
+    margin: 20px 0;
+  }
+
+  a img {
+    border:none;
+  }
+
+  img {
+    margin: 10px auto 10px auto;
+    max-width: 100%;
+    display: block;
+  }
+
+  .left-justify {
+    float: left;
+  }
+
+  .right-justify {
+    float:right;
+  }
+
+  pre, code {
+    font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    background-color: #f7f7f7;
+  }
+  
+  sub {
+    font-size: 65%;
+    vertical-align: sub;
+  }
+
+  sup {
+    font-size: 65%;
+    vertical-align: super;
+  }
+
+  code {
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  pre {
+    margin-top: 0;
+    margin-bottom: 16px;
+    word-wrap: normal;
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+  }
+
+  pre>code {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    word-break: normal;
+    white-space: pre;
+    background: transparent;
+    border: 0;
+  }
+
+  pre code {
+    display: inline;
+    max-width: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+  }
+
+  pre code::before,
+  pre code::after {
+    content: normal;
+  }
+
+  em,q,em,dfn {
+    font-style:italic;
+  }
+
+  .sans,html .gist .gist-file .gist-meta {
+    font-family:"Open Sans","Myriad Pro",Myriad,sans-serif;
+  }
+
+  .mono,pre,code,tt,p code,li code {
+    font-family:Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace;
+  }
+
+  .heading,.serif,h1,h2,h3 {
+    font-family:"Old Standard TT",serif;
+  }
+
+  strong {
+    font-weight:600;
+  }
+
+  q:before {
+    content:"\201C";
+  }
+
+  q:after {
+    content:"\201D";
+  }
+
+  del,s {
+    text-decoration:line-through;
+  }
+
+  blockquote {
+    font-family:"Old Standard TT",serif;
+    text-align:center;
+    padding:50px;
+  }
+  
+  blockquote.long {
+    text-align: left;
+  }
+
+  blockquote p {
+    display:block;
+    font-style:italic;
+    margin: 0;
+  }
+  
+  blockquote.long p {
+    margin: 20px 0 0 0;
+  }
+  
+  blockquote.long p:first-child {
+    margin: 0;
+  }
+  
+  blockquote.long p:last-child {
+    margin-bottom: -2ex;
+  }
+
+  blockquote:before,blockquote:after {
+    font-family:"Old Standard TT",serif;
+    font-size:35px;
+    color:#403c3b;
+  }
+  
+  blockquote:before {
+    content:'\201C';
+    float: left;
+  }
+
+  blockquote:after {
+    content:'\201D';
+    float: right;
+    margin-top: -1ex;
+    position: relative;
+    left: 1ex;
+    top: -0.5ex;
+  }
+  
+  blockquote.long:after {
+    margin-top: 0;
+  }
+
+  hr {
+    width:40%;
+    height: 1px;
+    background:#403c3b;
+    margin: 25px auto;
+  }
+
+  h1 {
+    font-size:35px;
+  }
+
+  h2 {
+    font-size:28px;
+  }
+
+  h3 {
+    font-size:22px;
+    margin-top:18px;
+  }
+
+  h1 a,h2 a,h3 a {
+    text-decoration:none;
+  }
+
+  h1,h2 {
+    margin-top:28px;
+  }
+
+
+  code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: black;
+  }
+
+  #sub-header, #sub-header * {
+    color:#403c3b;
+    font-size:13px;
+  }
+
+  #sub-header {
+    margin: 0 4px;
+  }
+
+  #nav h1 a {
+    font-size:35px;
+    color:#1d1313;
+    line-height:120%;
+  }
+
+  .together {
+    white-space: nowrap;
+  }
+
+  .posts-listing a, #nav a, .tags a {
+    text-decoration: none;
+  }
+
+  .posts-listing h2 small {
+    font-size: 50%;
+  }
+
+  .posts-listing li p.preview {
+    margin: 0;
+    color: #666;
+  }
+
+  li {
+    margin-left: 20px;
+  }
+
+  ul li {
+    margin-left: 1em;
+  }
+
+  ul li {
+    list-style-type: none;
+  }
+  ul li:before {
+    content:"\00BB \0020";
+    margin-left: -1em;
+    float: left;
+  }
+
+  footer {
+    border-top: 1px dotted black;
+    font-size: 80%;
+    margin-top: 20px;
+  }
+  footer p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .rc-scout .rc-scout__link {
+    color: black !important;
+    text-decoration-skip-ink: auto;
+  }
+
+  #nav ul li:before, .posts-listing li:before {
+    content:'';
+    margin-right:0;
+  }
+
+  #content {
+    text-align:left;
+    width:100%;
+    font-size:15px;
+    padding:60px 0 0;
+  }
+
+  #content h1,#content h2 {
+    margin-bottom:5px;
+  }
+
+  #content h2 {
+    font-size:25px;
+  }
+
+  #content .pagination {
+    text-align: center;
+  }
+
+  #content .entry-content {
+    margin-top:15px;
+  }
+
+  #content time {
+    margin-left:3px;
+  }
+
+  #content h1 {
+    font-size:30px;
+  }
+
+  .highlight {
+    margin: 10px 0;
+  }
+
+  .posts-listing {
+    margin:0 0 30px;
+  }
+
+  .posts-listing li {
+    margin:0 0 25px 15px;
+  }
+
+  .posts-listing li a:hover, #nav a:hover, .tags a:hover {
+    text-decoration: underline;
+  }
+
+  #nav {
+    text-align:center;
+    position:static;
+    margin-top:60px;
+  }
+
+  #nav ul {
+    display: table;
+    margin: 8px auto 0 auto;
+  }
+
+  #nav li {
+    list-style-type:none;
+    display:table-cell;
+    font-size:15px;
+    padding: 0 20px;
+  }
+
+  #links {
+    margin: 50px 0 0 0;
+  }
+
+  #links :nth-child(2) {
+    float:right;
+  }
+
+  #not-found {
+    text-align: center;
+  }
+
+  #not-found a {
+    font-family:"Old Standard TT",serif;
+    font-size: 200px;
+    text-decoration: none;
+    display: inline-block;
+    padding-top: 225px;
+  }
+
+  @media (max-width: 750px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:28px;
+    }
+
+    #nav li {
+      font-size:13px;
+      padding: 0 15px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:50px;
+      font-size:14px;
+    }
+
+    #content h1 {
+      font-size:25px;
+    }
+
+    #content h2 {
+      font-size:22px;
+    }
+
+    .posts-listing li div {
+      font-size:12px;
+    }
+    
+    footer {
+      font-size: 12px;
+    }
+    
+    blockquote.long:after {
+      margin-top: 1ex !important;
+    }
+  }
+
+  @media (max-width: 400px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:22px;
+    }
+
+    #nav li {
+      font-size:12px;
+      padding: 0 10px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:20px;
+      font-size:12px;
+    }
+
+    #content h1 {
+      font-size:20px;
+    }
+
+    #content h2 {
+      font-size:18px;
+    }
+
+    .posts-listing li div{
+      font-size:12px;
+    }
+  }
+</style>
+
+
+    
+  </head>
+
+  <body>
+    <section id=nav>
+      <h1><a href="/">mjec&#39;s electric blogaloo</a></h1>
+      <ul>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/tags/">Browse by tag</a></li>
+        
+      </ul>
+    </section>
+
+
+
+<section id=content>
+  <h1> Git locks </h1>
+
+  <div id=sub-header>
+    16 February 2019 · 3 minute read
+    
+    · <span class="tags">
+        
+            
+            
+            
+        
+        
+        <a href='/tags/technical/'>technical</a></span>
+    
+  </div>
+
+  <div class="entry-content">
+    <p>At work, we use git. I write code on my local machine, push it to my virtual machine for testing, and then when ready push from my virtual machine to our Github enterprise instance, from which it is deployed to production. I frequently use branches for development, though generally only push to master (aside from when I make pull requests for code review). We mostly use a single repository, but I there are a half-dozen or so less-frequently-used repositories which I like to keep up-to-date on my VM.</p>
+
+<p>We try to work with an entirely linear history, which means I&rsquo;ll generally <code>git pull --rebase</code> before pushing. This avoids merge commits.</p>
+
+<p>Because I can sometimes be working on a branch for a few weeks before pushing the code to master, I like to regularly rebase to ensure I&rsquo;m not generating merge conflicts. I do this by keeping <code>origin/master</code> as the remote for branches on my VM, and doing a <code>pull --rebase</code> regularly. In fact, I have a cron that pulls every 20 minutes. If something goes wrong (e.g. there&rsquo;s a merge conflict), it hits <a href="https://github.com/tonsky/AnyBar">anybar</a> on my laptop to let me know I need to resolve it. This doesn&rsquo;t happen that often, for which I&rsquo;m grateful. I can then manually pull and rebase on my laptop, which gets the changes from my VM. I can use my VM to rewrite history as well, which I frequently do (e.g. squashing commits).</p>
+
+<p>This arrangement has worked well for me for a couple of years, though every now and then I run into trouble. Most frequently this happens when I end up trying to perform two git actions at once &ndash; a classic example is performing a rebase to rewrite history while my cron is trying to pull and rebase. This results in one or both operation failing, and sometimes annoying losses of commit messages. It&rsquo;s nothing disasterous, but I figured there must be a better way.</p>
+
+<p>Enter <a href="https://linux.die.net/man/1/flock"><code>flock</code></a>. This acquires a lock on a file before running a given command, either failing if the lock can&rsquo;t be acquired or waiting until the lock can be acquired before continuing. In this way I can avoid performing two git operations at once, instead waiting or failing as appropriate. I initially had a specific file that I would lock in my home directory, but I quickly realized it&rsquo;d be better to acquire a lock on the <code>.git</code> directory itself. This is always present where operations can be in conflict, and it is scoped specifically to the repository in question. To do this I created <code>~/.locking_git</code> file, as follows, which I source in my <code>.bash_profile</code> and also in any script where I want git to lock.</p>
+
+<pre><code>#!/bin/bash
+
+set -euo pipefail
+
+GIT=`which git`
+
+function git_dir {
+    # `git rev-parse --show-toplevel` prints the directory which contains the .git directory
+    _DIR=`$GIT rev-parse --show-toplevel 2&gt;/dev/null`
+    if [ $? -eq 0 ]; then
+        echo &quot;${_DIR}/.git&quot;
+    else
+        echo &quot;/dev/null&quot;
+    fi
+}
+
+function git {
+    GITDIR=`git_dir`
+    if [ -d $GITDIR ]; then
+        flock $GITDIR $GIT &quot;$@&quot;
+    else
+        # don't try to acquire a lock if this isn't a repository (e.g. with `git init`, or a command that will fail anyway)
+        # this is important because `flock` will create the file if it doesn't already exist, which can confuse git.
+        $GIT &quot;$@&quot;
+    fi
+}
+</code></pre>
+
+<p>Now whenever I run <code>git</code> in my terminal, I&rsquo;m actually running the <code>git</code> function defined above, which acquires a lock if we&rsquo;re in an existing repository. I can also use <code>git_dir</code> in other scripts to acquire the lock in other situations, for example when calling the script that creates a new pull request.</p>
+
+  </div>
+
+  <div id=links>
+    
+      <a class="basic-alignment left" href="https://mjec.blog/2018/07/24/a-few-thoughts-on-civility/">&laquo; A few thoughts on civility</a>
+    
+    
+  </div>
+</section>
+
+  <footer>
+    <p>Yet another blog from <a href="https://mjec.net">Michael Cordover</a>.
+    <span class="rc-scout"></span></p>
+  </footer>
+
+  <script async defer src="https://www.recurse-scout.com/loader.js?t=7b61c3cc166c3321bfbe79ce44d62586"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: ['Open Sans:n4', 'Old Standard TT:n4']
+      }
+    });
+  </script>
+
+  <script type="text/javascript">
+    var _paq = _paq || [];
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//piwik.mjec.net/";
+      _paq.push(['setTrackerUrl', u+'piwik.php']);
+      _paq.push(['setSiteId', 13]);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <noscript><p><img src="//piwik.mjec.net/piwik.php?idsite=13" style="border:0;" alt="" /></p></noscript>
+
+  
+</body>
+</html>
+
+
+
