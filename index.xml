@@ -5,10 +5,19 @@
     <link>https://mjec.blog/</link>
     <description>Recent content on mjec&#39;s electric blogaloo</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 24 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 16 Feb 2019 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://mjec.blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Git locks</title>
+      <link>https://mjec.blog/2019/02/16/git-locks/</link>
+      <pubDate>Sat, 16 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2019/02/16/git-locks/</guid>
+      <description>A cute little hack to avoid trying to perform multiple git operations at once.</description>
+    </item>
     
     <item>
       <title>A few thoughts on civility</title>

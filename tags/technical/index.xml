@@ -6,10 +6,19 @@
     <description>Recent content in Technical on mjec&#39;s electric blogaloo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 11 Jul 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 16 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://mjec.blog/tags/technical/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Git locks</title>
+      <link>https://mjec.blog/2019/02/16/git-locks/</link>
+      <pubDate>Sat, 16 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2019/02/16/git-locks/</guid>
+      <description>At work, we use git. I write code on my local machine, push it to my virtual machine for testing, and then when ready push from my virtual machine to our Github enterprise instance, from which it is deployed to production. I frequently use branches for development, though generally only push to master (aside from when I make pull requests for code review). We mostly use a single repository, but I there are a half-dozen or so less-frequently-used repositories which I like to keep up-to-date on my VM.</description>
+    </item>
     
     <item>
       <title>Australia should not adopt electronic voting</title>
