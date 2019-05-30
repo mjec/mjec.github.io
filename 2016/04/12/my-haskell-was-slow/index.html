@@ -475,6 +475,7 @@
 </style>
 
 
+
     
   </head>
 
@@ -527,18 +528,18 @@
 <p>It turns out that GHC (the Haskell compiler) includes some nice profiling tools. You can set &ldquo;cost centres&rdquo; you want to look at using the <code>{-# SCC &quot;cost-centre-name&quot; #-}</code> pragma. So that&rsquo;s what I did, and I have ended up with this:</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">12
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="color:#75af00">buidFreqTableRecursive</span> <span style="color:#f92672">::</span> <span style="color:#00a8c8">Map</span><span style="color:#f92672">.</span><span style="color:#00a8c8">Map</span> <span style="color:#00a8c8">Word8</span> <span style="color:#00a8c8">Float</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">Float</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">Float</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">B</span><span style="color:#f92672">.</span><span style="color:#00a8c8">ByteString</span> <span style="color:#f92672">-&gt;</span> <span style="color:#111">(</span><span style="color:#00a8c8">Float</span><span style="color:#111">,</span> <span style="color:#00a8c8">Map</span><span style="color:#f92672">.</span><span style="color:#00a8c8">Map</span> <span style="color:#00a8c8">Word8</span> <span style="color:#00a8c8">Float</span><span style="color:#111">)</span>
@@ -564,9 +565,9 @@
 <p>I spent a bit of time trying to figure out how to make this function faster, but it turns out that building tens of thousands of frequency tables (one for each of 256 possibilities for each of 326 strings = 83,456 frequency tables) takes a lot of work. Even so, I did end up with this much more succinct implementation:</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">3
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="color:#75af00">buildFreqTable</span> <span style="color:#f92672">::</span> <span style="color:#111">(</span><span style="color:#00a8c8">Int</span><span style="color:#111">,</span> <span style="color:#00a8c8">Int</span><span style="color:#111">,</span> <span style="color:#00a8c8">Map</span><span style="color:#f92672">.</span><span style="color:#00a8c8">Map</span> <span style="color:#00a8c8">Word8</span> <span style="color:#00a8c8">Double</span><span style="color:#111">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">B</span><span style="color:#f92672">.</span><span style="color:#00a8c8">ByteString</span> <span style="color:#f92672">-&gt;</span> <span style="color:#111">(</span><span style="color:#00a8c8">Double</span><span style="color:#111">,</span> <span style="color:#00a8c8">Map</span><span style="color:#f92672">.</span><span style="color:#00a8c8">Map</span> <span style="color:#00a8c8">Word8</span> <span style="color:#00a8c8">Double</span><span style="color:#111">)</span>
@@ -579,8 +580,8 @@
 <p>Here&rsquo;s a function which computes a single score of how close the input text is to a baseline frequency table:</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">2
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="color:#75af00">buildDelta</span> <span style="color:#f92672">::</span> <span style="color:#00a8c8">Int</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">Map</span><span style="color:#f92672">.</span><span style="color:#00a8c8">Map</span> <span style="color:#00a8c8">Word8</span> <span style="color:#00a8c8">Double</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">B</span><span style="color:#f92672">.</span><span style="color:#00a8c8">ByteString</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">Double</span>

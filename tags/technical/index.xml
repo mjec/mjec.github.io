@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Technical on mjec&#39;s electric blogaloo</title>
+    <title>technical on mjec&#39;s electric blogaloo</title>
     <link>https://mjec.blog/tags/technical/</link>
-    <description>Recent content in Technical on mjec&#39;s electric blogaloo</description>
+    <description>Recent content in technical on mjec&#39;s electric blogaloo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 16 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 30 May 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://mjec.blog/tags/technical/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Three hours of my day</title>
+      <link>https://mjec.blog/2019/05/30/three-hours-of-my-day/</link>
+      <pubDate>Thu, 30 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2019/05/30/three-hours-of-my-day/</guid>
+      <description>Earlier this year I was promoted to be a staff software engineer. This involves being not just problem solving, but also a (partial) responsibility for the culture of my workplace.
+One of the things I struggled with for a long time &amp;ndash; long before I was working as a full-time programmer &amp;ndash; was a lack of understanding of how senior people were able to come up with the clever ideas they come up with.</description>
+    </item>
     
     <item>
       <title>Git locks</title>

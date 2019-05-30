@@ -6,157 +6,31 @@
     <description>Recent content in Tags on mjec&#39;s electric blogaloo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 11 Apr 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 30 May 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://mjec.blog/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Algorithms</title>
-      <link>https://mjec.blog/tags/algorithms/</link>
-      <pubDate>Mon, 11 Apr 2016 00:00:00 +0000</pubDate>
+      <title>practices</title>
+      <link>https://mjec.blog/tags/practices/</link>
+      <pubDate>Thu, 30 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://mjec.blog/tags/algorithms/</guid>
+      <guid>https://mjec.blog/tags/practices/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Cryptography</title>
-      <link>https://mjec.blog/tags/cryptography/</link>
-      <pubDate>Fri, 15 Apr 2016 00:00:00 +0000</pubDate>
+      <title>technical</title>
+      <link>https://mjec.blog/tags/technical/</link>
+      <pubDate>Thu, 30 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://mjec.blog/tags/cryptography/</guid>
+      <guid>https://mjec.blog/tags/technical/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Depression</title>
-      <link>https://mjec.blog/tags/depression/</link>
-      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://mjec.blog/tags/depression/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Django</title>
-      <link>https://mjec.blog/tags/django/</link>
-      <pubDate>Mon, 27 Jun 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://mjec.blog/tags/django/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Haskell</title>
-      <link>https://mjec.blog/tags/haskell/</link>
-      <pubDate>Tue, 12 Apr 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://mjec.blog/tags/haskell/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Math</title>
-      <link>https://mjec.blog/tags/math/</link>
-      <pubDate>Tue, 19 Apr 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://mjec.blog/tags/math/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Nyc</title>
-      <link>https://mjec.blog/tags/nyc/</link>
-      <pubDate>Tue, 28 Jun 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://mjec.blog/tags/nyc/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Performance</title>
-      <link>https://mjec.blog/tags/performance/</link>
-      <pubDate>Tue, 12 Apr 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://mjec.blog/tags/performance/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Personal</title>
-      <link>https://mjec.blog/tags/personal/</link>
-      <pubDate>Sun, 23 Jul 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://mjec.blog/tags/personal/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Policy</title>
-      <link>https://mjec.blog/tags/policy/</link>
-      <pubDate>Mon, 11 Jul 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://mjec.blog/tags/policy/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Popular Culture</title>
-      <link>https://mjec.blog/tags/popular-culture/</link>
-      <pubDate>Thu, 12 May 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://mjec.blog/tags/popular-culture/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Postgresql</title>
-      <link>https://mjec.blog/tags/postgresql/</link>
-      <pubDate>Sun, 26 Jun 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://mjec.blog/tags/postgresql/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Python</title>
-      <link>https://mjec.blog/tags/python/</link>
-      <pubDate>Mon, 27 Jun 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://mjec.blog/tags/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Rc</title>
-      <link>https://mjec.blog/tags/rc/</link>
-      <pubDate>Thu, 30 Jun 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://mjec.blog/tags/rc/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Security</title>
-      <link>https://mjec.blog/tags/security/</link>
-      <pubDate>Fri, 15 Apr 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://mjec.blog/tags/security/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Sicp</title>
-      <link>https://mjec.blog/tags/sicp/</link>
-      <pubDate>Thu, 07 Apr 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://mjec.blog/tags/sicp/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Society</title>
+      <title>society</title>
       <link>https://mjec.blog/tags/society/</link>
       <pubDate>Tue, 24 Jul 2018 00:00:00 +0000</pubDate>
       
@@ -165,25 +39,16 @@
     </item>
     
     <item>
-      <title>Systems</title>
-      <link>https://mjec.blog/tags/systems/</link>
-      <pubDate>Fri, 15 Apr 2016 00:00:00 +0000</pubDate>
+      <title>personal</title>
+      <link>https://mjec.blog/tags/personal/</link>
+      <pubDate>Sun, 23 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://mjec.blog/tags/systems/</guid>
+      <guid>https://mjec.blog/tags/personal/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Technical</title>
-      <link>https://mjec.blog/tags/technical/</link>
-      <pubDate>Sat, 16 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://mjec.blog/tags/technical/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Text Posts About Nothing</title>
+      <title>text posts about nothing</title>
       <link>https://mjec.blog/tags/text-posts-about-nothing/</link>
       <pubDate>Sun, 23 Jul 2017 00:00:00 +0000</pubDate>
       
@@ -192,16 +57,25 @@
     </item>
     
     <item>
-      <title>Travel</title>
-      <link>https://mjec.blog/tags/travel/</link>
-      <pubDate>Tue, 28 Jun 2016 00:00:00 +0000</pubDate>
+      <title>depression</title>
+      <link>https://mjec.blog/tags/depression/</link>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://mjec.blog/tags/travel/</guid>
+      <guid>https://mjec.blog/tags/depression/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Voting</title>
+      <title>policy</title>
+      <link>https://mjec.blog/tags/policy/</link>
+      <pubDate>Mon, 11 Jul 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/tags/policy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>voting</title>
       <link>https://mjec.blog/tags/voting/</link>
       <pubDate>Mon, 11 Jul 2016 00:00:00 +0000</pubDate>
       
@@ -210,11 +84,146 @@
     </item>
     
     <item>
-      <title>Web Development</title>
+      <title>rc</title>
+      <link>https://mjec.blog/tags/rc/</link>
+      <pubDate>Thu, 30 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/tags/rc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nyc</title>
+      <link>https://mjec.blog/tags/nyc/</link>
+      <pubDate>Tue, 28 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/tags/nyc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>travel</title>
+      <link>https://mjec.blog/tags/travel/</link>
+      <pubDate>Tue, 28 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/tags/travel/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>django</title>
+      <link>https://mjec.blog/tags/django/</link>
+      <pubDate>Mon, 27 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/tags/django/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>https://mjec.blog/tags/python/</link>
+      <pubDate>Mon, 27 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>web development</title>
       <link>https://mjec.blog/tags/web-development/</link>
       <pubDate>Mon, 27 Jun 2016 00:00:00 +0000</pubDate>
       
       <guid>https://mjec.blog/tags/web-development/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>postgresql</title>
+      <link>https://mjec.blog/tags/postgresql/</link>
+      <pubDate>Sun, 26 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/tags/postgresql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>popular culture</title>
+      <link>https://mjec.blog/tags/popular-culture/</link>
+      <pubDate>Thu, 12 May 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/tags/popular-culture/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>math</title>
+      <link>https://mjec.blog/tags/math/</link>
+      <pubDate>Tue, 19 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/tags/math/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cryptography</title>
+      <link>https://mjec.blog/tags/cryptography/</link>
+      <pubDate>Fri, 15 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/tags/cryptography/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>security</title>
+      <link>https://mjec.blog/tags/security/</link>
+      <pubDate>Fri, 15 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/tags/security/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>systems</title>
+      <link>https://mjec.blog/tags/systems/</link>
+      <pubDate>Fri, 15 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/tags/systems/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>haskell</title>
+      <link>https://mjec.blog/tags/haskell/</link>
+      <pubDate>Tue, 12 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/tags/haskell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>performance</title>
+      <link>https://mjec.blog/tags/performance/</link>
+      <pubDate>Tue, 12 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/tags/performance/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>algorithms</title>
+      <link>https://mjec.blog/tags/algorithms/</link>
+      <pubDate>Mon, 11 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/tags/algorithms/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sicp</title>
+      <link>https://mjec.blog/tags/sicp/</link>
+      <pubDate>Thu, 07 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/tags/sicp/</guid>
       <description></description>
     </item>
     

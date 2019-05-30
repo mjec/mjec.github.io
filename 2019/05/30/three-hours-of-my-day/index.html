@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="How I spent half a day to come up with something simple">
+
+    <meta name="twitter:creator" content="@mjec">
+    <meta name="twitter:title" content="Three hours of my day">
+    <meta name="twitter:description" content="How I spent half a day to come up with something simple">
+
+    <link rel="icon" type="image/png" href="/favicon_16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon_32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon_128x128.png" sizes="128x128">
+
+    <title>
+      Three hours of my day
+    </title>
+    <link rel="canonical" href="https://mjec.blog/2019/05/30/three-hours-of-my-day/">
+
+    <style>
+  * {
+    border:0;
+    font:inherit;
+    font-size:100%;
+    vertical-align:baseline;
+    margin:0;
+    padding:0;
+    color: black;
+    text-decoration-skip: ink;
+    text-decoration-skip-ink: auto;
+  }
+
+  body {
+    font-family:'Open Sans', 'Myriad Pro', Myriad, sans-serif;
+    font-size:17px;
+    line-height:160%;
+    color:#1d1313;
+    max-width:800px;
+    margin:auto;
+  }
+
+  p {
+    margin: 20px 0;
+  }
+
+  a img {
+    border:none;
+  }
+
+  img {
+    margin: 10px auto 10px auto;
+    max-width: 100%;
+    display: block;
+  }
+
+  .left-justify {
+    float: left;
+  }
+
+  .right-justify {
+    float:right;
+  }
+
+  pre, code {
+    font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    background-color: #f7f7f7;
+  }
+  
+  sub {
+    font-size: 65%;
+    vertical-align: sub;
+  }
+
+  sup {
+    font-size: 65%;
+    vertical-align: super;
+  }
+
+  code {
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  pre {
+    margin-top: 0;
+    margin-bottom: 16px;
+    word-wrap: normal;
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+  }
+
+  pre>code {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    word-break: normal;
+    white-space: pre;
+    background: transparent;
+    border: 0;
+  }
+
+  pre code {
+    display: inline;
+    max-width: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+  }
+
+  pre code::before,
+  pre code::after {
+    content: normal;
+  }
+
+  em,q,em,dfn {
+    font-style:italic;
+  }
+
+  .sans,html .gist .gist-file .gist-meta {
+    font-family:"Open Sans","Myriad Pro",Myriad,sans-serif;
+  }
+
+  .mono,pre,code,tt,p code,li code {
+    font-family:Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace;
+  }
+
+  .heading,.serif,h1,h2,h3 {
+    font-family:"Old Standard TT",serif;
+  }
+
+  strong {
+    font-weight:600;
+  }
+
+  q:before {
+    content:"\201C";
+  }
+
+  q:after {
+    content:"\201D";
+  }
+
+  del,s {
+    text-decoration:line-through;
+  }
+
+  blockquote {
+    font-family:"Old Standard TT",serif;
+    text-align:center;
+    padding:50px;
+  }
+  
+  blockquote.long {
+    text-align: left;
+  }
+
+  blockquote p {
+    display:block;
+    font-style:italic;
+    margin: 0;
+  }
+  
+  blockquote.long p {
+    margin: 20px 0 0 0;
+  }
+  
+  blockquote.long p:first-child {
+    margin: 0;
+  }
+  
+  blockquote.long p:last-child {
+    margin-bottom: -2ex;
+  }
+
+  blockquote:before,blockquote:after {
+    font-family:"Old Standard TT",serif;
+    font-size:35px;
+    color:#403c3b;
+  }
+  
+  blockquote:before {
+    content:'\201C';
+    float: left;
+  }
+
+  blockquote:after {
+    content:'\201D';
+    float: right;
+    margin-top: -1ex;
+    position: relative;
+    left: 1ex;
+    top: -0.5ex;
+  }
+  
+  blockquote.long:after {
+    margin-top: 0;
+  }
+
+  hr {
+    width:40%;
+    height: 1px;
+    background:#403c3b;
+    margin: 25px auto;
+  }
+
+  h1 {
+    font-size:35px;
+  }
+
+  h2 {
+    font-size:28px;
+  }
+
+  h3 {
+    font-size:22px;
+    margin-top:18px;
+  }
+
+  h1 a,h2 a,h3 a {
+    text-decoration:none;
+  }
+
+  h1,h2 {
+    margin-top:28px;
+  }
+
+
+  code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: black;
+  }
+
+  #sub-header, #sub-header * {
+    color:#403c3b;
+    font-size:13px;
+  }
+
+  #sub-header {
+    margin: 0 4px;
+  }
+
+  #nav h1 a {
+    font-size:35px;
+    color:#1d1313;
+    line-height:120%;
+  }
+
+  .together {
+    white-space: nowrap;
+  }
+
+  .posts-listing a, #nav a, .tags a {
+    text-decoration: none;
+  }
+
+  .posts-listing h2 small {
+    font-size: 50%;
+  }
+
+  .posts-listing li p.preview {
+    margin: 0;
+    color: #666;
+  }
+
+  li {
+    margin-left: 20px;
+  }
+
+  ul li {
+    margin-left: 1em;
+  }
+
+  ul li {
+    list-style-type: none;
+  }
+  ul li:before {
+    content:"\00BB \0020";
+    margin-left: -1em;
+    float: left;
+  }
+
+  footer {
+    border-top: 1px dotted black;
+    font-size: 80%;
+    margin-top: 20px;
+  }
+  footer p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .rc-scout .rc-scout__link {
+    color: black !important;
+    text-decoration-skip-ink: auto;
+  }
+
+  #nav ul li:before, .posts-listing li:before {
+    content:'';
+    margin-right:0;
+  }
+
+  #content {
+    text-align:left;
+    width:100%;
+    font-size:15px;
+    padding:60px 0 0;
+  }
+
+  #content h1,#content h2 {
+    margin-bottom:5px;
+  }
+
+  #content h2 {
+    font-size:25px;
+  }
+
+  #content .pagination {
+    text-align: center;
+  }
+
+  #content .entry-content {
+    margin-top:15px;
+  }
+
+  #content time {
+    margin-left:3px;
+  }
+
+  #content h1 {
+    font-size:30px;
+  }
+
+  .highlight {
+    margin: 10px 0;
+  }
+
+  .posts-listing {
+    margin:0 0 30px;
+  }
+
+  .posts-listing li {
+    margin:0 0 25px 15px;
+  }
+
+  .posts-listing li a:hover, #nav a:hover, .tags a:hover {
+    text-decoration: underline;
+  }
+
+  #nav {
+    text-align:center;
+    position:static;
+    margin-top:60px;
+  }
+
+  #nav ul {
+    display: table;
+    margin: 8px auto 0 auto;
+  }
+
+  #nav li {
+    list-style-type:none;
+    display:table-cell;
+    font-size:15px;
+    padding: 0 20px;
+  }
+
+  #links {
+    margin: 50px 0 0 0;
+  }
+
+  #links :nth-child(2) {
+    float:right;
+  }
+
+  #not-found {
+    text-align: center;
+  }
+
+  #not-found a {
+    font-family:"Old Standard TT",serif;
+    font-size: 200px;
+    text-decoration: none;
+    display: inline-block;
+    padding-top: 225px;
+  }
+
+  @media (max-width: 750px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:28px;
+    }
+
+    #nav li {
+      font-size:13px;
+      padding: 0 15px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:50px;
+      font-size:14px;
+    }
+
+    #content h1 {
+      font-size:25px;
+    }
+
+    #content h2 {
+      font-size:22px;
+    }
+
+    .posts-listing li div {
+      font-size:12px;
+    }
+    
+    footer {
+      font-size: 12px;
+    }
+    
+    blockquote.long:after {
+      margin-top: 1ex !important;
+    }
+  }
+
+  @media (max-width: 400px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:22px;
+    }
+
+    #nav li {
+      font-size:12px;
+      padding: 0 10px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:20px;
+      font-size:12px;
+    }
+
+    #content h1 {
+      font-size:20px;
+    }
+
+    #content h2 {
+      font-size:18px;
+    }
+
+    .posts-listing li div{
+      font-size:12px;
+    }
+  }
+</style>
+
+
+
+    
+  </head>
+
+  <body>
+    <section id=nav>
+      <h1><a href="/">mjec&#39;s electric blogaloo</a></h1>
+      <ul>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/tags/">Browse by tag</a></li>
+        
+      </ul>
+    </section>
+
+
+
+<section id=content>
+  <h1> Three hours of my day </h1>
+
+  <div id=sub-header>
+    30 May 2019 · 7 minute read
+    
+    · <span class="tags">
+        
+            
+            
+            
+        
+            
+            
+            
+        
+        
+        <a href='/tags/technical/'>technical</a> and <a href='/tags/practices/'>practices</a></span>
+    
+  </div>
+
+  <div class="entry-content">
+    
+
+<p>Earlier this year I was promoted to be a staff software engineer. This
+involves being not just problem solving, but also a (partial) responsibility
+for the culture of my workplace.</p>
+
+<p>One of the things I struggled with for a long time &ndash; long before I was working
+as a full-time programmer &ndash; was a lack of understanding of how senior people
+were able to come up with the clever ideas they come up with. Sometimes it&rsquo;s a
+stroke of inspiration. More often, I think, it comes from hard work. There are
+elements of experience and knowledge and pattern recognition, but fundamentally
+it is hard work.</p>
+
+<p>I wanted to use this post as a way of exposing what that hard work sometimes
+looks like. It&rsquo;s not about typing code quickly. It&rsquo;s about thinking slowly,
+until the right answer becomes obvious.</p>
+
+<p>This post is long, but the point is not the technical solution, it&rsquo;s that the
+process was longer than it seems from the result. And that&rsquo;s not only okay,
+that&rsquo;s the only way anyone works.</p>
+
+<h2 id="some-context">Some context</h2>
+
+<p>I&rsquo;m building a small service at work, which you might think of as kind of a
+cut-price <a href="https://sentry.io">Sentry</a>.<sup class="footnote-ref" id="fnref:0"><a href="#fn:0">1</a></sup> Specifically, by invoking one line of
+code you can record a PHP stack trace at that location; and you can do so in a
+manner that ensures only one copy of each unique trace is stored. With a high
+volume of requests (thousands per second) this is far more economical than
+using our logging pipeline.</p>
+
+<p>This is a system with very high write volume (up to once per request), but a
+very low read volume (it will only be consumed by developers). We&rsquo;re extremely
+tolerant to write failures, as you might expect, or even total data loss. The
+volume of persistent data is likely to be hundreds of megabytes to single digit
+gigabytes.</p>
+
+<p>The storage backend we settled on was Redis, for a range of reasons both
+technical and organizational.</p>
+
+<p>I have been working on spinning up the service and having it record data. Until
+today, I didn&rsquo;t give much thought to the structure of the data consumer. We want
+something a bit nicer than using <code>telnet</code> as a Redis client, and I&rsquo;d originally
+thought I&rsquo;d whip up a little mini-app, integrated into our back office systems.</p>
+
+<h2 id="a-few-suggestions">A few suggestions</h2>
+
+<p>As part of the architecture review process<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">2</a></sup> I got a number of comments, but
+for our purposes today I just want to highlight one of them.</p>
+
+<p>That suggestion is that rather than writing a frontend for querying this data,
+I could instead use <a href="https://cloud.google.com/bigquery/">Google BigQuery</a>.
+This was a great suggestion, because it meant I could focus on the bits I enjoy
+and am good at, instead of building and supporting a user interface. It also
+enables new uses of the data without more code being written. Great!</p>
+
+<p>So now the project has shifted a bit. It will still be exactly what I thought,
+but we need to get the data into BigQuery.</p>
+
+<h2 id="something-i-did-today">Something I did today</h2>
+
+<p>Today I decided I should figure out how we would get the data into BigQuery. I&rsquo;m
+tempted to fully set out the constraints here, but that would spoil the ending.
+Instead, I&rsquo;ll try to take you through my thinking process.</p>
+
+<p>I started by reading through the BigQuery documentation, to see what sort of
+limits I was likely to face there. BigQuery is designed as a column-oriented
+analytic data store for huge volumes of data that occasionally changes. The
+normal workload for this system would involve occasionally loading large
+immutable datasets &ndash; probably terrabytes of new rows loaded once a day, with
+no updates.</p>
+
+<p>But my dataset is small, so maybe I could manipulate the system a bit.</p>
+
+<p>My first natural instinct was to see whether we could use BigQuery as a backing
+store without Redis. I was pretty sure this was a terrible idea, and I was
+right. BigQuery tables are limited to 1,000 updates a day; we need thousands of
+updates a second.</p>
+
+<p>Still, we could regularly push batches of data to BigQuery. Once every two
+minutes would be 720 updates a day. That gives us some headroom for an
+occasional manual change.</p>
+
+<p>But what would the batches be? We need to have some idea of the state of what is
+in BigQuery to know what needs to be updated. We could use <code>MERGE</code> queries, but
+these are expensive and not best practice. And anyway, I&rsquo;d still have to run a
+<code>SCAN</code> across the entire Redis store to get the state of the world. It seems
+wasteful and difficult to try to merge the two.</p>
+
+<p>So another idea: I can just re-load the whole dataset every few minutes. That
+process is pretty simple: I do a <code>SCAN</code>, dump the data out to JSON (one record
+per line), and trigger a load into BigQuery. I&rsquo;m allowed to do that pretty
+often; it can be done without impacting write availability of Redis; and to boot
+data loads into BigQuery are free.</p>
+
+<p>My plan was to use a cron job that would do this periodic sweeping of a new copy
+of the data into BigQuery. This seems totally reasonable; we just need to make
+sure we don&rsquo;t try to write two copies of the table at once. I wanted this to be
+relatively cloud native too, so I didn&rsquo;t want to store any local state.<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">3</a></sup></p>
+
+<p>So enter what seemed to be to be the simplest locking mechanism: a file in GCS.
+But now we&rsquo;re dealing with lock files and that means race conditions, so I
+thought I would try to diagram it out, to ensure I wasn&rsquo;t missing an edge case.
+When things invariably fail, I want the system to recover without difficulty.</p>
+
+<p>So I opened up <a href="https://www.lucidchart.com/">Lucidchart</a> and got to diagramming.</p>
+
+<h2 id="success">Success!</h2>
+
+<p>After an hour or more, I had come up with what I thought of as the most
+simplified version of this system. There wre more lines crossing than I was
+happy about, but ultimately it seemed reasonable.</p>
+
+<p><img alt="The flowchart for this system; with significant complexity" src="/images/2019-05-21-prod-backtrace-bigquery-version-1.png" style="height: 610px"></p>
+
+<h2 id="reasonable-ish">Reasonable-ish</h2>
+
+<p>I mean, that seems reasonable, but it has a lot of moving parts. At this point
+though the flowchart looks pretty nice. There aren&rsquo;t many overlapping lines, and
+the overlapping lines are all sensible enough. We appear to have handled most of
+the edge cases gracefully. At this point I&rsquo;ve spent about three hours on this,
+and honestly I&rsquo;m pretty proud of myself.</p>
+
+<p>But I didn&rsquo;t stop there.</p>
+
+<p>That&rsquo;s important. That is the difference between junior-engineer me and
+senior-engineer me. Junior-engineer me would have stopped. I would be done. I
+would have shared this out, or just built it.</p>
+
+<p>Today I didn&rsquo;t stop there. I looked at the system I&rsquo;d built, and then I went
+back with a critical eye. I remembered reading something in the BigQuery
+documentation about external data sources, including JSON in GCS. Maybe I could
+manage less of this process.</p>
+
+<p>And it turns out that for this use case, JSON in GCS being queried by BigQuery
+is totally appropriate. We have to be a little cautious, but upload-and-replace
+in GCS is atomic (or at least can be) and the performance characteristics aren&rsquo;t
+so bad. We lose the ability to do things like partitioning and clustering to
+reduce query cost, but the datasets are small enough that it doesn&rsquo;t really
+matter.</p>
+
+<p>And so I threw away two or more hours of work, and came up with this simpler
+version. So simple it doesn&rsquo;t even need a flowchart.</p>
+
+<p><img alt="The flowchart for the second version of this syste; with significantly less complexity" src="/images/2019-05-21-prod-backtrace-bigquery-version-2.png" style="height: 450px"></p>
+
+<h2 id="the-lesson">The lesson</h2>
+
+<p>It&rsquo;s okay to throw away time. I might have felt guilty about wasting this time.
+That&rsquo;s my instinct. I felt defensive &ndash; against myself! &ndash; of the thing I had
+spent a couple of hours creating. I had to work against my instincts, overcome
+my insecurities, to assess honestly what the better solution was.</p>
+
+<p>My time is pretty expensive to my employer. A couple of hours is nothing to
+sneeze at. But spending that time, and then spending the extra half hour to
+reassess and convince myself of the obviously-better approach will pay many
+times that time cost in dividends. I don&rsquo;t have to ask others to review this;
+the complexity of the code is reduced; the time to build the system is reduced
+by well more than two hours.</p>
+
+<p>This is what it means to be a senior engineer.<sup class="footnote-ref" id="fnref:3"><a href="#fn:3">4</a></sup> Tonight, having thrown away
+all this work, feeling like I wasted that time, I actually feel more comfortable
+with my title than I have perhaps ever before.</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:0">It is significantly different in meaningful ways that aren&rsquo;t important here, but in this case Sentry isn&rsquo;t a better option.
+ <a class="footnote-return" href="#fnref:0"><sup>[return]</sup></a></li>
+<li id="fn:1">A process by which interested folks can comment on a proposal, with a particular eye to the soundness of the approach.
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:2">In fact when I say &ldquo;cron&rdquo; I was really thinking of a periodically-invoked cloud function.
+ <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+<li id="fn:3">Well, this is one of the many, many things involved in being senior/staff/principal.
+ <a class="footnote-return" href="#fnref:3"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+  </div>
+
+  <div id=links>
+    
+      <a class="basic-alignment left" href="https://mjec.blog/2019/02/16/git-locks/">&laquo; Git locks</a>
+    
+    
+  </div>
+</section>
+
+  <footer>
+    <p>Yet another blog from <a href="https://mjec.net">Michael Cordover</a>.
+    <span class="rc-scout"></span></p>
+  </footer>
+
+  <script async defer src="https://www.recurse-scout.com/loader.js?t=7b61c3cc166c3321bfbe79ce44d62586"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: ['Open Sans:n4', 'Old Standard TT:n4']
+      }
+    });
+  </script>
+
+  <script type="text/javascript">
+    var _paq = _paq || [];
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//piwik.mjec.net/";
+      _paq.push(['setTrackerUrl', u+'piwik.php']);
+      _paq.push(['setSiteId', 13]);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <noscript><p><img src="//piwik.mjec.net/piwik.php?idsite=13" style="border:0;" alt="" /></p></noscript>
+
+  
+</body>
+</html>
+
+
+

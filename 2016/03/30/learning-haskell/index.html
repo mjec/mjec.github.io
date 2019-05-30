@@ -475,6 +475,7 @@
 </style>
 
 
+
     
   </head>
 
@@ -527,8 +528,8 @@
 <p>The thing about strongly typed languages is they are <strong>strongly</strong> typed. The very first challenge - and the one that took me the longest - is to read in a hex string and output those bytes encoded in base 64. Haskell has some convenient functions for this: there&rsquo;s <a href="http://hackage.haskell.org/package/bytestring-0.10.6.0/docs/Data-ByteString.html">Data.ByteString</a> for a string of bytes, <a href="http://hackage.haskell.org/package/base16-bytestring-0.1.1.6/docs/Data-ByteString-Base16.html">Data.ByteString.Base16</a> for hexadecimal and <a href="http://hackage.haskell.org/package/base64-bytestring-1.0.0.1/docs/Data-ByteString-Base64.html">Data.ByteString.Base64</a> for base 64. Noting that <code>.</code> is the &ldquo;function composition&rdquo; operator, this makes the solution trivial:</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">2
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="color:#75af00">hex_to_base64</span> <span style="color:#f92672">::</span> <span style="color:#00a8c8">ByteString</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">ByteString</span>
@@ -540,7 +541,7 @@
 <p>Of course, life is never quite that simple. Your input comes as a <code>String</code> and a <code>String</code> is not a <code>ByteString</code>. This is somewhat unlike Python. Okay, next try:</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">1
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="color:#75af00">hex_to_base64</span> <span style="color:#f92672">=</span> <span style="color:#75af00">byte_string_to_string</span> <span style="color:#f92672">.</span> <span style="color:#75af00">base64_encode</span> <span style="color:#f92672">.</span> <span style="color:#75af00">base16_decode</span> <span style="color:#f92672">.</span> <span style="color:#75af00">string_to_byte_string</span></code></pre></td></tr></table>
@@ -553,13 +554,13 @@
 <p>Now that I know that though, the solution is genuinely trivial. Here it is in full, written as a single function.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">7
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="color:#00a8c8">import</span> <span style="color:#00a8c8">qualified</span> <span style="color:#111">Data.ByteString.Base16.Lazy</span> <span style="color:#00a8c8">as</span> <span style="color:#111">B16</span>
@@ -588,8 +589,8 @@
 <p>A few other pieces of code which I think illustrate Haskell&rsquo;s strengths nicely. Here&rsquo;s one which returns true if and only if all characters in the string match the regex <code>[A-Fa-f0-9]+</code>:</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">2
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="color:#75af00">isHex</span> <span style="color:#f92672">::</span> <span style="color:#00a8c8">String</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">Bool</span>
@@ -599,12 +600,12 @@
 <p>So what, we can all do regex, right? Well, I get to use this to parse my input from the command line like so:</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">6
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="color:#75af00">challenge1</span> <span style="color:#f92672">::</span> <span style="color:#111">[</span><span style="color:#00a8c8">String</span><span style="color:#111">]</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">IO</span> <span style="color:#111">()</span>
@@ -620,8 +621,8 @@
 <p>I quite like this one too:</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">2
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="color:#75af00">bitwiseCombine</span> <span style="color:#f92672">::</span> <span style="color:#111">(</span><span style="color:#00a8c8">Word8</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">Word8</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">Word8</span><span style="color:#111">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">B</span><span style="color:#f92672">.</span><span style="color:#00a8c8">ByteString</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">B</span><span style="color:#f92672">.</span><span style="color:#00a8c8">ByteString</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">B</span><span style="color:#f92672">.</span><span style="color:#00a8c8">ByteString</span>
@@ -631,8 +632,8 @@
 <p>This combines two <code>ByteString</code>s by applying the <code>f</code> operator (as an infix) to each byte of the arguments, then returns a new <code>ByteString</code>. You can use this and <a href="https://en.wikipedia.org/wiki/Currying">currying</a> to make a new function for whatever operator you want. For example, I have this:</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">2
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="color:#75af00">bitwiseXor</span> <span style="color:#f92672">::</span> <span style="color:#00a8c8">B</span><span style="color:#f92672">.</span><span style="color:#00a8c8">ByteString</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">B</span><span style="color:#f92672">.</span><span style="color:#00a8c8">ByteString</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">B</span><span style="color:#f92672">.</span><span style="color:#00a8c8">ByteString</span>
@@ -646,11 +647,11 @@
 <p>Okay, last one. This function takes two &ldquo;maps&rdquo;, each of which is essentially a key-value pair with keys composed of <code>Word8</code>s and values composed of <code>Float</code>s. As the name might suggest, these are frequency tables, where the <code>Word8</code> is a byte (e.g. &lsquo;A&rsquo;) and the <code>Float</code> is what proportion of the whole it makes up (in the range <code>0 .. 1</code>). <code>freqTableDifference</code> takes the absolute values of the differences between paired elements, discarding anything that is not in the intersection of the maps. <code>freqTableDelta</code> sums those differences into a basic score showing roughly how different the two are (think <a href="https://en.wikipedia.org/wiki/Hamming_distance">Hamming distance</a>, but not).</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#939390">5
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="color:#75af00">freqTableDelta</span> <span style="color:#f92672">::</span> <span style="color:#00a8c8">Map</span><span style="color:#f92672">.</span><span style="color:#00a8c8">Map</span> <span style="color:#00a8c8">Word8</span> <span style="color:#00a8c8">Float</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">Map</span><span style="color:#f92672">.</span><span style="color:#00a8c8">Map</span> <span style="color:#00a8c8">Word8</span> <span style="color:#00a8c8">Float</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">Float</span>

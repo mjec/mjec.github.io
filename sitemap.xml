@@ -3,6 +3,41 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://mjec.blog/post/</loc>
+    <lastmod>2019-05-30T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mjec.blog/tags/</loc>
+    <lastmod>2019-05-30T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mjec.blog/2019/05/30/three-hours-of-my-day/</loc>
+    <lastmod>2019-05-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mjec.blog/</loc>
+    <lastmod>2019-05-30T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mjec.blog/tags/practices/</loc>
+    <lastmod>2019-05-30T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mjec.blog/tags/technical/</loc>
+    <lastmod>2019-05-30T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://mjec.blog/2019/02/16/git-locks/</loc>
     <lastmod>2019-02-16T00:00:00+00:00</lastmod>
   </url>
@@ -13,8 +48,26 @@
   </url>
   
   <url>
+    <loc>https://mjec.blog/tags/society/</loc>
+    <lastmod>2018-07-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://mjec.blog/2017/07/23/how-many-atoms-are-there-in-an-amoeba/</loc>
     <lastmod>2017-07-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mjec.blog/tags/personal/</loc>
+    <lastmod>2017-07-23T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mjec.blog/tags/text-posts-about-nothing/</loc>
+    <lastmod>2017-07-23T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -23,8 +76,26 @@
   </url>
   
   <url>
+    <loc>https://mjec.blog/tags/depression/</loc>
+    <lastmod>2017-01-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://mjec.blog/2016/07/11/australia-should-not-adopt-electronic-voting/</loc>
     <lastmod>2016-07-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mjec.blog/tags/policy/</loc>
+    <lastmod>2016-07-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mjec.blog/tags/voting/</loc>
+    <lastmod>2016-07-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -33,8 +104,26 @@
   </url>
   
   <url>
+    <loc>https://mjec.blog/tags/rc/</loc>
+    <lastmod>2016-06-30T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://mjec.blog/2016/06/28/reflections-on-new-york-city/</loc>
     <lastmod>2016-06-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mjec.blog/tags/nyc/</loc>
+    <lastmod>2016-06-28T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mjec.blog/tags/travel/</loc>
+    <lastmod>2016-06-28T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -43,8 +132,32 @@
   </url>
   
   <url>
+    <loc>https://mjec.blog/tags/django/</loc>
+    <lastmod>2016-06-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mjec.blog/tags/python/</loc>
+    <lastmod>2016-06-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mjec.blog/tags/web-development/</loc>
+    <lastmod>2016-06-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://mjec.blog/2016/06/26/your-rdbms-has-cool-features/</loc>
     <lastmod>2016-06-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mjec.blog/tags/postgresql/</loc>
+    <lastmod>2016-06-26T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -53,8 +166,20 @@
   </url>
   
   <url>
+    <loc>https://mjec.blog/tags/popular-culture/</loc>
+    <lastmod>2016-05-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://mjec.blog/2016/04/19/non-proofs/</loc>
     <lastmod>2016-04-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mjec.blog/tags/math/</loc>
+    <lastmod>2016-04-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -63,8 +188,38 @@
   </url>
   
   <url>
+    <loc>https://mjec.blog/tags/cryptography/</loc>
+    <lastmod>2016-04-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mjec.blog/tags/security/</loc>
+    <lastmod>2016-04-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mjec.blog/tags/systems/</loc>
+    <lastmod>2016-04-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://mjec.blog/2016/04/12/my-haskell-was-slow/</loc>
     <lastmod>2016-04-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mjec.blog/tags/haskell/</loc>
+    <lastmod>2016-04-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mjec.blog/tags/performance/</loc>
+    <lastmod>2016-04-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -73,8 +228,20 @@
   </url>
   
   <url>
+    <loc>https://mjec.blog/tags/algorithms/</loc>
+    <lastmod>2016-04-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://mjec.blog/2016/04/07/fibonacci-numbers-and-the-golden-ratio/</loc>
     <lastmod>2016-04-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mjec.blog/tags/sicp/</loc>
+    <lastmod>2016-04-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -114,162 +281,6 @@
   
   <url>
     <loc>https://mjec.blog/about/</loc>
-  </url>
-  
-  <url>
-    <loc>https://mjec.blog/tags/algorithms/</loc>
-    <lastmod>2016-04-11T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://mjec.blog/tags/cryptography/</loc>
-    <lastmod>2016-04-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://mjec.blog/tags/depression/</loc>
-    <lastmod>2017-01-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://mjec.blog/tags/django/</loc>
-    <lastmod>2016-06-27T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://mjec.blog/tags/haskell/</loc>
-    <lastmod>2016-04-12T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://mjec.blog/tags/math/</loc>
-    <lastmod>2016-04-19T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://mjec.blog/tags/nyc/</loc>
-    <lastmod>2016-06-28T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://mjec.blog/tags/performance/</loc>
-    <lastmod>2016-04-12T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://mjec.blog/tags/personal/</loc>
-    <lastmod>2017-07-23T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://mjec.blog/tags/policy/</loc>
-    <lastmod>2016-07-11T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://mjec.blog/tags/popular-culture/</loc>
-    <lastmod>2016-05-12T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://mjec.blog/tags/postgresql/</loc>
-    <lastmod>2016-06-26T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://mjec.blog/post/</loc>
-    <lastmod>2019-02-16T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://mjec.blog/tags/python/</loc>
-    <lastmod>2016-06-27T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://mjec.blog/tags/rc/</loc>
-    <lastmod>2016-06-30T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://mjec.blog/tags/security/</loc>
-    <lastmod>2016-04-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://mjec.blog/tags/sicp/</loc>
-    <lastmod>2016-04-07T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://mjec.blog/tags/society/</loc>
-    <lastmod>2018-07-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://mjec.blog/tags/systems/</loc>
-    <lastmod>2016-04-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://mjec.blog/tags/</loc>
-    <lastmod>2016-04-11T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://mjec.blog/tags/technical/</loc>
-    <lastmod>2019-02-16T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://mjec.blog/tags/text-posts-about-nothing/</loc>
-    <lastmod>2017-07-23T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://mjec.blog/tags/travel/</loc>
-    <lastmod>2016-06-28T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://mjec.blog/tags/voting/</loc>
-    <lastmod>2016-07-11T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://mjec.blog/tags/web-development/</loc>
-    <lastmod>2016-06-27T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://mjec.blog/</loc>
-    <lastmod>2019-02-16T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
 </urlset>

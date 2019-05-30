@@ -1,14 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>mjec&#39;s electric blogaloo</title>
     <link>https://mjec.blog/</link>
     <description>Recent content on mjec&#39;s electric blogaloo</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 16 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 30 May 2019 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://mjec.blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Three hours of my day</title>
+      <link>https://mjec.blog/2019/05/30/three-hours-of-my-day/</link>
+      <pubDate>Thu, 30 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://mjec.blog/2019/05/30/three-hours-of-my-day/</guid>
+      <description>How I spent half a day to come up with something simple</description>
+    </item>
     
     <item>
       <title>Git locks</title>
